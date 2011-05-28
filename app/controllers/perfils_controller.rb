@@ -1,6 +1,7 @@
 class PerfilsController < ApplicationController
   # GET /perfils
   # GET /perfils.xml
+  #para commit
   def index
     @perfils = Perfil.all
 
