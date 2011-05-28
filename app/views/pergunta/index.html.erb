@@ -1,0 +1,23 @@
+<h1>Listing pergunta</h1>
+
+<table>
+  <tr>
+    <th>Enuciado</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @pergunta.each do |perguntum| %>
+  <tr>
+    <td><%= perguntum.enuciado %></td>
+    <td><%= link_to 'Show', perguntum %></td>
+    <td><%= link_to 'Edit', edit_perguntum_path(perguntum) %></td>
+    <td><%= link_to 'Destroy', perguntum, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Perguntum', new_perguntum_path %>

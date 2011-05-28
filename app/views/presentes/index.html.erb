@@ -1,0 +1,23 @@
+<h1>Listing presentes</h1>
+
+<table>
+  <tr>
+    <th>Nome</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @presentes.each do |presente| %>
+  <tr>
+    <td><%= presente.nome %></td>
+    <td><%= link_to 'Show', presente %></td>
+    <td><%= link_to 'Edit', edit_presente_path(presente) %></td>
+    <td><%= link_to 'Destroy', presente, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Presente', new_presente_path %>

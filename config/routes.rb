@@ -1,4 +1,14 @@
 Pandorando::Application.routes.draw do
+  resources :presentes
+
+  resources :perfils
+
+  resources :resposta
+
+  resources :pergunta
+
+  resources :usuarios
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
