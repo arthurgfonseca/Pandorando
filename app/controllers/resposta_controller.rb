@@ -3,10 +3,11 @@ class RespostaController < ApplicationController
   # GET /resposta.xml
   def index
     @resposta = Respostum.all
+    @respostum = Respostum.new
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @resposta }
+      format.js # Ajax CRUD
     end
   end
 
@@ -17,7 +18,7 @@ class RespostaController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @respostum }
+      format.js # Ajax CRUD
     end
   end
 
@@ -28,13 +29,17 @@ class RespostaController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @respostum }
+      format.js # Ajax CRUD
     end
   end
 
   # GET /resposta/1/edit
   def edit
     @respostum = Respostum.find(params[:id])
+    respond_to do |format|
+      format.html # new.html.erb
+      format.js # Ajax CRUD
+    end
   end
 
   # POST /resposta
@@ -45,10 +50,9 @@ class RespostaController < ApplicationController
     respond_to do |format|
       if @respostum.save
         format.html { redirect_to(@respostum, :notice => 'Respostum was successfully created.') }
-        format.xml  { render :xml => @respostum, :status => :created, :location => @respostum }
+        format.js
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @respostum.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -61,10 +65,9 @@ class RespostaController < ApplicationController
     respond_to do |format|
       if @respostum.update_attributes(params[:respostum])
         format.html { redirect_to(@respostum, :notice => 'Respostum was successfully updated.') }
-        format.xml  { head :ok }
+        format.js
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @respostum.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -77,7 +80,7 @@ class RespostaController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(resposta_url) }
-      format.xml  { head :ok }
+      format.js
     end
   end
 end

@@ -1,23 +1,33 @@
-<h1>Listing resposta</h1>
+<div class="h_text">
+	<!-- <img alt="" src="images/1-t1.jpg" />--><h1>Usuário</h1><br />
+</div>
+<div class="padding">
+	<div class="main_content">
+		<div class="show">
+			<table id="resposta" class="grid">
+				<thead>
+					<tr>
+						<th>Enunciado</th>
+						<th>Show</th>
+						<th>Edit</th>
+						<th>Remove</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @resposta.each do |respostum| %>
+					<%= render respostum %>
+					<% end %>
+				</tbody>
+				<tfooter>
+					
+				</tfooter>
+			</table>
+		</div>
+		<div class="form">
+			<h2>New</h2>
+			<div id="form"><%= render :partial => "form" %></div>
+		</div>
+	</div>
+</div>
 
-<table>
-  <tr>
-    <th>Enuciado</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
-<% @resposta.each do |respostum| %>
-  <tr>
-    <td><%= respostum.enuciado %></td>
-    <td><%= link_to 'Show', respostum %></td>
-    <td><%= link_to 'Edit', edit_respostum_path(respostum) %></td>
-    <td><%= link_to 'Destroy', respostum, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Respostum', new_respostum_path %>

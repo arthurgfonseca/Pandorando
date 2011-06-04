@@ -1,27 +1,12 @@
-<h1>Listing usuarios</h1>
-
-<table>
-  <tr>
-    <th>Nome</th>
-    <th>Email</th>
-    <th>Senha</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @usuarios.each do |usuario| %>
-  <tr>
-    <td><%= usuario.nome %></td>
-    <td><%= usuario.email %></td>
-    <td><%= usuario.senha %></td>
-    <td><%= link_to 'Show', usuario %></td>
-    <td><%= link_to 'Edit', edit_usuario_path(usuario) %></td>
-    <td><%= link_to 'Destroy', usuario, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Usuario', new_usuario_path %>
+<div class="h_text">
+	<!-- <img alt="" src="images/1-t1.jpg" />--><h1>Usuário</h1><br />
+</div>
+<div class="padding">
+	<div class="main_content">
+		<strong>Lorem ipsum dolor sit am</strong><br />
+		<p class="p1">
+			Cectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Pha- sellus porta. Fusce suscipit.<br />
+		</p>
+		<a href="#"><img alt="" src="images/click_here.gif" /></a><br />
+	</div>
+</div>

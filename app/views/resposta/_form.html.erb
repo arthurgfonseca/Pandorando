@@ -1,4 +1,4 @@
-<%= form_for(@respostum) do |f| %>
+<%= form_for(@respostum, :remote => true) do |f| %>
   <% if @respostum.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@respostum.errors.count, "error") %> prohibited this respostum from being saved:</h2>
@@ -10,12 +10,11 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :enuciado %><br />
-    <%= f.text_field :enuciado %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+	<p class="form_field">
+		<label class="label"><%= f.label :enuciado %></label>
+    	<label class="text_field"><%= f.text_field :enuciado %></label>
+	</p>
+	<div class="buttons">
+		<a href="#"><%= f.submit "Save" %></a><br />
+	</div>
 <% end %>

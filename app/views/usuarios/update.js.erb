@@ -1,0 +1,11 @@
+<% if @usuario.errors.any? -%>
+  $("#flash_notice").hide(300);
+  $("#usuario_errors").html("<%= escape_javascript(error_messages_for(@usuario))%>");
+  $("#usuario_errors").show(300);
+<% else -%>
+  $("#usuario_errors").hide(300);
+  $("#flash_notice").html("<%= escape_javascript(flash[:notice])%>");
+  $("#flash_notice").show(300);
+  $(":input:not(input[type=submit])").val("");
+  $("#usuario_list").html("<%= escape_javascript( render(:partial => "list") ) %>");
+<% end -%>

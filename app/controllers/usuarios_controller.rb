@@ -1,35 +1,15 @@
 class UsuariosController < ApplicationController
   # GET /usuarios
   # GET /usuarios.xml
-  def index
+  
+  before_filter :load
+  
+  def load
     @usuarios = Usuario.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @usuarios }
-    end
-  end
-
-  # GET /usuarios/1
-  # GET /usuarios/1.xml
-  def show
-    @usuario = Usuario.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @usuario }
-    end
-  end
-
-  # GET /usuarios/new
-  # GET /usuarios/new.xml
-  def new
     @usuario = Usuario.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @usuario }
-    end
+  end
+  
+  def index
   end
 
   # GET /usuarios/1/edit
@@ -41,15 +21,9 @@ class UsuariosController < ApplicationController
   # POST /usuarios.xml
   def create
     @usuario = Usuario.new(params[:usuario])
-
-    respond_to do |format|
-      if @usuario.save
-        format.html { redirect_to(@usuario, :notice => 'Usuario was successfully created.') }
-        format.xml  { render :xml => @usuario, :status => :created, :location => @usuario }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @usuario.errors, :status => :unprocessable_entity }
-      end
+    if @usuario.save
+      flash[:notice] = "Usuario criado com sucesso!"
+      @usuarios = Usuario.all;
     end
   end
 
@@ -57,15 +31,9 @@ class UsuariosController < ApplicationController
   # PUT /usuarios/1.xml
   def update
     @usuario = Usuario.find(params[:id])
-
-    respond_to do |format|
-      if @usuario.update_attributes(params[:usuario])
-        format.html { redirect_to(@usuario, :notice => 'Usuario was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @usuario.errors, :status => :unprocessable_entity }
-      end
+    if @usuario.update_attributes(params[:id])
+      flash[:notice] = "Usuario atualizado com sucesso!"
+      @usuarios = Usuario.all;
     end
   end
 
@@ -74,10 +42,6 @@ class UsuariosController < ApplicationController
   def destroy
     @usuario = Usuario.find(params[:id])
     @usuario.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(usuarios_url) }
-      format.xml  { head :ok }
-    end
+    flash[:notice] = "Usuario removido com sucesso!"
   end
 end

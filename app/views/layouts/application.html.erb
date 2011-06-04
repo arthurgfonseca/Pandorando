@@ -1,14 +1,85 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>Pandorando</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
-  <%= csrf_meta_tag %>
+  <%= stylesheet_link_tag "layout.css" %>
+  <%= stylesheet_link_tag "style.css" %>
+  <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' %>
+  <%= javascript_include_tag 'rails' %>
+<%= javascript_include_tag 'maxheight' %>
 </head>
-<body>
+<body id="index_1" onload="new ElementMaxHeight();">
+	<div id="header_tall">	
+		<div id="main">
+			<!--header -->
+			<div id="header">
+				<div class="h_logo">
+						<div class="left">
+						<!-- <img alt="" src="images/logo.jpg" />--><br />
+					</div>
+					<div class="right">
+						<a href="#">Login</a>				</div>
+					<div class="clear"></div>
+				</div>
+				<div id="menu">
+					<div class="rightbg">
+						<div class="leftbg">
+							<div class="padding">
+								<ul>
+									<li><span>Perguntas</span></li>
+									<li><a>Respostas</a></li>
+									<li><a>Presentes</a></li>
+									<li><a>Categorias</a></li>
+									<li><a>Usuários</a></li>
+									<li class="last"><a href="index-5.html">Relatório</a></li>
+								</ul>
+								<br class="clear" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--header end-->
+			<!-- middle -->
+			<div id="middle">
+				<div class="indent">
+					<div class="columns1">
+						<div class="column1">
+							<div class="border">
+								<div class="btall">
+									<div class="ltall">
+										<div class="rtall">
+											<div class="tleft">
+												<div class="tright">
+													<div class="bleft">
+														<div class="bright">
+															<div class="ind">
+																<div id="flash_notice" style="display:none"></div>
+																<%= yield %>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- middle end -->
+			<!-- footer -->
+			<div id="footer">
+				<div class="indent">
+					Pandorando <a href="#">Privacy Policy</a>				</div>
+			</div>
+			<!-- footer end -->
+		</div>
 
-<%= yield %>
+	</div>
 
 </body>
 </html>

@@ -1,16 +1,6 @@
-<%= form_for(@usuario) do |f| %>
-  <% if @usuario.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@usuario.errors.count, "error") %> prohibited this usuario from being saved:</h2>
+<%= form_for(@usuario, :remote => true) do |f| %>
 
-      <ul>
-      <% @usuario.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<div id= "usuario_errors" style="display:none"></div>
   <div class="field">
     <%= f.label :nome %><br />
     <%= f.text_field :nome %>
