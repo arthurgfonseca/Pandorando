@@ -1,0 +1,6 @@
+<tr id="<%= dom_id category %>" class="show_grid">
+    <td style="width:70%"><%= category.name %></td>
+    <td><%= link_to 'Show', category, :remote => true %></td>
+    <td><%= link_to 'Edit', edit_category_path(category), :remote => true %></td>
+    <td><%= link_to 'Destroy', category, :confirm => 'Are you sure?', :method => :delete, :remote => true %></td>
+</tr>

@@ -1,10 +1,10 @@
 <div class="h_text">
-	<!-- <img alt="" src="images/1-t1.jpg" />--><h1>Answers</h1><br />
+	<!-- <img alt="" src="images/1-t1.jpg" />--><h1>Categories</h1><br />
 </div>
 <div class="padding">
 	<div class="main_content">
 		<div class="show">
-			<table id="answers" class="grid">
+			<table id="categories" class="grid">
 				<thead>
 					<tr>
 						<th>Enunciation</th>
@@ -14,8 +14,8 @@
 					</tr>
 				</thead>
 				<tbody>
-					<% @answers.each do |answer| %>
-  						<%= render answer %>
+					<% @categories.each do |category| %>
+						<%= render category %>
 					<% end %>
 				</tbody>
 				<tfooter>
@@ -24,7 +24,7 @@
 			</table>
 		</div>
 		<div class="form">
-			<h2>New Answer</h2>
+			<h2>New Category</h2>
 			<div id="form"><%= render :partial => "form" %></div>
 		</div>
 	</div>

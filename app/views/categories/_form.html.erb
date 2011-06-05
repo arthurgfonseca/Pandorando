@@ -1,0 +1,21 @@
+<%= form_for(@category, :remote => true) do |f| %>
+  <% if @category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+      <ul>
+      <% @category.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p class="form_field">
+    <label class="label"><%= f.label :name %></label>
+    <label class="text_field"><%= f.text_field :name %></label>
+  </p>
+  <div class="buttons">
+    <a><%= f.submit "Save" %></a>
+  </div>
+<% end %>
