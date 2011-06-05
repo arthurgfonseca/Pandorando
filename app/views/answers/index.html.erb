@@ -1,0 +1,31 @@
+<div class="h_text">
+	<!-- <img alt="" src="images/1-t1.jpg" />--><h1>Answers</h1><br />
+</div>
+<div class="padding">
+	<div class="main_content">
+		<div class="show">
+			<table id="answers" class="grid">
+				<thead>
+					<tr>
+						<th>Enunciation</th>
+						<th>Show</th>
+						<th>Edit</th>
+						<th>Remove</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @answers.each do |answer| %>
+  						<% render answers %>
+					<% end %>
+				</tbody>
+				<tfooter>
+
+				</tfooter>
+			</table>
+		</div>
+		<div class="form">
+			<h2>New Answer</h2>
+			<div id="form"><%= render :partial => "form" %></div>
+		</div>
+	</div>
+</div>

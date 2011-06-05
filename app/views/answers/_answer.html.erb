@@ -1,0 +1,6 @@
+<tr id="<%= dom_id answer %>" class="show_grid">
+    <td style="width:70%"><%= answer.enunciation %></td>
+    <td><%= link_to 'Show', answer, :remote => true %></td>
+    <td><%= link_to 'Edit', edit_answer_path(answer), :remote => true %></td>
+    <td><%= link_to 'Destroy', answer, :confirm => 'Are you sure?', :method => :delete, :remote => true %></td>
+ </tr>

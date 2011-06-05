@@ -1,5 +1,7 @@
 Pandorando::Application.routes.draw do
   
+  resources :answers
+
   resources :questions
 
   root :to => "users#index"
