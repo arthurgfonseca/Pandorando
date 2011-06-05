@@ -1,0 +1,7 @@
+<tr id="<%= dom_id user %>" class="show_grid">
+  <td style="width:35%"><%= user.name %></td>
+  <td style="width:35%"><%= user.email %></td>
+  <td><%= link_to 'Show', user, :remote => true %></td>
+  <td><%= link_to 'Edit', edit_user_path(user), :remote => true %></td>
+  <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete, :remote => true %></td>
+</tr>

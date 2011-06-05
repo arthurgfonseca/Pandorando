@@ -1,0 +1,32 @@
+<div class="h_text">
+	<!-- <img alt="" src="images/1-t1.jpg" />--><h1>Users</h1><br />
+</div>
+<div class="padding">
+	<div class="main_content">
+		<div class="show">
+			<table id="users" class="grid">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Show</th>
+						<th>Edit</th>
+						<th>Remove</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @users.each do |user| %>
+						<%= render user %>
+					<% end %>
+					</tbody>
+				<tfooter>
+
+				</tfooter>
+			</table>
+		</div>
+		<div class="form">
+			<h2>New User</h2>
+			<div id="form"><%= render :partial => "form" %></div>
+		</div>
+	</div>
+</div>

@@ -93,7 +93,7 @@ a {color:#3d6f92; font-size:12px;}
 /*form*/
 .form {width:100%; margin-top:20px;}
 .form h2 {margin-bottom:10px; color:#000000;}
-.form_field {height:20px; width:100%;}
+.form_field {height:30px; width:100%;}
 .label {width:30%; color:#3d6f92; font-size:12px; font-weight:bold; float:left; text-align:left;}
 .text_field {width:70%;}
 .text_field input {width:50%;}

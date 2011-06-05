@@ -1,0 +1,29 @@
+<%= form_for(@user, :remote => true) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+	
+  <p class="form_field">
+    <label class="label"><%= f.label :name %></label>
+    <label class="text_field"><%= f.text_field :name %></label>
+  </p>
+  <p class="form_field">
+    <label class="label"><%= f.label :email %></label>
+    <labe class="text_field"><%= f.text_field :email %></label>
+  </p>
+  <p class="form_field">
+    <label class="label"><%= f.label :senha %></label>
+    <labe class="text_field"><%= f.text_field :senha %></label>
+  </p>
+	<div class="buttons">
+	    <a href="#"><%= f.submit "Save" %></a>
+	</div>
+<% end %>

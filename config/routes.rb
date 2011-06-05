@@ -1,4 +1,9 @@
 Pandorando::Application.routes.draw do
+  
+  root :to => "users#index"
+  
+  resources :users
+
   resources :resposta
 
   # The priority is based upon order of creation:

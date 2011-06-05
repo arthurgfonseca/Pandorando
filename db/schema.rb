@@ -10,25 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110528152839) do
-
-  create_table "perfils", :force => true do |t|
-    t.string   "nome"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "pergunta", :force => true do |t|
-    t.string   "enuciado"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "presentes", :force => true do |t|
-    t.string   "nome"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(:version => 20110604222827) do
 
   create_table "resposta", :force => true do |t|
     t.string   "enuciado"
@@ -36,8 +18,8 @@ ActiveRecord::Schema.define(:version => 20110528152839) do
     t.datetime "updated_at"
   end
 
-  create_table "usuarios", :force => true do |t|
-    t.string   "nome"
+  create_table "users", :force => true do |t|
+    t.string   "name"
     t.string   "email"
     t.string   "senha"
     t.datetime "created_at"
