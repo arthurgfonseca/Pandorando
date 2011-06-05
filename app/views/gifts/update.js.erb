@@ -1,0 +1,4 @@
+$("#<%= dom_id(@gift) %>").replaceWith("<%= escape_javascript(render(:partial => @gift)) %>");
+<% @gift = Gift.new # reset for new form %>
+$(".edit_gift").replaceWith("<%= escape_javascript(render(:partial => "form"))%>")
+$(".new_gift")[0].reset();

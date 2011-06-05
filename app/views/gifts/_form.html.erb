@@ -1,0 +1,20 @@
+<%= form_for(@gift, :remote => true) do |f| %>
+  <% if @gift.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@gift.errors.count, "error") %> prohibited this gift from being saved:</h2>
+
+      <ul>
+      <% @gift.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p class="form_field">
+    <label class="label"><%= f.label :name %></label>
+    <label class="text_field"><%= f.text_field :name %></label>
+  </p>
+  <div class="buttons">
+    <a><%= f.submit %></a>
+  </div>
+<% end %>

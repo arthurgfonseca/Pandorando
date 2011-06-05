@@ -1,5 +1,7 @@
 Pandorando::Application.routes.draw do
   
+  resources :gifts
+
   resources :categories
 
   resources :answers
