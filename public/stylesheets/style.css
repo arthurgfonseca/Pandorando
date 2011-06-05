@@ -96,6 +96,7 @@ a {color:#3d6f92; font-size:12px;}
 .form_field {height:30px; width:100%;}
 .label {width:30%; color:#3d6f92; font-size:12px; font-weight:bold; float:left; text-align:left;}
 .text_field {width:70%;}
+.text_area textarea {width:70%; height:45px; margin-bottom:30px;}
 .text_field input {width:50%;}
 
 .buttons {margin-top:10px; margin-bottom:10px; height:30px;}

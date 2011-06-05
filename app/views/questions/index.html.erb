@@ -1,22 +1,21 @@
 <div class="h_text">
-	<!-- <img alt="" src="images/1-t1.jpg" />--><h1>Users</h1><br />
+	<!-- <img alt="" src="images/1-t1.jpg" />--><h1>Questions</h1><br />
 </div>
 <div class="padding">
 	<div class="main_content">
 		<div class="show">
-			<table id="users" class="grid">
+			<table id="questions" class="grid">
 				<thead>
 					<tr>
-						<th>Name</th>
-						<th>Email</th>
+						<th>Enunciation</th>
 						<th>Show</th>
 						<th>Edit</th>
 						<th>Remove</th>
 					</tr>
 				</thead>
 				<tbody>
-					<% @users.each do |user| %>
-						<%= render user %>
+					<% @questions.each do |question| %>
+					  <%= render question %>
 					<% end %>
 				</tbody>
 				<tfooter>
@@ -25,7 +24,7 @@
 			</table>
 		</div>
 		<div class="form">
-			<h2>New User</h2>
+			<h2>New Question</h2>
 			<div id="form"><%= render :partial => "form" %></div>
 		</div>
 	</div>

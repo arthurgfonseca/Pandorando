@@ -10,7 +10,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110604222827) do
+ActiveRecord::Schema.define(:version => 20110605152124) do
+
+  create_table "questions", :force => true do |t|
+    t.text     "enunciation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "resposta", :force => true do |t|
     t.string   "enuciado"
