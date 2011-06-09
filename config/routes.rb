@@ -1,5 +1,7 @@
 Pandorando::Application.routes.draw do
   
+  get "home/index"
+
   resources :gifts
 
   resources :categories
@@ -8,7 +10,7 @@ Pandorando::Application.routes.draw do
 
   resources :questions
 
-  root :to => "users#index"
+  root :to => "home#index"
   
   resources :users
 

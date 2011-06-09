@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Pandorando</title>
+  <%= stylesheet_link_tag "layout.css" %>
+  <%= stylesheet_link_tag "style.css" %>
+  <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' %>
+  <%= javascript_include_tag 'rails' %>
+<%= javascript_include_tag 'maxheight' %>
+</head>
+<body id="index_1" onload="new ElementMaxHeight();">
+	<div id="header_tall" style="height:630px">	
+		<div id="main">
+			<!--header -->
+			<div id="header">
+				<div class="h_logo">
+						<div class="left">
+						<!-- <img alt="" src="images/logo.jpg" />--><br />
+					</div>
+					<div class="right">
+						<a href="http://localhost:3000/users">Admin</a>				</div>
+					<div class="clear"></div>
+				</div>
+			<!--header end-->
+			<!-- middle -->
+			<div id="middle" style="height:500px;">
+				
+			</div>
+			<!-- middle end -->
+			<!-- footer -->
+			<div id="footer">
+				<div class="indent">
+					Pandorando <a href="#">Privacy Policy</a>				</div>
+			</div>
+			<!-- footer end -->
+		</div>
+
+	</div>
+
+</body>
+</html>
