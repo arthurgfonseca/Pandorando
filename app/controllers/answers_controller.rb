@@ -1,8 +1,13 @@
 class AnswersController < ApplicationController
   # GET /answers
   # GET /answers.xml
+  
   def index
-    @answers = Answer.all
+    if(Answer.find(:first) != nil)
+      @answers = Answer.find(:all, :include => :question)
+    else
+      @answers = Answer.all
+    end
     @answer = Answer.new
     @index = "answers"
 
@@ -21,6 +26,29 @@ class AnswersController < ApplicationController
       format.html # show.html.erb
       format.js
     end
+  end
+  
+  def addChar
+    
+    @answer = Answer.find(params[:id])
+    @categories = Category.find(:all)
+    @first = true
+    
+    
+    if(params[:title].to_s != "")
+       @first = false
+       category = Category.find(params[:title])
+       char = @answer.characteristics.build 
+       char.title = category.name
+       char.load = params[:load].to_i
+       char.save
+     end
+
+     respond_to do |format|
+          format.html { redirect_to("/answers") }
+          format.js
+     end
+    
   end
 
   # GET /answers/new
@@ -80,4 +108,11 @@ class AnswersController < ApplicationController
       format.js
     end
   end
+  
+  def newCharacteristic
+    
+    puts 'passei aki no newCharacteristic'
+    
+  end
+  
 end

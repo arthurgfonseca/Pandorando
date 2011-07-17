@@ -1,0 +1,6 @@
+alert('entrou aki')
+if('<%= @lastQuestion %>' == 'false') {
+	$("#question").replaceWith("<%= escape_javascript(render(:partial => "questions"))%>")
+} else {
+	$("#question").replaceWith("<%= escape_javascript(render(:partial => "result"))%>")
+}
