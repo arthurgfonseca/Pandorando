@@ -38,6 +38,7 @@ class AnswersController < ApplicationController
   def edit
     @answer = Answer.find(params[:id])
   end
+  
 
   # POST /answers
   # POST /answers.xml
