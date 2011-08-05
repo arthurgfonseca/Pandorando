@@ -5,6 +5,7 @@ class GenerateQuestionController < ApplicationController
   def nextQuestion
     
     @questions = GenerateQuestionController.getQuestions()
+    numberOfQuestions = @questions.size
     arrPesos = session[:arrPesos]
     @lastQuestion = false
     @questionNumber = (params[:questionNumber]).to_i
@@ -37,7 +38,7 @@ class GenerateQuestionController < ApplicationController
     #Check if it is the last question
     if(@questions.size <= @questionNumber + 1)
       @lastQuestion = true
-      getResult()
+      @network = getResult(numberOfQuestions)
     else
       @questionNumber = @questionNumber.next
     end
@@ -57,9 +58,18 @@ class GenerateQuestionController < ApplicationController
     
   end
   
-  def getResult
+  def getResult(numberOfQuestions)
+    
+    arrPesos = []
+    session[:arrPesos].each{|result|
+      arrPesos << Float(result.to_f/numberOfQuestions.to_f)
+    }
+    
+    
     puts 'passei aki'
-    arrPesos = session[:arrPesos]
+    network = ResultController.generateResult(arrPesos)
+    return network
+    
   end
   
   
