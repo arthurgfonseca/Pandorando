@@ -1,7 +1,6 @@
-class Network
+class History
   include Mongoid::Document
-  field :positionx, :type => Integer
-  field :positiony, :type => Integer
+  field :internal_id, :type => Integer
   field :weight0, :type => Float
   field :weight1, :type => Float
   field :weight2, :type => Float

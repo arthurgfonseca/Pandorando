@@ -4,10 +4,10 @@ class HomeController < ApplicationController
   def index
     
     #Init array
-    arrPesos = Array.new(2)
-    arrPesos[0] = 0
-    arrPesos[1] = 0
-    session[:arrPesos] = arrPesos
+    # arrPesos = Array.new(2)
+    #     arrPesos[0] = 0
+    #     arrPesos[1] = 0
+    #     session[:arrPesos] = arrPesos
     
     @questions = generateQuestion()
     @questionNumber = 0

@@ -3,11 +3,8 @@ class AnswersController < ApplicationController
   # GET /answers.xml
   
   def index
-    if(Answer.find(:first) != nil)
-      @answers = Answer.find(:all, :include => :question)
-    else
-      @answers = Answer.all
-    end
+    @answers = Answer.all
+ 
     @answer = Answer.new
     @index = "answers"
 
