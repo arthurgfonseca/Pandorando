@@ -1,6 +1,7 @@
 <tr id="<%= dom_id question %>" class="show_grid">
     <td style="width:70%"><%= question.enunciation %></td>
-    <td><%= link_to 'Show', question, :remote => true %></td>
+    <td><%= link_to 'addAnswer', {:controller => "questions", :action => "addAnswer", :id => question}, :remote => true %></td>
+	<!-- <td><%= link_to 'Edit', edit_question_path(question), :remote => true %></td> -->
     <td><%= link_to 'Edit', edit_question_path(question), :remote => true %></td>
     <td><%= link_to 'Destroy', question, :confirm => 'Are you sure?', :method => :delete, :remote => true %></td>
 </tr>

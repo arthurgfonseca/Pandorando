@@ -1,0 +1,35 @@
+<div id="question">
+	<div class="h_text">
+		<!-- <img alt="" src="images/1-t1.jpg" />--><h1>Question</h1><br />
+	</div>
+	<div class="padding">
+		<div class="main_content">
+			<h2><%= @questionNumber.to_s %></h2>
+			<h2><%= @questions[@questionNumber].enunciation %></h2>
+			<br />
+		
+			<%=  form_tag({:controller => "generate_question", :action => "nextQuestion"}, :remote => true)  do -%>
+		
+			<%= hidden_field_tag 'questionNumber', @questionNumber%>
+		
+			<% @questions[@questionNumber].answers.each do |i|  %> 
+			<label class="label"><%= i.enunciation %></label>
+			<%= check_box_tag i.enunciation %>
+			<br />
+			<% end %>
+		
+			<% if(@questions.size > (@questionNumber + 1))%>
+			<div class="buttons">
+			    <a href="#"><%= submit_tag "Next" %></a>
+			</div>
+			<% else %>
+			<div class="buttons">
+			    <a href="#"><%= submit_tag "Ok" %></a>
+			</div>
+			<% end %>
+		
+			<% end -%>
+		
+		</div>
+	</div>
+</div>

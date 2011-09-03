@@ -2,6 +2,8 @@ class CreateAnswers < ActiveRecord::Migration
   def self.up
     create_table :answers do |t|
       t.string :enunciation
+      
+      t.references :question
 
       t.timestamps
     end
