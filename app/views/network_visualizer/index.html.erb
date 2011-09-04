@@ -1,0 +1,41 @@
+<script type="text/javascript">  
+
+//adiciona um neuronio pegando o id e o vetor dele no campo de texto
+function adicionarNeuronio() {  
+	if(document.getElementById('id-neuronio').value == ''
+	|| document.getElementById('vetor').value == '')
+		alert("Preencha todos os campos");
+	else {
+		var pjs = Processing.getInstanceById("mapa");  
+		pjs.adicionarVetorAUmNeuronio(document.getElementById('id-neuronio').value, document.getElementById('vetor').value);
+	}
+}  
+
+//Adiciona neuronios e vetoresrandomicamente
+function adicionarAutomaticamente() {  
+	var pjs = Processing.getInstanceById("mapa");  
+	for (i=1; i<=50; i++) {
+		//inteiro entre 0 e 100
+		var id = Math.floor(Math.random()*101)
+		pjs.adicionarVetorAUmNeuronio(id, '3,66,1,1'); 
+	}
+	
+}         		
+</script>
+
+<canvas id="mapa" datasrc="/javascripts/kohonen_site.pjs"></canvas>
+
+	<p id="paragrafo-id">
+		<label for="name">Id neurônio</label>
+		<input type="text" name="id" id="id-neuronio" />
+	</p>
+
+	<p id="paragrafo-vetor">
+		<label for="email">Vetor a ser adicionado</label>
+		<input type="text" name="nome" id="vetor" />
+	</p>
+	<p class="submit">
+		<input type="submit" value="Adicionar" onclick="adicionarNeuronio(); return false;"/>
+	</p>
+
+<a onclick="adicionarAutomaticamente(); return false;">teste</a>

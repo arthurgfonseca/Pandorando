@@ -1,6 +1,6 @@
 if('<%= @first %>' == 'true') {
-	$("#addAnswer").replaceWith("<%= escape_javascript(render(:partial => "addAnswer"))%>")
+	$("#addAnswer").replaceWith("<%= escape_javascript(render(:partial => "addAnswer"))%>");
 } else {
 	$("#addAnswer").empty();
-	alert('resposta adicionada com sucesso')
+	alert('Resposta adicionada com sucesso.');
 }
