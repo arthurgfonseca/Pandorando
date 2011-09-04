@@ -4,4 +4,5 @@ class Question
   
   has_many :answers, :dependent => :destroy
   
+  validates :enunciation, :presence => true
 end

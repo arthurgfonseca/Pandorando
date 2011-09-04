@@ -3,6 +3,8 @@ class AnswerCharacteristicWeight
   field :characteristic_id, :type => Integer
   field :weight, :type => Float
   
+  validates :weight, :presence => true
+  
   belongs_to :answer
   
   alias :original_save :save

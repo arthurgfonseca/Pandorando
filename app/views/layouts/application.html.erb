@@ -7,7 +7,8 @@
   <%= stylesheet_link_tag "style.css" %>
   <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' %>
   <%= javascript_include_tag 'rails' %>
-<%= javascript_include_tag 'maxheight' %>
+  <%= javascript_include_tag 'processing-1.2.1.js' %>
+  <%= javascript_include_tag 'maxheight' %>
 </head>
 <body id="index_1" onload="new ElementMaxHeight();">
 	<div id="header_tall">	
@@ -19,7 +20,7 @@
 						<!-- <img alt="" src="images/logo.jpg" />--><br />
 					</div>
 					<div class="right">
-						<a href="http://localhost:3000/">Logout</a>				</div>
+						<a href="#"><%= link_to "Profile" %></a>				</div>
 					<div class="clear"></div>
 				</div>
 				<div id="menu">
@@ -28,31 +29,26 @@
 							<div class="padding">
 								<ul>
 									<% if(@index == "users") %>
-									<li><span>Users</span></li>
+									<li><span>Usu&aacute;rios</span></li>
 									<% else %>
-									<li><a href="http://localhost:3000/users">Users</a></li>
+									<li><%= link_to "Usuários", :controller => "users"%></li>
 									<% end %>
 									<% if(@index == "questions") %>
-									<li><span>Questions</span></li>
+									<li><span>Perguntas</span></li>
 									<% else %>
-									<li><a href="http://localhost:3000/questions">Questions</a></li>
+									<li><%= link_to "Perguntas", :controller => "questions"%></li>
 									<% end %>
 									<% if(@index == "answers") %>
-									<li><span>Answers</span></li>
+									<li><span>Respostas</span></li>
 									<% else %>
-									<li><a href="http://localhost:3000/answers">Answers</a></li>
-									<% end %>
-									<% if(@index == "categories") %>
-									<li><span>Categories</span></li>
-									<% else %>
-									<li><a href="http://localhost:3000/categories">Categories</a></li>
+									<li><%= link_to "Respostas", :controller => "answers"%></li>
 									<% end %>
 									<% if(@index == "gifts") %>
-									<li><span>Gifts</span></li>
+									<li><span>Presentes</span></li>
 									<% else %>
-									<li><a href="http://localhost:3000/gifts">Gifts</a></li>
+									<li><%= link_to "Presentes", :controller => "gifts"%></li>
 									<% end %>
-									<li class="last"><a href="http://localhost:3000/reports">Reports</a></li>
+									<li class="last"><a href="#">Mostrar Rede</a></li>
 								</ul>
 								<br class="clear" />
 							</div>

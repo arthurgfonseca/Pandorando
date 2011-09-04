@@ -5,4 +5,5 @@ class Answer
   belongs_to :question
   has_many :AnswerCharacteristicWeight, :dependent => :destroy
   
+  validates :enunciation, :presence => true
 end

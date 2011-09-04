@@ -3,7 +3,7 @@ Pandorando::Application.routes.draw do
   get "home/index"
 
   resources :gifts
-  
+
   match "generate_question/nextQuestion" => "generate_question#nextQuestion"
   
   match "answers/newCharacteristic" => "answers#newCharacteristic"
@@ -22,7 +22,8 @@ Pandorando::Application.routes.draw do
   resources :users
 
   resources :resposta
-
+  
+  match ':controller(/:action(/:id))'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

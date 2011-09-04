@@ -1,4 +1,4 @@
 $("#<%= dom_id(@question) %>").replaceWith("<%= escape_javascript(render(:partial => @question)) %>");
 <% @question = Question.new # reset for new form %>
-$(".edit_question").replaceWith("<%= escape_javascript(render(:partial => "form"))%>")
+$(".edit_question").replaceWith("<%= escape_javascript(render(:partial => 'form'))%>").
 $(".new_question")[0].reset();
