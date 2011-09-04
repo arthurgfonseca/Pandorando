@@ -3,14 +3,14 @@
 <br />
 <h2>Add Characteristic</h2>
 <br />
-<% form_tag({:controller => "answers", :action => "addChar", :id => @answer}, :remote => true) do %>
+<%= form_tag({:controller => "answers", :action => "addChar", :id => @answer}, :remote => true) do %>
 	<p class="form_field">
 	    <label class="label">char</label>
-	    <label class="text_field"><%= select_tag "title", options_from_collection_for_select(@categories, "id", "name") %></label>
+	    <label class="text_field"><%= select_tag "characteristic", options_from_collection_for_select(@characteristics, "id", "name") %></label>
 	  </p>
 	<p class="form_field">
 	    <label class="label">Peso</label>
-	    <label class="text_field"><%= text_field_tag 'load' %></label>
+	    <label class="text_field"><%= text_field_tag 'weight' %></label>
 	  </p>
 	  <div class="buttons">
 	    <a><%= submit_tag "Add" %></a>

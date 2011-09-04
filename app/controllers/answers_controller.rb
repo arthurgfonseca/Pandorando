@@ -3,6 +3,7 @@ class AnswersController < ApplicationController
   # GET /answers.xml
   
   def index
+
     @answers = Answer.all
  
     @answer = Answer.new
@@ -26,19 +27,16 @@ class AnswersController < ApplicationController
   end
   
   def addChar
-    
     @answer = Answer.find(params[:id])
-    @categories = Category.find(:all)
+    @characteristics = Characteristic.get_characteristics
     @first = true
-    
-    
-    if(params[:title].to_s != "")
+
+    if(params[:characteristic].to_s != "")
        @first = false
-       category = Category.find(params[:title])
-       char = @answer.characteristics.build 
-       char.title = category.name
-       char.load = params[:load].to_i
-       char.save
+       characteristic_weight = @answer.AnswerCharacteristicWeight.build 
+       characteristic_weight.characteristic_id = params[:characteristic]
+       characteristic_weight.weight = params[:weight].to_f
+       characteristic_weight.save
      end
 
      respond_to do |format|

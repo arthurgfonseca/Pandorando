@@ -3,6 +3,6 @@ class Answer
   field :enunciation, :type => String
   
   belongs_to :question
-  has_many :characteristics
+  has_many :AnswerCharacteristicWeight, :dependent => :destroy
   
 end
