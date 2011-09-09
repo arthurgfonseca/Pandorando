@@ -22,7 +22,8 @@ class SomController < ApplicationController
   def self.get_best_matching_unit(codebook_vectors, pattern)
     best, b_dist = nil, nil
     codebook_vectors.each do |codebook|
-      dist = SomController.euclidean_distance(codebook[:vector], pattern)
+      vector = [codebook.weight0, codebook.weight1, codebook.weight2, codebook.weight3, codebook.weight4]
+      dist = SomController.euclidean_distance(vector, pattern)
       best,b_dist = codebook,dist if b_dist.nil? or dist<b_dist
     end
     return [best, b_dist]
@@ -30,52 +31,70 @@ class SomController < ApplicationController
 
   def self.get_vectors_in_neighborhood(bmu, codebook_vectors, neigh_size)
     neighborhood = []
+    bmuCord = [bmu.positionx, bmu.positiony]
     codebook_vectors.each do |other|
-      if SomController.euclidean_distance(bmu[:coord], other[:coord]) <= neigh_size
+      otherCord = [other.positionx, other.positiony]
+      if SomController.euclidean_distance(bmuCord, otherCord) <= neigh_size
         neighborhood << other
       end
     end
     return neighborhood
   end
 
-  def self.update_codebook_vector(codebook, pattern, lrate)
-    puts 'UPDATE CODEBOOK'
+  def self.update_codebook_vector(codebook, pattern, lrate, timestamp, timestampTotal, neigh_size, bmu)
+    
+    bmuCord = [bmu.positionx, bmu.positiony]
+    otherCord = [codebook.positionx, codebook.positiony]
+    bmuDist = SomController.euclidean_distance(bmuCord, otherCord)
+    
+    distanceRateModifier = Math.exp(-1*((bmuDist.to_f)*(bmuDist.to_f))/(1*(neigh_size.to_f)*(neigh_size.to_f)))
+    
+    learningRateModifier = Math.exp((-1*timestamp).to_f/(timestampTotal).to_f)
     # puts codebook
-    codebook[:vector].each_with_index do |v,i|
-      # TODO: ADD DISTANCE OF BMU PARAMTER
-      error = pattern[i]-codebook[:vector][i]
-      codebook[:vector][i] += lrate * error
+    cont = 0
+    while(cont < 5)
+      
+      error = pattern[cont] - eval("codebook.weight" + cont.to_s)
+      value = eval("codebook.weight" + cont.to_s)
+      
+      if(cont == 0)
+        codebook.weight0 = value + (distanceRateModifier * learningRateModifier * lrate * error)
+      elsif(cont == 1)
+        codebook.weight1 = value + (distanceRateModifier * learningRateModifier * lrate * error)
+      elsif(cont == 2)
+        codebook.weight2 = value + (distanceRateModifier * learningRateModifier * lrate * error)
+      elsif(cont == 3)
+        codebook.weight3 = value + (distanceRateModifier * learningRateModifier * lrate * error)
+      elsif(cont == 4)
+        codebook.weight4 = value + (distanceRateModifier * learningRateModifier * lrate * error)
+      else
+        raise 'error'
+      end
+      
+      cont = cont.next
     end
+    # Save changes
+    codebook.save
   end
 
-  def self.train_network(vectors, input, iterations, l_rate, neighborhood_size)
+  def self.train_network(network, input, iterations, l_rate, neighborhood_size)
     iterations.times do |iter|
       # pattern = random_vector(shape)
       pattern = input
       lrate = l_rate * (1.0-(iter.to_f/iterations.to_f))
       neigh_size = neighborhood_size * (1.0-(iter.to_f/iterations.to_f))
-      bmu,dist = SomController.get_best_matching_unit(vectors, pattern)
-      neighbors = SomController.get_vectors_in_neighborhood(bmu, vectors, neigh_size)
+      bmu,dist = SomController.get_best_matching_unit(network, pattern)
+      neighbors = SomController.get_vectors_in_neighborhood(bmu, network, neigh_size)
+      timestamp = 1
+      timestampTotal = neighbors.size
       neighbors.each do |node|
-       SomController.update_codebook_vector(node, pattern, lrate)
+       SomController.update_codebook_vector(node, pattern, lrate, timestamp, timestampTotal, neigh_size, bmu)
+       timestamp = timestamp.next
       end
-      puts ">training: neighbors=#{neighbors.size}, bmu_dist=#{dist}, bmu=#{bmu}"
+      puts ">training: neighbors=#{neighbors.size}, bmu_dist=#{dist}, bmux=#{bmu.positionx}, bmuy=#{bmu.positiony}"
     end
   end
 
-  # def self.summarize_vectors(vectors)
-  #   minmax = Array.new(vectors.first[:vector].size){[1,0]}
-  #   vectors.each do |c|
-  #     c[:vector].each_with_index do |v,i|
-  #       minmax[i][0] = v if v<minmax[i][0]
-  #       minmax[i][1] = v if v>minmax[i][1]
-  #     end
-  #   end
-  #   s = ""
-  #   minmax.each_with_index {|bounds,i| s << "#{i}=#{bounds.inspect} "}
-  #   puts "Vector details: #{s}"
-  #   return minmax
-  # end
 
   def self.test_network(codebook_vectors, input, num_trials=100)
     error = 0.0

@@ -4,19 +4,28 @@ class ResultController < ApplicationController
     
     puts 'entrei result'
     
-    nodes = Network.find(:all)
+    nodes = Network.all
     # Network was alredy created
     if(nodes.size == 0)
+      puts 'GEREI NETWORK'
       network = ResultController.createNetwork()
-    else
-      network = ResultController.getNetwork(nodes)
+      puts 'NETWORK GERADA'
     end
+    
+    network = Network.all
     puts 'NETWORK INICIAL'
-    puts network
+    network.each{|node|
+      puts 'NOOOOOOODEEEEEEEE'
+      puts node.weight0
+      puts node.weight1
+      puts node.weight2
+      puts node.weight3
+      puts node.weight4
+      
+    }
     
     # Start Kohonen Network
     ResultController.start(network, resultVector)
-    puts network
     return network
     
   end
@@ -61,7 +70,17 @@ class ResultController < ApplicationController
     puts ''
     puts 'NETWORK FINAL'
     
-    ResultController.updateNetworkDatabase(network)
+    network.each{|node|
+      puts 'NOOOOOOODEEEEEEEE FINAL nodex=' + (node.positionx).to_s + 'nodey=' + (node.positiony).to_s
+      puts node.weight0
+      puts node.weight1
+      puts node.weight2
+      puts node.weight3
+      puts node.weight4
+      
+    }
+    
+    # ResultController.updateNetworkDatabase(network)
     
   end
   
@@ -99,7 +118,14 @@ class ResultController < ApplicationController
       node = Network.new
       node.positionx = networkItem[:coord][0].to_i
       node.positiony = networkItem[:coord][1].to_i
-      node.weights = (networkItem[:vector][0].to_s + ", " + networkItem[:vector][1].to_s)
+      # Fazer de forma iterativa
+      puts 'VETOOOOORRRRRRRRRRRR'
+      puts networkItem[:vector]
+      node.weight0 = networkItem[:vector][0].to_f
+      node.weight1 = networkItem[:vector][1].to_f
+      node.weight2 = networkItem[:vector][2].to_f
+      node.weight3 = networkItem[:vector][3].to_f
+      node.weight4 = networkItem[:vector][4].to_f
       node.save
       
     }

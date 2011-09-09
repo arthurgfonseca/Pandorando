@@ -10,10 +10,11 @@ class Characteristic
   
   def Characteristic.get_characteristics
     array = Array.new
-    array.push(Characteristic.new(0,'teste'))
-    array.push(Characteristic.new(10,'teste1'))
-    array.push(Characteristic.new(2,'teste2'))
-    array.push(Characteristic.new(3,'teste3'))
+    array.push(Characteristic.new(0,'Intelectual')) # Nerd
+    array.push(Characteristic.new(1,'Esportista')) # Quem gosta ou pratica esporte
+    array.push(Characteristic.new(2,'Alternativo')) # Pessoa alternativa (Danilo, Daniel)
+    array.push(Characteristic.new(3,'Baladeiro')) # Balada, bons bares (Livia)
+    array.push(Characteristic.new(4,'Comum')) # Forro, Sertaneja, Faustão etc...
     return array
   end
   
