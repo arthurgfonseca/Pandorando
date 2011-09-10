@@ -14,6 +14,8 @@ class HomeController < ApplicationController
     
     @questions = generateQuestion()
     @questionNumber = 0
+    puts "QUESTION SIZE"
+    puts @questions.size
    
     
   end

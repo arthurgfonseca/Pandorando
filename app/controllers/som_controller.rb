@@ -47,7 +47,7 @@ class SomController < ApplicationController
     otherCord = [codebook.positionx, codebook.positiony]
     bmuDist = SomController.euclidean_distance(bmuCord, otherCord)
     
-    distanceRateModifier = Math.exp(-1*((bmuDist.to_f)*(bmuDist.to_f))/(1*(neigh_size.to_f)*(neigh_size.to_f)))
+    distanceRateModifier = Math.exp(-1*((bmuDist.to_f)*(bmuDist.to_f))/(4*(neigh_size.to_f)*(neigh_size.to_f)))
     
     learningRateModifier = Math.exp((-1*timestamp).to_f/(timestampTotal).to_f)
     # puts codebook
@@ -85,11 +85,8 @@ class SomController < ApplicationController
       neigh_size = neighborhood_size * (1.0-(iter.to_f/iterations.to_f))
       bmu,dist = SomController.get_best_matching_unit(network, pattern)
       neighbors = SomController.get_vectors_in_neighborhood(bmu, network, neigh_size)
-      timestamp = 1
-      timestampTotal = neighbors.size
       neighbors.each do |node|
-       SomController.update_codebook_vector(node, pattern, lrate, timestamp, timestampTotal, neigh_size, bmu)
-       timestamp = timestamp.next
+       SomController.update_codebook_vector(node, pattern, lrate, iter, iterations, neigh_size, bmu)
       end
       puts ">training: neighbors=#{neighbors.size}, bmu_dist=#{dist}, bmux=#{bmu.positionx}, bmuy=#{bmu.positiony}"
     end

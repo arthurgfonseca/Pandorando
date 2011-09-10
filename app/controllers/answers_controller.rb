@@ -8,6 +8,9 @@ class AnswersController < ApplicationController
  
     @answer = Answer.new
     @index = "answers"
+    
+    puts'ANSWER'
+    puts @answers[0].question
 
     respond_to do |format|
       format.html # index.html.erb

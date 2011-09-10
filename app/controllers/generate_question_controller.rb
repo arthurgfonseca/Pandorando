@@ -77,7 +77,7 @@ class GenerateQuestionController < ApplicationController
   def self.getQuestions
     
     # return Question.find(:all, :include => :answers)
-    return Question.all
+    return Question.limit(5)
     
   end
   
