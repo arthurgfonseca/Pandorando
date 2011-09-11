@@ -11,10 +11,11 @@
 			<%=  form_tag({:controller => "generate_question", :action => "nextQuestion"}, :remote => true)  do -%>
 		
 			<%= hidden_field_tag 'questionNumber', @questionNumber%>
-		
+			<% cont = 1 %>
 			<% @questions[@questionNumber].answers.each do |i|  %> 
-			<label class="label"><%= i.enunciation %></label>
-			<%= check_box_tag i.enunciation %>
+			<%= radio_button_tag "answer", i.enunciation %>
+			<%= i.enunciation.humanize%>
+			<% cont = cont.next %>
 			<br />
 			<% end %>
 		

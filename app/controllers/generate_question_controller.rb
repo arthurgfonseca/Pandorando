@@ -11,26 +11,34 @@ class GenerateQuestionController < ApplicationController
     @questionNumber = (params[:questionNumber]).to_i
     
     #TODO
-    opcao1 = params[:Sim]
-    opcao2 = params[:Nao]
+    opcao = params[:answer]
     
     
-    if(opcao1)
-      answer = @questions[@questionNumber.to_i].answers[0]
-      answerWithChar = Answer.find(answer.id, :include => :characteristics)
-      char = answerWithChar.characteristics
-      arrPesos[0] = arrPesos[0].to_i + char[0].load
-      arrPesos[1] = arrPesos[1].to_i + char[1].load
+    answers = @questions[@questionNumber.to_i].answers
+    puts answers
       
-    end
-    
-    if(opcao2)
-      answer = @questions[@questionNumber.to_i].answers[1]
-      answerWithChar = Answer.find(answer.id, :include => :characteristics)
-      char = answerWithChar.characteristics
-      arrPesos[0] = arrPesos[0].to_i + char[0].load
-      arrPesos[1] = arrPesos[1].to_i + char[1].load
-    end
+      for answer in answers
+        puts 'haaa'
+        puts answer
+        puts answer.id
+        if(answer.enunciation == opcao.to_s)
+      
+          answerWithChar = Answer.find(answer.id)
+          char = answerWithChar.AnswerCharacteristicWeight
+          
+          puts 'WEIGHT'
+          puts char[0].weight
+          puts arrPesos.class
+          
+          
+          arrPesos[0] = arrPesos[0].to_f + (char[0].weight).to_f
+          arrPesos[1] = arrPesos[1].to_f + (char[1].weight).to_f
+          arrPesos[2] = arrPesos[2].to_f + (char[2].weight).to_f
+          arrPesos[3] = arrPesos[3].to_f + (char[3].weight).to_f
+          arrPesos[4] = arrPesos[4].to_f + (char[4].weight).to_f
+      
+        end
+      end
     
     session[:arrPesos] = arrPesos
     
@@ -38,6 +46,20 @@ class GenerateQuestionController < ApplicationController
     #Check if it is the last question
     if(@questions.size <= @questionNumber + 1)
       @lastQuestion = true
+      
+      puts Constants::TRAIN_MODE
+      
+      # Add new weights following the char quantity
+      if(Constants::TRAIN_MODE == true)
+        history = History.new
+        history.weight0 = arrPesos[0]
+        history.weight1 = arrPesos[1]
+        history.weight2 = arrPesos[2]
+        history.weight3 = arrPesos[3]
+        history.weight4 = arrPesos[4]
+        history.save
+      end
+      
       @network = getResult(numberOfQuestions)
     else
       @questionNumber = @questionNumber.next
@@ -55,7 +77,7 @@ class GenerateQuestionController < ApplicationController
   def self.getQuestions
     
     # return Question.find(:all, :include => :answers)
-    return Question.all
+    return Question.limit(5)
     
   end
   

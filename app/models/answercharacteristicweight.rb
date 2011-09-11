@@ -1,6 +1,6 @@
 class AnswerCharacteristicWeight
   include Mongoid::Document
-  field :characteristic_id, :type => Integer
+  field :characteristic_id, :type => Float
   field :weight, :type => Float
   
   validates :weight, :presence => true
