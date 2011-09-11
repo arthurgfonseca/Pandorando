@@ -39,7 +39,7 @@ int timer_interno = 0;
 
 void setup() {
 
-  size(800, 800);
+  size(734,734);
   background(0, 0, 0, 0);
   smooth();
   loop();  
@@ -209,11 +209,11 @@ EVENTOS
 ******************************/
 
 void mouseClicked() {
-
+	
 	for(int indiceNeuronios=0; indiceNeuronios < balls.length; indiceNeuronios++) { 
 		if(balls[indiceNeuronios].estamos_encima) {
 			Ball neuronio = balls[indiceNeuronios];
-			cliqueNoNeuronio(neuronio.vetores);
+			cliqueNoNeuronio(neuronio);
 		}
 	}
 }
@@ -325,6 +325,7 @@ class Ball {
   void adicionarVetor( String vetor ) {
     vetores[vetores.length] = vetor;
 	ocurrencias = vetores.length; 
+	heatMap.store.addDataPoint(this.x, this.y);
   }
 }
 

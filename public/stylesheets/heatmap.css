@@ -1,0 +1,13 @@
+#heatmapArea {
+	position:relative;
+	width: 734px;
+	height: 734px;	
+}	
+
+#heatmapArea canvas {
+	position: absolute;
+	top:0;
+	left:0;
+	width: 734px;
+	height: 734px;
+}
