@@ -34,6 +34,22 @@ class Characteristic
     return nil
   end
   
+  def Characteristic.get_characteristic_by_id(searching_characteristic_id)
+    characteristics_array = Characteristic.get_characteristics
+    characteristics_array.each { |characteristic|
+      if characteristic.id == searching_characteristic_id then
+        puts characteristic.name
+        return characteristic
+      end
+    }
+    
+    puts '=============== ERRO ================'
+    puts "Chamada do metodo Characteristic.get_characteristic_by_id - ERRO - Caracteristica nao encontrada"
+    puts '=============== ERRO ================'
+    
+    return nil
+  end
+  
   def == (other_characteristic)
      @id == other_characteristic.id
   end

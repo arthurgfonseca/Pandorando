@@ -1,0 +1,53 @@
+<div id="<%= dom_id question %>" class="show_grid">
+    <p>
+<%= question.enunciation %>
+    - 
+	<%= link_to 'Add', {:controller => "questions", :action => "addAnswer", :id => question}, :remote => true %>
+	 - 
+	<%= link_to 'Editar', edit_question_path(question), :remote => true %>
+	 - 
+	<%= link_to 'Remover', question, :confirm => 'Tem certeza que deseja remover a pergunta? Todas as repostas e pesos perdidos.', :method => :delete, :remote => true %>
+</p>
+<table style="width:100%">
+	<thead>
+		<tr>
+			<td >
+				Resposta/Caracteristica
+			</td>
+			<%  caracteristicas = Characteristic.get_characteristics
+				for indice_da_coluna_da_caracteristicas in 0...caracteristicas.length				
+			%>
+				<td><%= caracteristicas[indice_da_coluna_da_caracteristicas].name; %></td>
+			<% end %>
+		</tr>
+	</thead>
+	<tbody>
+		<% if ((question.answers).length == 0) %>
+		<tr>
+			<td colspan = "<%= caracteristicas.length + 1 %>">
+				Nao ha respostas cadastradas
+			</td>
+		</tr>
+		<% end %>
+		<% question.answers.each do |resposta| %>
+			<tr>
+				<td>
+					<%= resposta.enunciation %>
+				</td>
+				<%  
+					for indice_da_coluna_da_caracteristicas in 0...caracteristicas.length
+						peso_da_caracteristica = 0.0;	
+						for peso_da_caracteristica_da_resposta in resposta.AnswerCharacteristicWeight 
+							caracteristica_da_coluna = caracteristicas[indice_da_coluna_da_caracteristicas];
+							if (peso_da_caracteristica_da_resposta.characteristic_id == caracteristica_da_coluna.id)
+								peso_da_caracteristica = peso_da_caracteristica_da_resposta.weight		
+							end		
+						end 		
+				%>
+					<td><%= peso_da_caracteristica %></td>
+				<% end %>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+</div>
