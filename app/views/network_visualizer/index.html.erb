@@ -56,27 +56,42 @@ function adicionarAutomaticamente() {
 
 //heatmap
 window.onload = function(){
-	heatMap = h337.create({"element":document.getElementById("heatmapArea"), "radius":10, "visible":true});
+	heatMap = h337.create({"element":document.getElementById("heatmapArea"), "radius":70, "visible":true});
 	
 };
+
+//ajusta o radius do heatma
+function ajustarRadius() {  
+	heatMap.setNewRadius(document.getElementById('radius-heatmap').value);
+}
 </script>
+
+<p>
+	<a onclick="criarRede(); return false;" style="cursor:pointer;color:red;">Criar rede<a>
+		&nbsp;&nbsp; - &nbsp;&nbsp;
+	<a onclick="adicionarAutomaticamente(); return false;" style = "cursor:pointer;">Gerar Vetores Randomicos(apos criar rede)</a>
+</p>
+
+<p>
+	<label for="name">Radius heatmap</label>
+	<input type="text" name="radius" id="radius-heatmap" value=70/>
+	<input type="submit" value="Ajustar" onclick="ajustarRadius(); return false;"/>
+	&nbsp;&nbsp; - &nbsp;&nbsp;
+	<a onclick="heatMap.toggleDisplay();" style="cursor:pointer;color:red;">Mostrar/Esconder Heatmap<a>
+</p>
+
+<p>
+	<label for="name">Id neurônio</label>
+	<input type="text" name="id" id="id-neuronio" />
+
+	<label for="email">Vetor a ser adicionado</label>
+	<input type="text" name="nome" id="vetor" />
+	
+	<input type="submit" value="Adicionar" onclick="adicionarNeuronio(); return false;"/>
+</p>
 <div id="heatmapArea">
 <canvas id="mapa" datasrc="/javascripts/kohonen_site.pjs"></canvas>
 </div>
-	<p id="paragrafo-id">
-		<label for="name">Id neurônio</label>
-		<input type="text" name="id" id="id-neuronio" />
-	</p>
 
-	<p id="paragrafo-vetor">
-		<label for="email">Vetor a ser adicionado</label>
-		<input type="text" name="nome" id="vetor" />
-	</p>
-	<p class="submit">
-		<input type="submit" value="Adicionar" onclick="adicionarNeuronio(); return false;"/>
-		<p class="submit">
-			<input type="submit" value="CriarRede" onclick="criarRede(); return false;"/>
-		</p>
-	</p>
 
-<a onclick="adicionarAutomaticamente(); return false;">teste</a>
+
