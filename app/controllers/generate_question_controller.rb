@@ -58,9 +58,20 @@ class GenerateQuestionController < ApplicationController
         history.weight3 = arrPesos[3]
         history.weight4 = arrPesos[4]
         history.save
+        
+        @network = getResult(numberOfQuestions)
+      else
+        
+        puts "ENTREI AKI"
+        arrPerfis = getPerfisList(numberOfQuestions)
+        puts "ARR PERFILS"
+        puts arrPerfis[0]
+        puts arrPerfis[1]
+        puts arrPerfis[2]
+        
       end
       
-      @network = getResult(numberOfQuestions)
+      
     else
       @questionNumber = @questionNumber.next
     end
@@ -92,6 +103,19 @@ class GenerateQuestionController < ApplicationController
     puts 'passei aki'
     network = ResultController.generateResult(arrPesos)
     return network
+    
+  end
+  
+  def getPerfisList(numberOfQuestions)
+    
+    arrPesos = []
+    session[:arrPesos].each{|result|
+      arrPesos << Float(result.to_f/numberOfQuestions.to_f)
+    }
+    
+    puts 'passei aki no getPerfis'
+    return ResultController.getBmuFromNetwork(arrPesos)
+    
     
   end
   

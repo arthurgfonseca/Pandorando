@@ -24,12 +24,68 @@ class ResultController < ApplicationController
       
     }
     
-    # Start Kohonen Network
-    ResultController.start(network, resultVector)
-    return network
+    if(Constants::TRAIN_MODE == true)
+      # Start Kohonen Network
+      ResultController.start(network, resultVector)
+      return network
+    else
+      # Start Kohonen Network
+      arrPerfil = Array.new
+      ResultController.getBmuFromNetwork(arrPerfil, network, resultVector)
+      return arrPerfil
+    end
+    
+    
     
   end
   
+  def self.getBmuFromNetwork(resultVector)
+    
+    arrBmu = Array.new
+    arrPerfil = Array.new
+    
+    network = Network.all
+    
+    SomController.best_unit(arrBmu, network, resultVector)
+    
+    puts "ARRBMU"
+    puts arrBmu.size
+    puts "FIMBMUSIZE"
+    
+    
+    dist = 1000 # Max value
+    perfisCount = (Perfil.all).size
+    
+    while perfisCount > 1
+    
+      index = nil
+      cont = 0
+    
+      arrBmu.each{|hashBmu|
+        if(dist > hashBmu[:dist])
+          dist = hashBmu[:dist]
+          index = cont
+        end
+      
+      }
+      cont = cont.next
+      perfisCount = perfisCount.pred
+      
+      puts "HAHAHAH"
+      puts arrBmu[index][:name]
+      puts index
+      puts "FIM AHUAHU"
+      
+      arrPerfil << arrBmu[index][:name]
+      
+    end
+    
+    
+    
+    
+    return arrPerfil
+    
+  end
   
   def self.start(network, resultVector)
     puts 'entrei start'
@@ -38,6 +94,7 @@ class ResultController < ApplicationController
     l_rate = Constants::LEARNING_RATE
     neigh_size = Constants::NEIGHBOURHOOD_RADIUS
     input = resultVector
+    bmu = nil
     
     puts'################################################################'
     puts ''
@@ -57,7 +114,7 @@ class ResultController < ApplicationController
     puts 'ENTROU ALGORITMO'
     puts ''
     puts ''
-    SomController.execute(network, input, interations, l_rate, neigh_size)
+    bmuResult = SomController.execute(network, input, interations, l_rate, neigh_size, bmu)
     puts ''
     puts ''
     puts 'SAIU DO ALGORITMO'
@@ -69,6 +126,17 @@ class ResultController < ApplicationController
     puts ''
     puts ''
     puts 'NETWORK FINAL'
+    puts 'BMU'
+    puts bmuResult
+    puts 'BMU FIM'
+    characteristics = Characteristic.get_characteristics
+    bmuRecord = Perfil.new
+    bmuRecord.positionx = bmuResult.positionx
+    bmuRecord.positiony = bmuResult.positiony
+    bmuRecord.title = "Comum"
+    bmuRecord.save
+    
+    
     
     network.each{|node|
       puts 'NOOOOOOODEEEEEEEE FINAL nodex=' + (node.positionx).to_s + 'nodey=' + (node.positiony).to_s

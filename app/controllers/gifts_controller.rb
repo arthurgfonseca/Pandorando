@@ -5,6 +5,7 @@ class GiftsController < ApplicationController
     @gifts = Gift.all
     @gift = Gift.new
     @index = "gifts"
+    @perfis = Perfil.all
 
     respond_to do |format|
       format.html # index.html.erb
