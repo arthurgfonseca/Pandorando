@@ -1,5 +1,6 @@
 if('<%= @first %>' == 'true') {
-	$("#addAnswer").replaceWith("<%= escape_javascript(render(:partial => "addAnswer"))%>");
+	$("#addAnswer").remove();
+	$("<%= escape_javascript(render(:partial => "addAnswer"))%>").prependTo("#<%= dom_id(@question) %>");
 } else {
 	$("#addAnswer").empty();
 	alert('Resposta adicionada com sucesso.');

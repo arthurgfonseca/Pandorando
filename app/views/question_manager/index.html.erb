@@ -3,17 +3,17 @@
 </div>
 <div class="padding">
 	<div class="main_content">
-		<div class="show">
+		<div class="form">
+			<h2>Pergunta</h2>
+			<div id="formulario-questao"><%= render :partial => "form" %></div>
+		</div>
+		<div class="show" id="questions">
 			<% @questions.each do |question| %>
 			 		<%= render :partial => "question", :locals => {:question => question} %>
 			<% end %>
 		</div>
 		<div id="addAnswer">
 			
-		</div>
-		<div class="form">
-			<h2>Nova Pergunta</h2>
-			<div id="form"><%= render :partial => "form" %></div>
 		</div>
 	</div>
 </div>

@@ -2,7 +2,7 @@
     <p>
 <%= question.enunciation %>
     - 
-	<%= link_to 'Add', {:controller => "questions", :action => "addAnswer", :id => question}, :remote => true %>
+	<%= link_to 'Adicionar resposta', {:controller => "questions", :action => "addAnswer", :id => question}, :remote => true %>
 	 - 
 	<%= link_to 'Editar', edit_question_path(question), :remote => true %>
 	 - 

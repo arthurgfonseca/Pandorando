@@ -1,7 +1,5 @@
 <div id="addAnswer">
-<br />
-<br />
-<h2>Add Answer</h2>
+<h2>Adicionar Resposta</h2>
 <br />
 <% form_tag({:controller => "questions", :action => "addAnswer", :id => @question}, :remote => true) do %>
 	<p class="form_field">
@@ -9,7 +7,7 @@
 	    <label class="text_field"><%= text_field_tag 'enuciado' %></label>
 	  </p>
 	  <div class="buttons">
-	    <a><%= submit_tag "Add" %></a>
+	    <a><%= submit_tag "Adicionar" %></a>
 	  </div>
 <% end %>
 </div>
