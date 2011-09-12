@@ -24,8 +24,8 @@ class ResultController < ApplicationController
       
       }
         # Train Kohonen Network
-        ResultController.start(network, resultVector)
-        return network
+        perfil = ResultController.start(network, resultVector)
+        return perfil
     else
       # Get info from Kohonen Network
       arrPerfil = Array.new
@@ -118,14 +118,24 @@ class ResultController < ApplicationController
     puts 'BMU'
     puts bmuResult
     puts 'BMU FIM'
-    characteristics = Characteristic.get_characteristics
-    bmuRecord = Perfil.new
-    bmuRecord.positionx = bmuResult.positionx
-    bmuRecord.positiony = bmuResult.positiony
-    bmuRecord.title = "Comum"
-    bmuRecord.save
     
     
+    if(SomController.checkIfShoudCreatePerfil(bmuResult))
+      user = User.last
+      perfil = Perfil.where(:title => user.name)
+      
+      if perfil.size > 0
+        perfil.positionx = bmuResult.positionx
+        perfil.positiony = bmuResult.positiony
+        perfil.save
+      else
+        bmuRecord = Perfil.new
+        bmuRecord.positionx = bmuResult.positionx
+        bmuRecord.positiony = bmuResult.positiony
+        bmuRecord.title = (User.last).name
+        bmuRecord.save
+      end
+    end
     
     network.each{|node|
       puts 'NOOOOOOODEEEEEEEE FINAL nodex=' + (node.positionx).to_s + 'nodey=' + (node.positiony).to_s
@@ -137,7 +147,34 @@ class ResultController < ApplicationController
       
     }
     
+    perfil = Perfil.where(:title => user.name)
+    
+    return perfil
+    
     # ResultController.updateNetworkDatabase(network)
+    
+  end
+  
+  def self.checkIfShoudCreatePerfil(bmuResult)
+    
+    createPerfil = false
+    
+    allBmu = Perfil.all
+    
+    for selectedBmu in allBmu
+      
+      bmuCord = [selectedBmu.positionx, selectedBmu.positiony]
+      otherCord = [bmuResult.positionx, bmuResult.positiony]
+      distance =  SomController.euclidean_distance(bmuCord, otherCord)
+      
+      if distance < (Constants::NEIGHBOURHOOD_RADIUS / 2)
+        createPerfil = true
+      end
+      
+    end
+    
+    return createPerfil
+    
     
   end
   

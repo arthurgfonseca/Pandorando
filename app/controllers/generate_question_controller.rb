@@ -41,14 +41,14 @@ class GenerateQuestionController < ApplicationController
       end
     
     session[:arrPesos] = arrPesos
+    @allGifts = Gift.all
     @arrGifts = Array.new
+    @perfil = nil
     
     #Check if it is the last question
     if(@questions.size <= @questionNumber + 1)
       @lastQuestion = true
       @trainMode = Constants::TRAIN_MODE
-      
-      puts Constants::TRAIN_MODE
       
       # Add new weights following the char quantity
       if(Constants::TRAIN_MODE == true)
@@ -58,30 +58,25 @@ class GenerateQuestionController < ApplicationController
         history.weight2 = arrPesos[2]
         history.weight3 = arrPesos[3]
         history.weight4 = arrPesos[4]
-        history.save
+        # history.save
         
-        @network = getResult(numberOfQuestions)
+        # @perfil = getResult(numberOfQuestions)
+        
+        # Remover, usado apenas para teste
+        @perfil = Perfil.last
+        
+        
+        
       else
         
         arrPerfis = getPerfisList(numberOfQuestions)
-        @arrGifts = Array.new
         
         cont = 0
         
-        puts "ENTREI WHILE"
-        
         while(cont < 3)
-          
           perfil = Perfil.where(:title => arrPerfis[cont]).first
-          
-          puts "gift title"
           gift = perfil.gifts[0]
-          puts gift.name
-          
-          # gift = ((Perfil.where(:title => arrPerfis[cont]).first).gifts[0]).name
-          puts gift
           @arrGifts << gift.name
-          @teste = "aaa"
           cont = cont.next
         end
         
