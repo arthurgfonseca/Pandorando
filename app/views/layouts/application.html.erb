@@ -5,9 +5,11 @@
   <title>Pandorando</title>
   <%= stylesheet_link_tag "layout.css" %>
   <%= stylesheet_link_tag "style.css" %>
+  <%= stylesheet_link_tag "heatmap.css" %>
   <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' %>
   <%= javascript_include_tag 'rails' %>
   <%= javascript_include_tag 'processing-1.2.1.js' %>
+  <%= javascript_include_tag 'heatmap.js' %>
   <%= javascript_include_tag 'maxheight' %>
 </head>
 <body id="index_1" onload="new ElementMaxHeight();">
@@ -59,32 +61,8 @@
 			<!--header end-->
 			<!-- middle -->
 			<div id="middle">
-				<div class="indent">
-					<div class="columns1">
-						<div class="column1">
-							<div class="border">
-								<div class="btall">
-									<div class="ltall">
-										<div class="rtall">
-											<div class="tleft">
-												<div class="tright">
-													<div class="bleft">
-														<div class="bright">
-															<div class="ind">
-																<div id="flash_notice" style="display:none"></div>
-																<%= yield %>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<%= yield %>
+
 			</div>
 			<!-- middle end -->
 			<!-- footer -->

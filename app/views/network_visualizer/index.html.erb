@@ -1,13 +1,47 @@
 <script type="text/javascript">  
+var numeroDeLinhasDaRede = 10;
+var numeroDeColunasDaRede = 10;
+var heatMap = null;
+
+function cliqueNoNeuronio(neuronio) {
+	alert('Neuronio de id: ' + neuronio.id);
+	if (neuronio.vetores.length > 0)
+		alert('Vetores do neuronio: (' + neuronio.vetores.join(') - (') + ')');
+	else
+		alert('Neuronio nao possui vetores.');
+		
+	return;
+};
+//Cria rede de 100 neuronios
+function criarRede() {  
+	var pjs = Processing.getInstanceById("mapa");  
+	pjs.MapaNeural.quantidadeDeLinhas = numeroDeLinhasDaRede;
+	pjs.MapaNeural.quantidadeDeColunas = numeroDeColunasDaRede;
+	
+	var linha = 0;
+	var coluna = 0;
+	for (i=0; i<pjs.MapaNeural.quantidadeDeLinhas*pjs.MapaNeural.quantidadeDeColunas; i++) {
+		
+		pjs.MapaNeural.criarNeuronio(i, '', linha, coluna); 
+		coluna++;
+		
+		if(coluna > pjs.MapaNeural.quantidadeDeColunas - 1) {
+			linha++;
+			coluna = 0;
+		}
+		
+	}
+	return false;
+}
 
 //adiciona um neuronio pegando o id e o vetor dele no campo de texto
-function adicionarNeuronio() {  
+function adicionarNeuronio() { 
 	if(document.getElementById('id-neuronio').value == ''
 	|| document.getElementById('vetor').value == '')
 		alert("Preencha todos os campos");
 	else {
 		var pjs = Processing.getInstanceById("mapa");  
-		pjs.adicionarVetorAUmNeuronio(document.getElementById('id-neuronio').value, document.getElementById('vetor').value);
+		pjs.MapaNeural.adicionarVetorAUmNeuronio(document.getElementById('id-neuronio').value, document.getElementById('vetor').value);
 	}
 }  
 
@@ -16,26 +50,50 @@ function adicionarAutomaticamente() {
 	var pjs = Processing.getInstanceById("mapa");  
 	for (i=1; i<=50; i++) {
 		//inteiro entre 0 e 100
-		var id = Math.floor(Math.random()*101)
-		pjs.adicionarVetorAUmNeuronio(id, '3,66,1,1'); 
+		var id = Math.floor(Math.random()*numeroDeLinhasDaRede*numeroDeColunasDaRede )
+		pjs.MapaNeural.adicionarVetorAUmNeuronio(id, '3,66,1,1'); 
 	}
 	
 }         		
+
+//heatmap
+window.onload = function(){
+	heatMap = h337.create({"element":document.getElementById("heatmapArea"), "radius":70, "visible":false});
+	
+};
+
+//ajusta o radius do heatma
+function ajustarRadius() {  
+	heatMap.setNewRadius(document.getElementById('radius-heatmap').value);
+}
 </script>
 
+<p>
+	<a onclick="criarRede(); return false;" style="cursor:pointer;color:red;">Criar rede<a>
+		&nbsp;&nbsp; - &nbsp;&nbsp;
+	<a onclick="adicionarAutomaticamente(); return false;" style = "cursor:pointer;">Gerar Vetores Randomicos(apos criar rede)</a>
+</p>
+
+<p>
+	<label for="name">Radius heatmap</label>
+	<input type="text" name="radius" id="radius-heatmap" value="70"> </input>
+	<input type="submit" value="Ajustar" onclick="ajustarRadius(); return false;"/>
+	&nbsp;&nbsp; - &nbsp;&nbsp;
+	<a onclick="heatMap.toggleDisplay();" style="cursor:pointer;color:red;">Mostrar/Esconder Heatmap<a>
+</p>
+
+<p>
+	<label for="name">Id neurônio</label>
+	<input type="text" name="id" id="id-neuronio" />
+
+	<label for="email">Vetor a ser adicionado</label>
+	<input type="text" name="nome" id="vetor" />
+	
+	<input type="submit" value="Adicionar" onclick="adicionarNeuronio(); return false;"/>
+</p>
+<div id="heatmapArea">
 <canvas id="mapa" datasrc="/javascripts/kohonen_site.pjs"></canvas>
+</div>
 
-	<p id="paragrafo-id">
-		<label for="name">Id neurônio</label>
-		<input type="text" name="id" id="id-neuronio" />
-	</p>
 
-	<p id="paragrafo-vetor">
-		<label for="email">Vetor a ser adicionado</label>
-		<input type="text" name="nome" id="vetor" />
-	</p>
-	<p class="submit">
-		<input type="submit" value="Adicionar" onclick="adicionarNeuronio(); return false;"/>
-	</p>
 
-<a onclick="adicionarAutomaticamente(); return false;">teste</a>

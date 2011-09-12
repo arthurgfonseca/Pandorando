@@ -1,1 +1,3 @@
-$("#<%= dom_id(@question) %>").remove();
+$("#question_<%= @question.id %>").fadeOut('medium', function() {
+        $(this).remove()
+      });

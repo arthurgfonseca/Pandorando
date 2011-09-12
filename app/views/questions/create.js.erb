@@ -1,2 +1,3 @@
-$('<%= escape_javascript(render(:partial => @question))%>').appendTo('#questions');
-$("#new_question")[0].reset();
+$('<%= escape_javascript(render(:partial => "/question_manager/question", :locals => {:question => @question}))%>').prependTo('#questions');
+$('#question_<%=@question.id%>').hide();
+$('#question_<%=@question.id%>').fadeIn('slow');

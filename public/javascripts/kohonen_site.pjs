@@ -14,76 +14,50 @@
 // ---------------------------------------------------------------- //
 //  Made with Processing (Beta) v091
 // ---------------------------------------------------------------- //
-//  Modificado por VinÃ­cius Alves Oyama
+//  Modificado por Vinícius Alves Oyama
 
 int nro_linea = 2;
 int nro_espacio = 0;
-PFont font, font1, font2, font3, font4;
+PFont font;
 
-int pares_totales = 0;
+int total_de_vetores = 0;
 float k_total;
 
 int espacio_abajo;
 int espacio_arriba;
 int espacio_derecha;
 int espacio_izquierda;
-int burbujas_maximas = 120;
+
+int burbujas_maximas = 1000;
 int burbujas_graficadas = 0;
 
 Ball[] balls = new Ball[0];
-float grav = 1.40;                    // Gravedad
-float b = 0.85;                       // Rebote
-float f = 0.90;                       // Friccion
-
-String visual_mode = "lineal";
-
-color ColorLineasGrales = color(200);
-color ColorAcento = color(255, 102, 0);
-color ColorAcentoCompanion = color(255, 180, 0);
 
 int lapso_refresh = 1;               // cada cuantos frames se renueva la info del listado
 int timer_interno = 0;
-boolean resorte_activado = false;
-boolean llenar_burbujas = false;
-boolean hay_gravedad = false;
+
 
 void setup() {
 
-  size(550, 520);
+  size(734,734);
   background(0, 0, 0, 0);
   smooth();
   loop();  
    
-  font = loadFont("Helvetica.vlw");
-  font1 = font;
-  font2 = font;
-  font3 = font;
-  font4 = font;
+  font = loadFont("Century.vlw");
   
-  
-  calcularKtotal();
-  
-  layout( font1, font2, font3 );
+  layout();
 }
 
-void layout( PFont font1, PFont font2, PFont font3 ) {
+void layout() {
 
-  espacio_abajo = 60;
-  espacio_arriba = 20;
-  espacio_derecha = 20;
-  espacio_izquierda = 20;
-    
+	
   // datos
-  textFont(font1, 14);
+  textFont(font, 14);
   textAlign(CENTER);
   fill(5);
   text("Mostrando " + str(burbujas_graficadas)+" neuronios do total de "+str(balls.length), width/2, height-30);
-  
-  // titulos
-  //textFont(font2, 18);
-  //textAlign(RIGHT);
-  //fill(ColorAcento);
-  //text("Mapa Neural de Kohonen", width - espacio_derecha, height-31);
+
 }
 
 void draw() {
@@ -92,110 +66,143 @@ void draw() {
       timer_interno++;
       if ( timer_interno == lapso_refresh ) {
         timer_interno = 0;
-        ordenarArrays();
+		//temos que reordenar o array pois o desenho das bordas do neuronio depende do numero de ocorrencias maximo e minimo entre todos os neuronios
+        //e essa informação é retirada baseando-se na ideia de que o array de neuronios esta ordenado
+		MapaNeural.ordenarArrayDeNeuronios();
       }
     
     background(0, 0, 0, 0);
     
-    pares_totales = 0;
+    total_de_vetores = 0;
     burbujas_graficadas = 0;
     for ( int i=burbujas_maximas; i>=0; i-- ) {
       if ( i < balls.length ) {
-        pares_totales += balls[i].ocurrencias;
+        total_de_vetores += balls[i].ocurrencias;
         burbujas_graficadas++;
       }
     }
     
-    calcularKtotal();
+    MapaNeural.calcularAreaTotalASerOcupadaPeloQuadradoDoNeuronio();
+	if (MapaNeural.ativarEfeitoVisualDeAcordoComNumeroDeVetores)
     for ( int i=0; i<balls.length; i++ ) {
-      float kprima = ( k_total * balls[i].ocurrencias ) / pares_totales;
+      float kprima = ( k_total * balls[i].ocurrencias ) / balls[0].ocurrencias;
       balls[i].ka = kprima;
       balls[i].r = sqrt( ( ( kprima ) / PI ) );
     }
         
     for ( int i=burbujas_maximas; i>=0; i-- ) {
       if ( i < balls.length ) {
-        if ( hay_gravedad ) balls[i].fall();
-        if ( resorte_activado ) balls[i].spring();
-        balls[i].bounce();
-        balls[i].collide();
-        balls[i].move();
         balls[i].encima();      
         balls[i].display();
       }
     }
-      
-    layout( font1, font2, font3 );
-}
-
-
-
-//Adiciona um vetor a um neuronio, caso o neuronio nÃ£o exista ele Ã© criado
-void adicionarVetorAUmNeuronio( String idNeuronio, String vetor ) {
-  Ball neuronio = null;
-  // buscar kp a sumar en array existente
-  for (int i=0; i < balls.length; i++) { 
-    if ( balls[i].id == idNeuronio) {
-      neuronio = balls[i];
-    } 
-    if (neuronio != null) break;
-  } 
-  
-  if (neuronio == null)
-	neuronio = criarNeuronio(idNeuronio, vetor);
-  else
-	neuronio.adicionarVetor(vetor);
-}
-
-Ball criarNeuronio( String idNeuronio, String vetor) {  
-  calcularKtotal();
-  float ka;
-  if ( balls.length > 0 ) ka = k_total / balls.length;
-  else ka = k_total;
-  Ball[] tempBall = new Ball( idNeuronio, ka, "Nome", vetor );
-  balls[balls.length] = tempBall;
-  return tempBall;
-}
-
-void ordenarArrays() {
-  
-  Ball[] temp_ocurrencias = new Ball[balls.length];
-  temp_ocurrencias = balls;
-  
-  Ball temp;
-  int i, j;
-      for (i = temp_ocurrencias.length-1; i >= 0; i--)
-         for (j = 0; j < i; j++)
-            if (temp_ocurrencias[j].ocurrencias < temp_ocurrencias[j + 1].ocurrencias) {
-               temp = temp_ocurrencias[j];
-               temp_ocurrencias[j] = temp_ocurrencias[j + 1];
-               temp_ocurrencias[j + 1] = temp;
-            }
-
-  balls = temp_ocurrencias;
-  
-}
-
-void calcularKtotal () {
-
-  // encontrar un valor de k (superficie a ocupar) que concuerde con
-  // la cantidad de burbujar a dibujar (evitar que se superpongan)
-  
-  float alto = height-espacio_arriba-espacio_abajo;
-  float ancho = width-espacio_izquierda-espacio_derecha;
-  
-  if ( burbujas_graficadas <= 1 ) {
-    if ( alto < ancho ) k_total = PI*pow(alto/2,2)*0.8;
-    else k_total = PI*pow(ancho/2,2)*0.8;
-  }
-  else if ( burbujas_graficadas > 1 && burbujas_graficadas <= 6 ) k_total = ancho * alto * 0.65;
-  else if ( burbujas_graficadas > 6 && burbujas_graficadas <= 20 ) k_total = ancho * alto * 0.75;
-  else if ( burbujas_graficadas > 20 && burbujas_graficadas <= 50 ) k_total = ancho * alto * 0.80;
-  else if ( burbujas_graficadas > 50 && burbujas_graficadas <= 200 ) k_total = ancho * alto * 0.86;
-  else if ( burbujas_graficadas > 200 ) k_total = ancho * alto * 0.92;
 
 }
 
+
+public class MapaNeural {
+	public boolean ativarEfeitoVisualDeAcordoComNumeroDeVetores = false;
+	public static int quantidadeDeLinhas = 3;
+	
+	public static int quantidadeDeColunas = 3;
+	
+	//Adiciona um vetor a um neuronio, caso o neuronio não exista ele é criado
+	public static void adicionarVetorAUmNeuronio( String idNeuronio, String vetor ) {
+	  Ball neuronio = MapaNeural.obterNeuronioPorId(idNeuronio);
+	
+	  if (neuronio == null)	{
+			alert('Atencao. Nao foi possivel adicionar o vetor ' + vetor + ' ao neuronio de id ' + idNeuronio + '. Pois nao foi encontrado um neuronio com esse id');
+			return;
+	  } else
+		neuronio.adicionarVetor(vetor);
+	}
+
+	public static Ball criarNeuronio( String idNeuronio, String vetor, int linhaDoNeuronio, int colunaDoNeuronio) {  
+		
+		if (MapaNeural.atingiuNumeroMaximoDeNeuroniosPermitidos()) {
+			alert('Atencao. Nao e possivel criar o neuronio ' + idNeuronio + ' pois ja foi atingido o numero maximo de neuronios da rede.');
+			return;
+		}
+		
+		Ball neuronio = MapaNeural.obterNeuronioPorId(idNeuronio);
+		if (neuronio != null){
+			alert('Atencao. Nao e possivel criar o neuronio ' + idNeuronio + ' pois ja existe um neuronio com esse id na rede');
+			return;
+		}
+			
+		MapaNeural.calcularAreaTotalASerOcupadaPeloQuadradoDoNeuronio();
+			
+		Ball[] tempBall = new Ball( idNeuronio, k_total, "Nome", vetor, MapaNeural.obterPontoDoNeuronioDadaALinhaEColuna(linhaDoNeuronio,colunaDoNeuronio) );
+		balls[balls.length] = tempBall;
+		
+		return tempBall;
+	}
+	
+	private static Ball obterNeuronioPorId(String idNeuronio) {
+		Ball neuronio = null;
+		  // buscar kp a sumar en array existente
+		  for (int i=0; i < balls.length; i++) { 
+		    if ( balls[i].id == idNeuronio) {
+		      neuronio = balls[i];
+		    } 
+		    if (neuronio != null) break;
+		  }
+		return neuronio;
+	}
+
+	private static boolean atingiuNumeroMaximoDeNeuroniosPermitidos() {
+		return (MapaNeural.numeroMaximoDeNeuronios() <= balls.length)
+	}
+
+	private static Ponto obterPontoDoNeuronioDadaALinhaEColuna(int linha, int coluna) {
+		float larguraDoQuadradoDeCadaNeuronio =  (float)width/(float)MapaNeural.quantidadeDeColunas;
+		float alturaDoQuadradoDeCadaNeuronio =  (float)height/(float)MapaNeural.quantidadeDeLinhas;
+		float x = (float)coluna*larguraDoQuadradoDeCadaNeuronio + larguraDoQuadradoDeCadaNeuronio/2.0;
+		float y = (float)linha*alturaDoQuadradoDeCadaNeuronio + alturaDoQuadradoDeCadaNeuronio/2.0;
+				
+		return new Ponto(x,y);
+	}
+	//ordena o array de neuronio de acordo com o numero de ocorrencias de vetores de cada um
+	// a posição zero do array é ocupada pelo neuronio que possui mais ocorrencias de vetores
+	public static void ordenarArrayDeNeuronios() {
+
+	  Ball[] temp_ocurrencias = new Ball[balls.length];
+	  temp_ocurrencias = balls;
+
+	  Ball temp;
+	  int i, j;
+
+	  for (i = temp_ocurrencias.length-1; i >= 0; i--)
+	       for (j = 0; j < i; j++)
+	          if (temp_ocurrencias[j].ocurrencias < temp_ocurrencias[j + 1].ocurrencias) {
+	             temp = temp_ocurrencias[j];
+	             temp_ocurrencias[j] = temp_ocurrencias[j + 1];
+	             temp_ocurrencias[j + 1] = temp;
+	          }
+
+	  balls = temp_ocurrencias;
+
+	}
+
+	public static void calcularAreaTotalASerOcupadaPeloQuadradoDoNeuronio() {
+		
+		float larguraDoRetanguloDeCadaNeuronio =  (float)width/(float)MapaNeural.quantidadeDeColunas;
+		float alturaDoRetanguloDeCadaNeuronio =  (float)height/(float)MapaNeural.quantidadeDeLinhas;
+		
+		//caso o mapa nao possuia o mesmo numero de colunas e linhas para facilitar o calculo
+		// nos consideramos que ele é simetrico utilizando o maior entre as duas dimensoes
+		//area da cinrcunferencia inscrita em um quadrado
+		
+		if (larguraDoRetanguloDeCadaNeuronio > alturaDoRetanguloDeCadaNeuronio)
+			k_total = alturaDoRetanguloDeCadaNeuronio*alturaDoRetanguloDeCadaNeuronio*PI/4.0;
+		else
+			k_total = larguraDoRetanguloDeCadaNeuronio*larguraDoRetanguloDeCadaNeuronio*PI/4.0;
+	}
+	
+	public static int numeroMaximoDeNeuronios() {
+		return MapaNeural.quantidadeDeLinhas * MapaNeural.quantidadeDeColunas;
+	}
+}
 
 /*****************************
 EVENTOS
@@ -206,8 +213,7 @@ void mouseClicked() {
 	for(int indiceNeuronios=0; indiceNeuronios < balls.length; indiceNeuronios++) { 
 		if(balls[indiceNeuronios].estamos_encima) {
 			Ball neuronio = balls[indiceNeuronios];
-			for(int indiceVetores = 0; indiceVetores < neuronio.vetores.length; indiceVetores++)
-				alert('Vetor ' + (indiceVetores + 1) + ': ' + neuronio.vetores[indiceVetores]);
+			cliqueNoNeuronio(neuronio);
 		}
 	}
 }
@@ -215,221 +221,111 @@ void mouseClicked() {
 /******************************
 CLASSES
 ******************************/
+class Ponto {
+	public float x;
+	public float y;
+	
+	Ponto(float _x, float _y) {
+		this.x = _x;
+		this.y = _y;
+	}
+}
 
 class Ball {
 
   public static int NumeroNeuronios = 0;
   
   float r;
-  float m;
   
-  float x;
-  float y;
+  public float x;
+  public float y;
   
-  float vx;
-  float vy;
-  
-  String id;
+  public String id;
   float ka;
   
   String nombre;
   String[] vetores = new String[0];
   int ocurrencias = 0;
   
-  // Spring
-  float mass;                                       // Masa
-  float kspring;                                    // Constante de resorte
-  float damp;                                       // Damping 
-  float rest_posx = ( ( width-espacio_derecha ) / 2 ) + espacio_izquierda / 2;
-  float rest_posy = ( ( height-espacio_abajo ) / 2 ) + espacio_derecha / 2;
-  float accel = 0;                                  // Aceleracion 
-  float force = 0;                                  // Fuerza
-  
   boolean estamos_encima;
   
-  Ball( String ID, float KA, String NOMBRE, String vetor ) {
+  Ball( String ID, float areaAOcupar, String NOMBRE, String vetor , Ponto centroDoCirculo) {
     NumeroNeuronios++;
-    ka = KA;
+    ka = areaAOcupar;
     r = sqrt( ka / PI );
-    m = r;
-    x = random(r+espacio_izquierda,width-espacio_derecha-r);
-    y = random(r+espacio_arriba,height-espacio_abajo-r);
-    vx = random(-3,3);
-    vy = random(-3,3);
+    x = centroDoCirculo.x;
+    y = centroDoCirculo.y;
+
     id = ID;
     nombre = NOMBRE;
     
-    estamos_encima = false;
-    
-    mass = sqrt( ( ( (PI*pow((height-espacio_abajo-espacio_arriba)/2,2)*0.8) / 2000 ) / PI ) );
-    damp = 0.85;
-    kspring = 0.01;
-	
-	this.adicionarVetor(vetor);
-  }
-  
-  void fall() {
-  
-    if ( keyboard.pressed(UP) ) vy -= grav;
-    if ( keyboard.pressed(DOWN) ) vy += grav;
-    if ( keyboard.pressed(LEFT) ) vx -= grav;
-    if ( keyboard.pressed(RIGHT) ) vx += grav;
-  }
-  
-  void spring() {
-  
-    rest_posx = ( ( width-espacio_derecha ) / 2 ) + espacio_izquierda / 2;
-    rest_posy = ( ( height-espacio_abajo ) / 2 ) + espacio_derecha / 2; 
-
-    if ( balls.length > 0 && ( balls[0].ocurrencias - balls[burbujas_graficadas-1].ocurrencias ) > 0 ) {
-      float A = balls[0].ocurrencias;                        // maximo original
-      float C = ocurrencias;                                 // valor original
-      float B = balls[burbujas_graficadas-1].ocurrencias;    // minimo original
-      float D = 5;                                           // nuevo maximo
-      float E;                                               // nuevo minimo
-      if ( burbujas_graficadas > 20 ) E = -1;
-      else E = 0;
-      kspring = -1 * ( ( ( A - C ) / ( A - B ) ) * ( D - E ) - D );
-    }
-    if ( burbujas_graficadas == 1 ) kspring = 4;
-    
-    //mass = r;
-    
-    force = -kspring * (y - rest_posy);    // f=-ky 
-    accel = force / mass;                  // Asignar aceleracion
-    vy = damp * (vy + accel);              // Definir velocidad 
-    //y += vy;
-
-    force = -kspring * (x - rest_posx);    // f=-ky 
-    accel = force / mass;                  // Asignar aceleracion
-    vx = damp * (vx + accel);              // Definir velocidad 
-    //x += vx;
-  }
-  
-  void bounce() {
-  
-    if ( y + vy + r > height-espacio_abajo ) {
-    
-      y = height-espacio_abajo - r;
-      vx *= f;
-      vy *= -b;
-    }
-    if ( y + vy - r < espacio_arriba ) {
-    
-      y = r+espacio_arriba;
-      vx *= f;
-      vy *= -b;
-    }
-    if ( x + vx + r > width-espacio_derecha ) {
-    
-      x = width-espacio_derecha - r;
-      vx *= -b;
-      vy *= f;
-    }
-    if ( x + vx - r < espacio_izquierda ) {
-    
-      x = r+espacio_izquierda;
-      vx *= -b;
-      vy *= f;
-    }
-  }
-  
-  void collide() {
-  
-    for ( int i=burbujas_maximas; i>=0; i-- ) {
-    
-      if ( i < balls.length ) {
-      
-        float X = balls[i].x;
-        float Y = balls[i].y;
-        float R = balls[i].r;
-        float M = balls[i].m;
-      
-        float deltax = X-x;
-        float deltay = Y-y;
-        float d = sqrt(pow(deltax,2)+pow(deltay,2));
-      
-        if ( d < r + R && d > 0 ) {
-        
-          float dD = r + R - d;
-          float theta = atan2(deltay,deltax);
-        
-          vx += -dD*cos(theta)*M/(m+M);
-          vy += -dD*sin(theta)*M/(m+M);
-        
-          vx *= b;
-          vy *= b;
-        
-        }
-      }
-    }
-  }
-  
-  void move() {
-
-      x += vx;
-      y += vy;
+	if (vetor != '')
+		this.adicionarVetor(vetor);
   }
   
   void encima() {
-  
+	
     if ( dist(x, y, mouseX, mouseY) < r ) {
 		estamos_encima = true;
-	} else estamos_encima = false;
-  
+	} 
+	else  
+		estamos_encima = false;
   }
   
   void display() {
   
+	//guarda o numero maximo, minimo de ocorrencia de vetores entre todos os neuronios e tambem armazena o numero de ocorrencias do neuronio atual
     float A = balls[0].ocurrencias;                        // maximo original
     float C = ocurrencias;                                 // valor original
     float B = balls[burbujas_graficadas-1].ocurrencias;    // minimo original
     float D;                                               // nuevo maximo
     float E;                                               // nuevo minimo
-    //nuevo_valor = -1 * ( ( ( A - C ) / ( A - B ) ) * ( D - E ) - D );
-  
-    if ( visual_mode == "lineal" ) {
 
-      if ( llenar_burbujas ) fill(255,255,255);
-      else noFill();
-      if ( estamos_encima ) 
+    noFill();
+    if ( estamos_encima ) 
 		fill(0,0,0,15);
-	  else
+	else
 	    fill(255);
-      strokeWeight(r/20);
-      //stroke(ColorLineasGrales);
-      float lc = -1 * ( ( ( A - C ) / ( A - B ) ) * ( 60 - 200 ) - 60 );
-      float lcalpha = -1 * ( ( ( A - C ) / ( A - B ) ) * ( 255 - 90 ) - 255 );
-      if ( A == B ) lcalpha = 255;
-	  if (isNaN(lc))
+	
+    strokeWeight(r/20);
+	
+	float lc = 100;
+	float lcalpha = 255;
+	
+	if (MapaNeural.ativarEfeitoVisualDeAcordoComNumeroDeVetores) {
+		//configura a transparencia e a cor da borda dependendo do numero de ocorrencia de vetores
+	    lc = -1 * ( ( ( A - C ) / ( A - B ) ) * ( 60 - 200 ) - 60 );
+	    lcalpha = -1 * ( ( ( A - C ) / ( A - B ) ) * ( 255 - 90 ) - 255 );
+
+	    if ( A == B ) lcalpha = 255;
+	}
+	
+	if (isNaN(lc))
 		lc=0;
-      color local = color( lc );
-      stroke( local );
-      //noFill();
-	  
-      ellipse(x,y,2*r-r/10,2*r-r/10); 
-      float tamanio = r*0.8;
-      textFont(font, tamanio);
-      textAlign(CENTER);
-      fill(220, 112, 23, lcalpha);
-      //fill(0, 102, 153);
-      //if ( show_info || estamos_encima ) text(nombre, x, y+tamanio/5);
-      text(this.id, x, y+tamanio/5);
+		
+    color local = color( lc );
+    stroke( local );
+	
+	//desenha o circulo  
+    ellipse(x,y,2*r-r/10,2*r-r/10); 
+    float tamanio = r*0.8;
+    textFont(font, tamanio);
+    textAlign(CENTER);
+    fill(220, 112, 23, lcalpha);
 
-      //if ( show_info || estamos_encima ) {
+    text(this.id, x, y+tamanio/5);
 
-      float tamanio1 = r*0.25;
-      textFont(font, tamanio1);
-      fill(0, 102, 153, lcalpha);
-      text(str(ocurrencias), x, y+tamanio/3+tamanio1);
-
-    }
+    float tamanio1 = r*0.25;
+    textFont(font, tamanio1);
+    fill(0, 102, 153, lcalpha);
+    text(str(ocurrencias), x, y+tamanio/3+tamanio1);
 
   }
   
   void adicionarVetor( String vetor ) {
     vetores[vetores.length] = vetor;
 	ocurrencias = vetores.length; 
+	heatMap.store.addDataPoint(this.x, this.y);
   }
 }
 

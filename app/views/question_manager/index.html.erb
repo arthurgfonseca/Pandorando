@@ -1,0 +1,19 @@
+<div class="h_text">
+	<!-- <img alt="" src="images/1-t1.jpg" />--><h1>Perguntas</h1><br />
+</div>
+<div class="padding">
+	<div class="main_content">
+		<div class="form">
+			<h2>Pergunta</h2>
+			<div id="formulario-questao"><%= render :partial => "form" %></div>
+		</div>
+		<div class="show" id="questions">
+			<% @questions.each do |question| %>
+			 		<%= render :partial => "question", :locals => {:question => question} %>
+			<% end %>
+		</div>
+		<div id="addAnswer">
+			
+		</div>
+	</div>
+</div>
