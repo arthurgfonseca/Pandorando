@@ -3,35 +3,33 @@ class ResultController < ApplicationController
   def self.generateResult(resultVector)
     
     puts 'entrei result'
-    
-    nodes = Network.all
-    # Network was alredy created
-    if(nodes.size == 0)
-      puts 'GEREI NETWORK'
-      network = ResultController.createNetwork()
-      puts 'NETWORK GERADA'
-    end
-    
-    network = Network.all
-    puts 'NETWORK INICIAL'
-    network.each{|node|
-      puts 'NOOOOOOODEEEEEEEE'
-      puts node.weight0
-      puts node.weight1
-      puts node.weight2
-      puts node.weight3
-      puts node.weight4
-      
-    }
-    
     if(Constants::TRAIN_MODE == true)
-      # Start Kohonen Network
-      ResultController.start(network, resultVector)
-      return network
+      nodes = Network.all
+      # Network was alredy created
+      if(nodes.size == 0)
+        puts 'GEREI NETWORK'
+        network = ResultController.createNetwork()
+        puts 'NETWORK GERADA'
+      end
+    
+      network = Network.all
+      puts 'NETWORK INICIAL'
+      network.each{|node|
+        puts 'NOOOOOOODEEEEEEEE'
+        puts node.weight0
+        puts node.weight1
+        puts node.weight2
+        puts node.weight3
+        puts node.weight4
+      
+      }
+        # Train Kohonen Network
+        ResultController.start(network, resultVector)
+        return network
     else
-      # Start Kohonen Network
+      # Get info from Kohonen Network
       arrPerfil = Array.new
-      ResultController.getBmuFromNetwork(arrPerfil, network, resultVector)
+      arrPerfil = ResultController.getBmuFromNetwork(resultVector)
       return arrPerfil
     end
     
@@ -48,36 +46,27 @@ class ResultController < ApplicationController
     
     SomController.best_unit(arrBmu, network, resultVector)
     
-    puts "ARRBMU"
-    puts arrBmu.size
-    puts "FIMBMUSIZE"
     
     
-    dist = 1000 # Max value
-    perfisCount = (Perfil.all).size
-    
-    while perfisCount > 1
+    while arrBmu.size > 0
     
       index = nil
       cont = 0
+      dist = 1000 # Max value
     
       arrBmu.each{|hashBmu|
         if(dist > hashBmu[:dist])
           dist = hashBmu[:dist]
           index = cont
         end
+        
+        cont = cont.next
       
       }
-      cont = cont.next
-      perfisCount = perfisCount.pred
       
-      puts "HAHAHAH"
-      puts arrBmu[index][:name]
-      puts index
-      puts "FIM AHUAHU"
       
       arrPerfil << arrBmu[index][:name]
-      
+      arrBmu.delete_at(index)
     end
     
     

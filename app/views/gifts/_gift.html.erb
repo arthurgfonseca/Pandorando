@@ -1,5 +1,8 @@
 <tr id="<%= dom_id gift %>" class="show_grid">
-    <td><%= gift.name %></td>
+	<td style="width:30%"><%= gift.name %></td>
+	<% for perfil in gift.perfils %>
+		<td style="width:10%"><%= perfil.title %></td>
+	<% end %>
     <td><%= link_to 'Show', gift, :remote => true %></td>
     <td><%= link_to 'Edit', edit_gift_path(gift), :remote => true %></td>
     <td><%= link_to 'Destroy', gift, :confirm => 'Are you sure?', :method => :delete, :remote => true %></td>

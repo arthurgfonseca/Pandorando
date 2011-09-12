@@ -11,9 +11,13 @@ class SomController < ApplicationController
     
     allBmu = Perfil.all
     
+    
+    
     bmu,bmuDist = SomController.get_best_matching_unit(network, input)
     
+    
     for selectedBmu in allBmu
+      
       
       hashBmu = Hash.new
       

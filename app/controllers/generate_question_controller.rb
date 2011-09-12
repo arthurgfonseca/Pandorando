@@ -41,11 +41,12 @@ class GenerateQuestionController < ApplicationController
       end
     
     session[:arrPesos] = arrPesos
-    
+    @arrGifts = Array.new
     
     #Check if it is the last question
     if(@questions.size <= @questionNumber + 1)
       @lastQuestion = true
+      @trainMode = Constants::TRAIN_MODE
       
       puts Constants::TRAIN_MODE
       
@@ -62,12 +63,29 @@ class GenerateQuestionController < ApplicationController
         @network = getResult(numberOfQuestions)
       else
         
-        puts "ENTREI AKI"
         arrPerfis = getPerfisList(numberOfQuestions)
-        puts "ARR PERFILS"
-        puts arrPerfis[0]
-        puts arrPerfis[1]
-        puts arrPerfis[2]
+        @arrGifts = Array.new
+        
+        cont = 0
+        
+        puts "ENTREI WHILE"
+        
+        while(cont < 3)
+          
+          perfil = Perfil.where(:title => arrPerfis[cont]).first
+          
+          puts "gift title"
+          gift = perfil.gifts[0]
+          puts gift.name
+          
+          # gift = ((Perfil.where(:title => arrPerfis[cont]).first).gifts[0]).name
+          puts gift
+          @arrGifts << gift.name
+          @teste = "aaa"
+          cont = cont.next
+        end
+        
+        puts @arrGifts.size
         
       end
       
@@ -114,7 +132,7 @@ class GenerateQuestionController < ApplicationController
     }
     
     puts 'passei aki no getPerfis'
-    return ResultController.getBmuFromNetwork(arrPesos)
+    return ResultController.generateResult(arrPesos)
     
     
   end

@@ -13,10 +13,12 @@
   <p class="form_field">
     <label class="label"><%= f.label :name %></label>
     <label class="text_field"><%= f.text_field :name %></label>
+	<% for perfil in @perfis%>
 	<p class="form_field">
-	    <label class="label">char</label>
-	    <label class="text_field"><%= select_tag "characteristic", options_from_collection_for_select(@perfis, "title") %></label>
+	    <label class="label"><%= perfil.title %></label>
+	    <label class="text_field"><%= check_box_tag perfil.title %></label>
 	</p>
+	<% end %>
   </p>
   <div class="buttons">
     <a><%= f.submit %></a>
