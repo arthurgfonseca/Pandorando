@@ -1,0 +1,22 @@
+<tr id="<%= dom_id resposta %>" >
+	<td>
+		<%= resposta.enunciation %>
+		 - 
+		<%= link_to 'Edit', edit_answer_path(resposta), :remote => true %>
+		 - 
+	    <%= link_to 'Destroy', resposta, :confirm => 'Deseja realmente excluir a resposta? Todos os pesos serao perdidos.', :method => :delete, :remote => true %>
+	</td>
+	<%  
+		caracteristicas = Characteristic.get_characteristics
+		for indice_da_coluna_da_caracteristicas in 0...caracteristicas.length
+			peso_da_caracteristica = 0.0;	
+			caracteristica_da_coluna = caracteristicas[indice_da_coluna_da_caracteristicas];
+			for peso_da_caracteristica_da_resposta in resposta.AnswerCharacteristicWeight 
+				if (peso_da_caracteristica_da_resposta.characteristic_id == caracteristica_da_coluna.id)
+					peso_da_caracteristica = peso_da_caracteristica_da_resposta.weight		
+				end		
+			end 		
+	%>
+		<td><input value='<%= peso_da_caracteristica %>' size='5' onchange="atualizarValorDoPeso('<%= resposta.id %>', '<%= caracteristica_da_coluna.id %>', this.value);"/></td>
+	<% end %>
+</tr>

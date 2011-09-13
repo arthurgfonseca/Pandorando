@@ -1,4 +1,4 @@
-$("#<%= dom_id(@answer) %>").replaceWith("<%= escape_javascript(render(:partial => @answer)) %>");
-<% @answer = Answer.new # reset for new form %>
-$(".edit_answer").replaceWith("<%= escape_javascript(render(:partial => "form"))%>")
-$(".new_answer")[0].reset();
+$("#<%= dom_id(@answer) %>").replaceWith("<%= escape_javascript(render(:partial => '/question_manager/answer', :locals => {:resposta => @answer})) %>");
+$("#<%= dom_id(@answer) %>").hide();
+$("#<%= dom_id(@answer) %>").fadeIn('slow');
+$(".addAnswer").remove();

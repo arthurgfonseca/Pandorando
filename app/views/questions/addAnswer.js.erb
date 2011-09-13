@@ -1,7 +1,10 @@
-if('<%= @first %>' == 'true') {
-	$("#addAnswer").remove();
-	$("<%= escape_javascript(render(:partial => "addAnswer"))%>").prependTo("#<%= dom_id(@question) %>");
-} else {
-	$("#addAnswer").empty();
-	alert('Resposta adicionada com sucesso.');
-}
+<% if @first == true %>
+	$(".addAnswer").remove();
+	$("#question_<%= @question.id %> p:first-child").after("<%= escape_javascript(render(:partial => 'questions/addAnswer', :locals => {:question => @question}))%>");
+<% else %>
+	$("#<%= dom_id(@question) %> table tbody tr.sem-resposta-cadastrada").remove();
+	$("<%= escape_javascript(render(:partial => '/question_manager/answer', :locals => {:resposta => @answer}))%>").appendTo("#<%= dom_id(@question) %> table tbody");
+	$('#answer_<%=@answer.id%>').hide();
+	$('#answer_<%=@answer.id%>').fadeIn('slow');
+	$("#<%= dom_id(@question) %> .addAnswer form")[0].reset();
+<% end %>

@@ -6,11 +6,6 @@ Pandorando::Application.routes.draw do
 
   match "generate_question/nextQuestion" => "generate_question#nextQuestion"
   
-  match "answers/newCharacteristic" => "answers#newCharacteristic"
-  
-  # match "questions/addAnswer" => "questions#addAnswer"
-  match ':controller/:id/:action'
-
   resources :categories
 
   resources :answers

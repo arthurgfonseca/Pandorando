@@ -29,11 +29,11 @@ class QuestionsController < ApplicationController
      @question = Question.find(params[:id])
      @first = true
      
-     if(params[:enuciado].to_s != "")
+     if(params[:enunciado].to_s != "")
        @first = false
-       answer = @question.answers.build 
-       answer.enunciation = params[:enuciado]
-       answer.save
+       @answer = @question.answers.build 
+       @answer.enunciation = params[:enunciado]
+       @answer.save
      end
 
      respond_to do |format|
