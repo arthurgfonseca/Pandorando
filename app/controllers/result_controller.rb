@@ -2,7 +2,6 @@ class ResultController < ApplicationController
   
   def self.generateResult(resultVector)
     
-    puts 'entrei result'
     if(Constants::TRAIN_MODE == true)
       nodes = Network.all
       # Network was alredy created
@@ -120,21 +119,26 @@ class ResultController < ApplicationController
     puts 'BMU FIM'
     
     
-    if(SomController.checkIfShoudCreatePerfil(bmuResult))
+    if(ResultController.checkIfShoudCreatePerfil(bmuResult))
       user = User.last
       perfil = Perfil.where(:title => user.name)
+      puts "AJUSTA PERFIL"
       
       if perfil.size > 0
         perfil.positionx = bmuResult.positionx
         perfil.positiony = bmuResult.positiony
         perfil.save
       else
+        puts "CRIEI PERFIL NOVO"
+        puts (User.last).name
         bmuRecord = Perfil.new
         bmuRecord.positionx = bmuResult.positionx
         bmuRecord.positiony = bmuResult.positiony
         bmuRecord.title = (User.last).name
         bmuRecord.save
       end
+    else
+      puts "NAO CRIEI PERFIL"
     end
     
     network.each{|node|

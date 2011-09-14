@@ -60,18 +60,24 @@ class GenerateQuestionController < ApplicationController
         history.weight4 = arrPesos[4]
         # history.save
         
-        # @perfil = getResult(numberOfQuestions)
+        @perfil = getResult(numberOfQuestions)
+        
+        puts "PERFIL RETORNADO"
+        puts @perfil.title
         
         # Remover, usado apenas para teste
-        @perfil = Perfil.last
+        # @perfil = Perfil.last
         
         
         
       else
         
+        puts 'ENTREI AKIISISFASFJKLAKLJSFJKLASJKLFJKLAKJLSFAKLJJLFAKSLFKAJ'
+        
         arrPerfis = getPerfisList(numberOfQuestions)
         
         cont = 0
+        
         
         while(cont < 3)
           perfil = Perfil.where(:title => arrPerfis[cont]).first
