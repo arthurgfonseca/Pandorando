@@ -1,3 +1,6 @@
 $('<%= escape_javascript(render(:partial => "/question_manager/question", :locals => {:question => @question}))%>').prependTo('#questions');
 $('#question_<%=@question.id%>').hide();
 $('#question_<%=@question.id%>').fadeIn('slow');
+<% @question = Question.new # reset for new form %>
+$(".new_question").replaceWith("<%= escape_javascript(render(:partial => 'question_manager/form'))%>").
+$("#formulario-questao")[0].reset();

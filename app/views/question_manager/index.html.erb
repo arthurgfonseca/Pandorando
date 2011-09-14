@@ -1,3 +1,14 @@
+<script type='text/javascript'>
+
+function atualizarValorDoPeso(idDaResposta, idDaCaracteristica, pesoAtribuidoACaracteristica) {
+	if (isNaN(pesoAtribuidoACaracteristica)) {
+		alert('O peso deve ser numerico.');
+		return;
+	}
+	
+	$.get("/answers/addChar/" + idDaResposta, { characteristic : encodeURIComponent(idDaCaracteristica), weight: encodeURIComponent(pesoAtribuidoACaracteristica), authenticity_token : encodeURIComponent(AUTH_TOKEN) });
+}
+</script>
 <div class="h_text">
 	<!-- <img alt="" src="images/1-t1.jpg" />--><h1>Perguntas</h1><br />
 </div>
@@ -11,9 +22,6 @@
 			<% @questions.each do |question| %>
 			 		<%= render :partial => "question", :locals => {:question => question} %>
 			<% end %>
-		</div>
-		<div id="addAnswer">
-			
 		</div>
 	</div>
 </div>

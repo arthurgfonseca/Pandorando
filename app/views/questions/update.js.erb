@@ -1,4 +1,7 @@
 $("#<%= dom_id(@question) %>").replaceWith("<%= escape_javascript(render(:partial => '/question_manager/question', :locals => {:question => @question})) %>");
+window.location.href='#<%= dom_id(@question) %>';
+$("#<%= dom_id(@question) %>").hide();
+$("#<%= dom_id(@question) %>").fadeIn('slow');
 <% @question = Question.new # reset for new form %>
-$(".edit_question").replaceWith("<%= escape_javascript(render(:partial => 'question_manager/form'))%>").
+$(".edit_question").replaceWith("<%= escape_javascript(render(:partial => 'question_manager/form'))%>");
 $("#formulario-questao")[0].reset();

@@ -1,0 +1,21 @@
+<% if (@answer.nil?) %>
+	<% form_tag({:controller => "questions", :action => "addAnswer", :id => question}, :remote => true) do %>
+		<p class="form_field">
+		    <label class="label">Enuciado</label>
+		    <label class="text_field"><%= text_field_tag 'enunciado' %></label>
+		  </p>
+		  <div class="buttons">
+		    <a><%= submit_tag "Adicionar" %></a>
+		  </div>
+	<% end %>
+<% else %>
+	<% form_tag({:controller => "answer", :action => "edit", :id => @answer}, :remote => true) do %>
+		<p class="form_field">
+		    <label class="label">Enuciado</label>
+		    <label class="text_field"><%= text_field_tag 'enunciado', @answer.enunciation %></label>
+		  </p>
+		  <div class="buttons">
+		    <a><%= submit_tag "Adicionar" %></a>
+		 </div>
+	<% end %>
+<% end %>

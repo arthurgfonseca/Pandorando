@@ -30,12 +30,11 @@ class AnswersController < ApplicationController
   end
   
   def addChar
+    
     @answer = Answer.find(params[:id])
     @characteristics = Characteristic.get_characteristics
-    @first = true
 
     if(params[:characteristic].to_s != "")
-       @first = false
        characteristic_weight = @answer.AnswerCharacteristicWeight.build 
        characteristic_weight.characteristic_id = params[:characteristic]
        characteristic_weight.weight = params[:weight].to_f
@@ -43,7 +42,6 @@ class AnswersController < ApplicationController
      end
 
      respond_to do |format|
-          format.html { redirect_to("/answers") }
           format.js
      end
     

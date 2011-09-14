@@ -1,1 +1,2 @@
-$("#form > form").replaceWith("<%= escape_javascript(render(:partial => "form"))%>")
+$(".addAnswer").remove();
+$("#question_<%= @answer.question.id %> p:first-child").after("<%= escape_javascript(render(:partial => 'questions/editAnswer', :locals => {:answer => @answer}))%>");
