@@ -10,7 +10,7 @@ Pandorando::Application.routes.draw do
    match "answers/newCharacteristic" => "answers#newCharacteristic"
  
    # match "questions/addAnswer" => "questions#addAnswer"
-   match ':controller/:id/:action'
+   # match ':controller/:id/:action'
 
    resources :categories
 

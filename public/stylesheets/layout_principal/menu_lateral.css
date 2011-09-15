@@ -1,0 +1,82 @@
+﻿/* CSS do menu_lateral 
+/-----------------------------------------*/
+
+#menu_lateral
+{
+	font-family: Century Gothic, Tahoma, Arial, Sans-Serif;
+	font-weight: normal;
+	overflow: hidden;
+	position: relative;       
+}
+
+#menu_lateral ul
+{
+	margin: 0;
+}
+
+/* Header
+/-----------------------------------------*/
+
+.menu_lateral-header
+{
+	font-size: 14px; 
+	padding: 3%;
+	position: relative;			
+	z-index: 10;				
+}
+
+
+.menu_lateral-header.active
+{	
+
+	color: #d42f42;
+	background: transparent url('../../images/layout/accordion_seta_baixo_active.png') scroll no-repeat center right;
+}
+
+
+/* Content
+/-----------------------------------------*/
+
+.menu_lateral-content ul li
+{	
+	font-weight: normal;
+	list-style: none;
+	padding: 2%;
+	border-bottom: dotted 1px #cccccc;	
+}
+
+
+.menu_lateral-content ul li a:hover
+{
+	color: #d42f42;
+}
+
+.menu_lateral-content ul li a
+{
+	color: #AAA;
+	font-size: 11px;
+	font-weight: normal;
+	text-decoration: none;
+}
+
+.menu_lateral-content ul li:last-child
+{
+	border-bottom: none;	
+}
+
+.menu_lateral-content  li:first-child{
+	border-top: dotted 1px #cccccc;	
+}
+
+/* Espacamento
+/-------------------------------------------*/
+
+li
+{
+	margin-left: 30px;
+	
+}
+
+ul {
+	padding: 0;
+}

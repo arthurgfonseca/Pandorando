@@ -1,0 +1,36 @@
+<%= stylesheet_link_tag "layout_principal/menu_lateral.css" %>
+<div id="menu_lateral" style="top:25px">
+	<div class="menu_lateral-header active">Menu</div>
+	<div class="menu_lateral-content">
+	
+	<!-- a utilizacao deste menu de 2 niveis segue:
+		campos de nivel 1 - dentro da <ul> principal, insira <li><p> link...</li></p>
+		campos de nivel 2 - dentro de uma <li> insira uma tag <ul> e a partir dela monte um novo menu do tipo <li><p> link...</p></li>...
+		CSS -  o css deste submenu encontra-se no arquivo menu_lateral.css -->
+	
+	
+	
+		<ul>
+			<% if(@index == "users") %>
+			<li><span>Usu&aacute;rios</span></li>
+			<% else %>
+			<li><%= link_to "Usuários", :controller => "users"%></li>
+			<% end %>
+			<% if(@index == "question_manager") %>
+			<li><span>Perguntas</span></li>
+			<% else %>
+			<li><%= link_to "Perguntas", :controller => "Question_Manager"%></li>
+			<% end %>
+			<% if(@index == "gifts") %>
+			<li><span>Presentes</span></li>
+			<% else %>
+			<li><%= link_to "Presentes", :controller => "gifts"%></li>
+			<% end %>
+			<% if(@index == "network") %>
+			<li><span>Network</span></li>
+			<% else %>
+			<li><%= link_to "Network", :controller => "Network_Visualizer"%></li>
+			<% end %>
+		</ul>
+	</div>
+</div>

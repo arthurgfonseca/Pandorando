@@ -1,0 +1,61 @@
+/*
+	960 Grid System ~ Text CSS.
+	Learn more ~ http://960.gs/
+
+	Licensed under GPL and MIT.
+*/
+
+
+/* =Headings
+--------------------------------------------------------------------------------*/
+
+h1
+{
+	font-size: 25px;
+}
+
+h2
+{
+	font-size: 17px;
+}
+
+h3
+{
+	font-size: 21px;
+}
+
+h4
+{
+	font-size: 19px;
+}
+
+h5
+{
+	font-size: 17px;
+}
+
+h6
+{
+	font-size: 15px;
+}
+
+h1, h2, h3, h5, h6 {margin: 0;line-height:1.2em; margin-bottom:.3em;}
+h2 {margin-top:1em;}
+
+
+/* anchors
+----------------------------------------------- */
+a {
+	text-decoration: none;
+}
+
+
+/* paragraphs, quotes and lists
+----------------------------------------------- */
+p {
+	margin: 0;
+	margin-bottom:1em;
+	
+}
+
+
