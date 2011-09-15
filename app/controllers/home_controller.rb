@@ -26,6 +26,37 @@ class HomeController < ApplicationController
     
   end
   
+  def getUserAnswer
+    
+    @userAnswer = params[:id]
+    
+    puts "USER ANSWER"
+    puts @userAnswer
+    
+    respond_to do |format|
+      format.html # new.html.erb
+      format.js # Ajax CRUD
+    end
+    
+  end
+  
+  def getUser
+    
+    
+    
+  end
+  
+  def createUser
+    
+    puts "CREATE USER"
+    
+    respond_to do |format|
+      format.html # new.html.erb
+      format.js # Ajax CRUD
+    end
+    
+  end
+  
   
   private
   
