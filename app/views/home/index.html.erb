@@ -1,3 +1,6 @@
+<% if(@train_mode) %>
+<%= render :partial => "generate_question/questions"%>
+<% else %>
 <div id="home">
 	<h3>Essa é a sua primeira vez por aqui?</h3>
 	<br />
@@ -6,3 +9,4 @@
 	<br />
 	<h2><%= link_to 'Não', {:controller => "home", :action => "getUserAnswer", :id => "nao"}, :remote => true %></h2>
 </div>
+<% end %>

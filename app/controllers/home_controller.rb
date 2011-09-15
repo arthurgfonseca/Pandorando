@@ -12,11 +12,10 @@ class HomeController < ApplicationController
     arrPesos[4] = 0
     session[:arrPesos] = arrPesos
     
+    @train_mode = Constants::TRAIN_MODE
     @questions = generateQuestion()
     @questionNumber = 0
-    puts "QUESTION SIZE"
-    puts @questions.size
-   
+       
     
   end
   
@@ -50,9 +49,22 @@ class HomeController < ApplicationController
     
     puts "CREATE USER"
     
-    respond_to do |format|
-      format.html # new.html.erb
-      format.js # Ajax CRUD
+    name = params[:nome]
+    email = params[:email]
+    
+    user = User.new
+    user.name = name
+    user.email = email
+    
+    if(user.save)    
+      
+      @questions = generateQuestion()
+      @questionNumber = 0
+      
+      respond_to do |format|
+        format.html # new.html.erb
+        format.js # Ajax CRUD
+      end
     end
     
   end
