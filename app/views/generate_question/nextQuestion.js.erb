@@ -4,7 +4,6 @@ if('<%= @lastQuestion %>' == 'false') {
 	if('<%= @trainMode %>' == 'true') {
 		$("#question").replaceWith("<%= escape_javascript(render(:partial => "generateGifts"))%>")
 	} else {
-		alert("to aki")
 		$("#question").replaceWith("<%= escape_javascript(render(:partial => "result"))%>")
 	}
 	

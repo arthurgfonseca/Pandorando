@@ -62,8 +62,6 @@ class GenerateQuestionController < ApplicationController
         
         @perfil = getResult(numberOfQuestions)
         
-        puts "PERFIL RETORNADO"
-        puts @perfil.title
         
         # Remover, usado apenas para teste
         # @perfil = Perfil.last

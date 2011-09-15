@@ -118,13 +118,13 @@ class ResultController < ApplicationController
     puts bmuResult
     puts 'BMU FIM'
     
-    
+    user = User.last
     if(ResultController.checkIfShoudCreatePerfil(bmuResult))
-      user = User.last
-      perfil = Perfil.where(:title => user.name)
+      
+      perfil = Perfil.where(:title => user.name).first
       puts "AJUSTA PERFIL"
       
-      if perfil.size > 0
+      if perfil
         perfil.positionx = bmuResult.positionx
         perfil.positiony = bmuResult.positiony
         perfil.save
