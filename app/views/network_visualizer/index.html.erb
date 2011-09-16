@@ -2,6 +2,7 @@
 var numeroDeLinhasDaRede = <%= Math.sqrt(@matrizDaRedeNeural.length) %>;
 var numeroDeColunasDaRede = <%= Math.sqrt(@matrizDaRedeNeural.length) %>;
 var heatMap = null;
+var raioHeatmap = 20;
 
 function cliqueNoNeuronio(neuronio) {
 	alert('Neuronio de id: ' + neuronio.id);
@@ -63,7 +64,9 @@ function ajustarRadius() {
 
 //heatmap
 window.onload = function(){
-	heatMap = h337.create({"element":document.getElementById("heatmapArea"), "radius":70, "visible":false});
+	raioHeatmap = Math.floor(document.getElementById("mapa").width / numeroDeLinhasDaRede);
+	document.getElementById("radius-heatmap").value = raioHeatmap;
+	heatMap = h337.create({"element":document.getElementById("heatmapArea"), "radius": raioHeatmap, "visible":true});
 	<% 
 		idNeuronio = 0
 		@matrizDaRedeNeural.each do |neuronioDaRede| 
