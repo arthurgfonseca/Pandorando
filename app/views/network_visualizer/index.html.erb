@@ -1,6 +1,6 @@
 <script type="text/javascript">  
-var numeroDeLinhasDaRede = 10;
-var numeroDeColunasDaRede = 10;
+var numeroDeLinhasDaRede = <%= Math.sqrt(@matrizDaRedeNeural.length) %>;
+var numeroDeColunasDaRede = <%= Math.sqrt(@matrizDaRedeNeural.length) %>;
 var heatMap = null;
 
 function cliqueNoNeuronio(neuronio) {
@@ -56,16 +56,29 @@ function adicionarAutomaticamente() {
 	
 }         		
 
-//heatmap
-window.onload = function(){
-	heatMap = h337.create({"element":document.getElementById("heatmapArea"), "radius":70, "visible":false});
-	
-};
-
 //ajusta o radius do heatma
 function ajustarRadius() {  
 	heatMap.setNewRadius(document.getElementById('radius-heatmap').value);
 }
+
+//heatmap
+window.onload = function(){
+	heatMap = h337.create({"element":document.getElementById("heatmapArea"), "radius":70, "visible":false});
+	<% 
+		idNeuronio = 0
+		@matrizDaRedeNeural.each do |neuronioDaRede| 
+	%>
+	var pjs = Processing.getInstanceById("mapa");  
+		pjs.MapaNeural.quantidadeDeLinhas = numeroDeLinhasDaRede;
+		pjs.MapaNeural.quantidadeDeColunas = numeroDeColunasDaRede;
+		
+		pjs.MapaNeural.criarNeuronio('<%= idNeuronio %>', '', <%= neuronioDaRede.positionx %>, <%= neuronioDaRede.positiony %>); 
+	<% 
+		idNeuronio = idNeuronio + 1
+		end 
+	%>
+};
+
 </script>
 
 <p>
