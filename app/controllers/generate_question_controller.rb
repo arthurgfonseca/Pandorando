@@ -12,6 +12,7 @@ class GenerateQuestionController < ApplicationController
     
     #TODO
     opcao = params[:answer]
+    @acceptResult = true
     
     
     answers = @questions[@questionNumber.to_i].answers
@@ -41,7 +42,7 @@ class GenerateQuestionController < ApplicationController
       end
     
     session[:arrPesos] = arrPesos
-    @allGifts = Gift.all
+    @allGifts = Array.new
     @arrGifts = Array.new
     @perfil = nil
     
@@ -58,16 +59,19 @@ class GenerateQuestionController < ApplicationController
         history.weight2 = arrPesos[2]
         history.weight3 = arrPesos[3]
         history.weight4 = arrPesos[4]
-        # history.save
+        history.user_mail = session[:user].to_s
+        session[:user] = nil
+        history.save
         
         @perfil = getResult(numberOfQuestions)
-        
+        puts "SAI DO GER RESULT"
+        if(@perfil == nil)
+          puts "ENTREI AKI NO @PERFIL == NIL"
+          @acceptResult = false
+        end
         
         # Remover, usado apenas para teste
         # @perfil = Perfil.last
-        
-        
-        
       else
         
         puts 'ENTREI AKIISISFASFJKLAKLJSFJKLASJKLFJKLAKJLSFAKLJJLFAKSLFKAJ'

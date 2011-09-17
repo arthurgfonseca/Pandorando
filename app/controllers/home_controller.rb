@@ -1,7 +1,11 @@
+include ActionView::Helpers::SanitizeHelper 
+
 class HomeController < ApplicationController
   layout 'home'
   
   def index
+    
+    
     
     #Init array
     arrPesos = Array.new(5)
@@ -16,6 +20,20 @@ class HomeController < ApplicationController
     @questions = generateQuestion()
     @questionNumber = 0
        
+    
+  end
+  
+  def getGifts
+    
+    # puts "get products"
+    # produtos = Produto.all
+    # 
+    # for produto in produtos
+    #   gift = Gift.new
+    #   gift.name = strip_tags(produto.field1)
+    #   gift.price = (produto.field2).to_s
+    #   gift.save
+    # end
     
   end
   
@@ -41,7 +59,30 @@ class HomeController < ApplicationController
   
   def getUser
     
+    puts "GET USER"
     
+    name = params[:nome]
+    email = params[:email]
+    @findUser = false
+    
+    user = User.where(:email => email).first
+    
+    puts "USERRRRR"
+    puts user
+    puts "fimm"
+    @questions = generateQuestion()
+    @questionNumber = 0
+    
+    if(user)
+      session[:user] = (user.email).to_s
+      
+      puts 'hahahaha'
+      puts session[:user]
+      
+      @findUser = true
+    else
+      @findUser = false
+    end
     
   end
   
@@ -57,7 +98,7 @@ class HomeController < ApplicationController
     user.email = email
     
     if(user.save)    
-      
+      session[:user] = (user.email).to_s
       @questions = generateQuestion()
       @questionNumber = 0
       

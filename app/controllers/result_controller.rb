@@ -12,19 +12,30 @@ class ResultController < ApplicationController
       end
     
       network = Network.all
-      puts 'NETWORK INICIAL'
-      network.each{|node|
-        puts 'NOOOOOOODEEEEEEEE'
-        puts node.weight0
-        puts node.weight1
-        puts node.weight2
-        puts node.weight3
-        puts node.weight4
+      # puts 'NETWORK INICIAL'
+      #       network.each{|node|
+      #         puts 'NOOOOOOODEEEEEEEE'
+      #         puts node.weight0
+      #         puts node.weight1
+      #         puts node.weight2
+      #         puts node.weight3
+      #         puts node.weight4
+      #         puts node.match_count
+      #       
+      #       }
       
-      }
+      # Verifca se o usuário já respondeu, em caso positivo se a resposta está consistente com a anterior
+      if(ResultController.checkConsistency(resultVector))
         # Train Kohonen Network
         perfil = ResultController.start(network, resultVector)
+        
+        puts "SAI DO START"
+        
         return perfil
+      else
+        return nil
+      end
+        
     else
       # Get info from Kohonen Network
       arrPerfil = Array.new
@@ -32,7 +43,38 @@ class ResultController < ApplicationController
       return arrPerfil
     end
     
+  end
+  
+  def self.checkConsistency(resultVector)
+    acceptResult = true
+    puts "HAHAHSDKASHJFDAHJKFHJKLAH"
+    mail = (History.last).user_mail
+    perfil = Perfil.where(:title => mail).first
+    puts "sdasdakhjs"
+    puts perfil
     
+    if(perfil)
+      network = Network.all
+      puts "entrei aki"
+      bmu,bmuDist = SomController.get_best_matching_unit(network, resultVector)
+      
+      puts bmu.positionx
+      puts bmu.positiony
+      
+      puts "PERFIL"
+      puts perfil.positionx
+      puts perfil.positiony
+      
+      bmuCord = [bmu.positionx, bmu.positiony]
+      otherCord = [perfil.positionx, perfil.positiony]
+      distance =  SomController.euclidean_distance(bmuCord, otherCord)
+      # Resultado inconsistente (Descartado)
+      if(distance > perfil.radius)
+        acceptResult = false
+      end
+    end
+    
+    return acceptResult
     
   end
   
@@ -44,9 +86,7 @@ class ResultController < ApplicationController
     network = Network.all
     
     SomController.best_unit(arrBmu, network, resultVector)
-    
-    
-    
+
     while arrBmu.size > 0
     
       index = nil
@@ -62,7 +102,6 @@ class ResultController < ApplicationController
         cont = cont.next
       
       }
-      
       
       arrPerfil << arrBmu[index][:name]
       arrBmu.delete_at(index)
@@ -118,67 +157,122 @@ class ResultController < ApplicationController
     puts bmuResult
     puts 'BMU FIM'
     
-    user = User.last
-    if(ResultController.checkIfShoudCreatePerfil(bmuResult))
-      
-      perfil = Perfil.where(:title => user.name).first
-      puts "AJUSTA PERFIL"
-      
-      if perfil
-        perfil.positionx = bmuResult.positionx
-        perfil.positiony = bmuResult.positiony
-        perfil.save
-      else
-        puts "CRIEI PERFIL NOVO"
-        puts (User.last).name
-        bmuRecord = Perfil.new
-        bmuRecord.positionx = bmuResult.positionx
-        bmuRecord.positiony = bmuResult.positiony
-        bmuRecord.title = (User.last).name
-        bmuRecord.save
-      end
-    else
-      puts "NAO CRIEI PERFIL"
+    createPerfil = ResultController.checkIfShoudCreatePerfil(bmuResult)
+    
+    mail = (History.last).user_mail
+    # Verifica se é necessario criar um novo perfil
+    if(createPerfil)
+      bmuRecord = Perfil.new
+      bmuRecord.positionx = bmuResult.positionx
+      bmuRecord.positiony = bmuResult.positiony
+      # Perfil inicia com o tamanho padrão
+      bmuRecord.radius = (Constants::NEIGHBOURHOOD_RADIUS / 2).to_f
+      # Perfil é associado ao email do usuario, ja que ele é único
+      bmuRecord.title = mail
+      bmuRecord.save
     end
     
-    network.each{|node|
-      puts 'NOOOOOOODEEEEEEEE FINAL nodex=' + (node.positionx).to_s + 'nodey=' + (node.positiony).to_s
-      puts node.weight0
-      puts node.weight1
-      puts node.weight2
-      puts node.weight3
-      puts node.weight4
-      
-    }
+    # network.each{|node|
+    #       puts 'NOOOOOOODEEEEEEEE FINAL nodex=' + (node.positionx).to_s + 'nodey=' + (node.positiony).to_s
+    #       puts node.weight0
+    #       puts node.weight1
+    #       puts node.weight2
+    #       puts node.weight3
+    #       puts node.weight4
+    #       puts node.match_count
+    #       
+    #     }
     
-    perfil = Perfil.where(:title => user.name)
+    perfil = Perfil.where(:title => mail)
+    
     
     return perfil
-    
-    # ResultController.updateNetworkDatabase(network)
     
   end
   
   def self.checkIfShoudCreatePerfil(bmuResult)
     
-    createPerfil = false
+    createPerfil = true
     
-    allBmu = Perfil.all
+    # Caso não precise criar perfil, encontrar centro de massa mais proximo do bmuResult
+    bestDistance = 1000
+    bestBmu = nil
     
-    for selectedBmu in allBmu
+    allPerfil = Perfil.all
+    
+    for selectedPerfil in allPerfil
       
-      bmuCord = [selectedBmu.positionx, selectedBmu.positiony]
+      bmuCord = [selectedPerfil.positionx, selectedPerfil.positiony]
       otherCord = [bmuResult.positionx, bmuResult.positiony]
       distance =  SomController.euclidean_distance(bmuCord, otherCord)
       
-      if distance < (Constants::NEIGHBOURHOOD_RADIUS / 2)
+      # Se a distancia é maior do que o raio do perfil está fora do alcance do perfil e precisa criar um novo
+      if (distance > selectedPerfil.radius && createPerfil)
         createPerfil = true
+      else
+        # Se alguma vez o perfil caiu nesse caso é porque ele esta contido em algum perfil ja existente
+        createPerfil = false
+        # IF necessario para se ter certeza de que o perfil mais próximo seja mantido
+        if(bestDistance > distance && distance < selectedPerfil.radius)
+          bestDistance = distance
+          bestBmu = selectedPerfil
+        end
       end
       
     end
     
-    return createPerfil
+    # Importante observar que de qualquer forma que ser abordado o neuronio mais próximo do input tem que ter seu match_count alterado
     
+    # Caso seja TRUE cria um perfil, no contrario é absorvido por um perfil já criado
+    if(createPerfil)
+      bmuResult.match_count = bmuResult.match_count + 1
+      bmuResult.save
+    else
+      # 
+      # TODO: verificar a condição em que o centro de massa se desloca
+      # 
+      
+      # Verifica se precisa mudar a posicao do centro de massa
+      # Centro de massa sofre mudança se algum neuronio da sua vizanhança tiver um contador maior do que o dele
+      # bestBmu é o neuronio que representa o perfil mais proximo do vetor de entrada
+      if(bestBmu.match_count < bmuResult.match_count + 1)
+        bmuResult.match_count = bmuResult.match_count + 1
+        bmuResult.save
+        # Muda o centro de massa do perfil
+        bestBmu.positionx = bmuResult.positionx
+        bestBmu.positiony = bmuResult.positiony
+        # TODO: Verificar a necissidade de incrementar esse contador
+        bestBmu.match_count = bestBmu.match_count + 1
+        bestBmu.save
+        
+        ResultController.adjustPerfilRadius(bestBmu)
+        
+      else
+        # Não precisa mudar o centro de massa, e reforça o peso do centro de massa existente
+        bmuResult.match_count = bmuResult.match_count + 1
+        bmuResult.save
+        bestBmu.match_count = bestBmu.match_count + 1
+        bestBmu.save
+        
+        ResultController.adjustPerfilRadius(bestBmu)
+      end
+    end
+    
+    return createPerfil
+  end
+  
+  def self.adjustPerfilRadius(perfil)
+    if(perfil.match_count > 1 && perfil.match_count <= 10)
+      
+      newRadius = perfil.radius + perfil.radius*Math.exp(-1*((10.to_f - (perfil.match_count).to_f)/(10).to_f).to_f)
+      perfil.radius = newRadius
+      perfil.save
+    end
+    
+    puts "TAMANHO PADRAO"
+    puts (Constants::NEIGHBOURHOOD_RADIUS / 2)
+    puts "TAMANHO NOVO RAIO"
+    puts perfil.radius
     
   end
   
@@ -250,25 +344,6 @@ class ResultController < ApplicationController
       end
     end
     return codebook_vectors
-  end
-  
-  def self.updateNetworkDatabase(network)
-    
-    # Remove previous network
-    Network.destroy_all()
-    nodes = Network.find(:all)
-    puts nodes.size
-    
-    # Insert the new network
-    network.each{|networkItem|
-      node = Network.new
-      node.positionx = networkItem[:coord][0].to_i
-      node.positiony = networkItem[:coord][1].to_i
-      node.weights = (networkItem[:vector][0].to_s + ", " + networkItem[:vector][1].to_s)
-      node.save
-      
-    }
-    
   end
   
   

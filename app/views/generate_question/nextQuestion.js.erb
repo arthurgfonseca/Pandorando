@@ -2,7 +2,14 @@ if('<%= @lastQuestion %>' == 'false') {
 	$("#question").replaceWith("<%= escape_javascript(render(:partial => "questions"))%>")
 } else {
 	if('<%= @trainMode %>' == 'true') {
-		$("#question").replaceWith("<%= escape_javascript(render(:partial => "generateGifts"))%>")
+		if('<%= @acceptResult %>' == 'true') {
+			alert("acceptResult true")
+			$("#question").replaceWith("<%= escape_javascript(render(:partial => "generateGifts"))%>")
+		} else {
+			alert("alert 2")
+			$("#question").replaceWith("<%= escape_javascript(render(:partial => "discardResult"))%>")
+		}
+		
 	} else {
 		$("#question").replaceWith("<%= escape_javascript(render(:partial => "result"))%>")
 	}
