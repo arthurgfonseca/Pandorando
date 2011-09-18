@@ -6,6 +6,7 @@ class NetworkVisualizerController < ApplicationController
     puts "========== TAMANHO DA REDE ========="
     puts @matrizDaRedeNeural.length
 
+    @listaDePerfis = Perfil.all
     @index = "network"
 
   end

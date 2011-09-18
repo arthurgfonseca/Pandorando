@@ -70,7 +70,7 @@ function desenharRedeNeural() {
 		pjs.MapaNeural.quantidadeDeLinhas = numeroDeLinhasDaRede;
 		pjs.MapaNeural.quantidadeDeColunas = numeroDeColunasDaRede;
 		
-		pjs.MapaNeural.criarNeuronio('<%= idNeuronio %>', '', <%= neuronioDaRede.positionx %>, <%= neuronioDaRede.positiony %>); 
+		pjs.MapaNeural.criarNeuronio('<%= idNeuronio %>', '', <%= neuronioDaRede.positionx %>, <%= neuronioDaRede.positiony %>, <%= neuronioDaRede.match_count %>); 
 	<% 
 		idNeuronio = idNeuronio + 1
 		end 
@@ -78,13 +78,29 @@ function desenharRedeNeural() {
 	return;
 }
 
+function desenharRedeDePerfis() {
+	<% 
+		idPerfil = 0
+		@listaDePerfis.each do |perfil| 
+	%>
+		pjs.MapaDePerfis.adicionarPerfil(<%= perfil.positionx %>, <%= perfil.positiony %>, <%= perfil.radius %>, <%= perfil.match_count %>);
+	<% 
+		idPerfil = idPerfil + 1
+		end 
+	%>
+	return;
+}
 //heatmap
 window.onload = function(){
 	pjs = Processing.getInstanceById("mapa");  
+	_width = document.getElementById("mapa").width;
+    _height = document.getElementById("mapa").height;
+	pjs.size(_width, _height);
 	raioHeatmap = Math.floor(document.getElementById("mapa").width / numeroDeLinhasDaRede);
 	document.getElementById("radius-heatmap").value = raioHeatmap;
 	heatMap = h337.create({"element":document.getElementById("heatmapArea"), "radius": raioHeatmap, "visible":false});
 	desenharRedeNeural();
+	desenharRedeDePerfis();
 };
 
 </script>
@@ -115,9 +131,10 @@ window.onload = function(){
 	
 	<input type="submit" value="Adicionar" onclick="adicionarNeuronio(); return false;"/>
 </p>
-<div id="heatmapArea">
-<canvas id="mapa" datasrc="/javascripts/kohonen_site.pjs"></canvas>
-</div>
+
+	<div id="heatmapArea">
+		<canvas id="mapa" datasrc="/javascripts/kohonen_site.pjs"></canvas>
+	</div>
 
 
 

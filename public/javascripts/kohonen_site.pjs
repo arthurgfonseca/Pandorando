@@ -40,7 +40,7 @@ int timer_interno = 0;
 
 void setup() {
 
-  size(734,734);
+  size(650,650);
   background(0, 0, 0, 0);
   smooth();
   loop();  
@@ -48,6 +48,7 @@ void setup() {
   font = loadFont("Century.vlw");
   
   layout();
+
 }
 
 void layout() {
@@ -120,7 +121,7 @@ public class MapaNeural {
 		neuronio.adicionarVetor(vetor);
 	}
 
-	public static Ball criarNeuronio( String idNeuronio, String vetor, int linhaDoNeuronio, int colunaDoNeuronio) {  
+	public static Ball criarNeuronio( String idNeuronio, String vetor, int linhaDoNeuronio, int colunaDoNeuronio, int ocorrencias) {  
 		
 		if (MapaNeural.atingiuNumeroMaximoDeNeuroniosPermitidos()) {
 			alert('Atencao. Nao e possivel criar o neuronio ' + idNeuronio + ' pois ja foi atingido o numero maximo de neuronios da rede.');
@@ -135,7 +136,7 @@ public class MapaNeural {
 			
 		MapaNeural.calcularAreaTotalASerOcupadaPeloQuadradoDoNeuronio();
 			
-		Ball[] tempBall = new Ball( idNeuronio, k_total, "Nome", vetor, MapaNeural.obterPontoDoNeuronioDadaALinhaEColuna(linhaDoNeuronio,colunaDoNeuronio) );
+		Ball[] tempBall = new Ball( idNeuronio, k_total, "Nome", vetor, MapaNeural.obterPontoDoNeuronioDadaALinhaEColuna(linhaDoNeuronio,colunaDoNeuronio) , ocorrencias);
 		balls[balls.length] = tempBall;
 		
 		return tempBall;
@@ -226,13 +227,13 @@ EVENTOS
 ******************************/
 
 void mouseClicked() {
-	
+	/*
 	for(int indiceNeuronios=0; indiceNeuronios < balls.length; indiceNeuronios++) { 
 		if(balls[indiceNeuronios].estamos_encima) {
 			Ball neuronio = balls[indiceNeuronios];
 			cliqueNoNeuronio(neuronio);
 		}
-	}
+	}*/
 }
 
 /******************************
@@ -290,7 +291,7 @@ class Perfil {
 	    textFont(font, 12);
 	    textAlign(CENTER);
 	
-	    fill(220, 112, 23);
+	    fill(0,0,0);
 
 	    text(this.ocorrencias, this.x, this.y);
 	}
@@ -314,18 +315,19 @@ class Ball {
   
   boolean estamos_encima;
   
-  Ball( String ID, float areaAOcupar, String NOMBRE, String vetor , Ponto centroDoCirculo) {
+  Ball( String ID, float areaAOcupar, String NOMBRE, String vetor , Ponto centroDoCirculo, int _ocorrencias) {
     NumeroNeuronios++;
     ka = areaAOcupar;
     r = sqrt( ka / PI );
     x = centroDoCirculo.x;
     y = centroDoCirculo.y;
-
+	this.ocurrencias = _ocorrencias;
+	
     id = ID;
     nombre = NOMBRE;
     
-	if (vetor != '')
-		this.adicionarVetor(vetor);
+ 	for(int i=0;i < _ocorrencias; i++)
+		this.adicionarVetor('');
   }
   
   void encima() {
@@ -380,7 +382,7 @@ class Ball {
 
     text(this.id, x, y+tamanio/5);
 
-    float tamanio1 = r*0.25;
+    float tamanio1 = r*0.45;
     textFont(font, tamanio1);
     fill(0, 102, 153, lcalpha);
     text(str(ocurrencias), x, y+tamanio/3+tamanio1);
