@@ -32,6 +32,7 @@ int burbujas_maximas = 1000;
 int burbujas_graficadas = 0;
 
 Ball[] balls = new Ball[0];
+Perfil[] perfis = new Perfil[0];
 
 int lapso_refresh = 1;               // cada cuantos frames se renueva la info del listado
 int timer_interno = 0;
@@ -97,6 +98,8 @@ void draw() {
       }
     }
 
+	MapaDePerfis.desenharPerfis();
+
 }
 
 
@@ -154,7 +157,7 @@ public class MapaNeural {
 		return (MapaNeural.numeroMaximoDeNeuronios() <= balls.length)
 	}
 
-	private static Ponto obterPontoDoNeuronioDadaALinhaEColuna(int linha, int coluna) {
+	public static Ponto obterPontoDoNeuronioDadaALinhaEColuna(int linha, int coluna) {
 		float larguraDoQuadradoDeCadaNeuronio =  (float)width/(float)MapaNeural.quantidadeDeColunas;
 		float alturaDoQuadradoDeCadaNeuronio =  (float)height/(float)MapaNeural.quantidadeDeLinhas;
 		float x = (float)coluna*larguraDoQuadradoDeCadaNeuronio + larguraDoQuadradoDeCadaNeuronio/2.0;
@@ -204,6 +207,20 @@ public class MapaNeural {
 	}
 }
 
+public class MapaDePerfis {
+	public static boolean deveDesenharOsPerfis = false;
+	public static void desenharPerfis() {
+		if (MapaDePerfis.deveDesenharOsPerfis)
+			for(int indicePerfis=0; indicePerfis < perfis.length; indicePerfis++) { 
+				perfis[indicePerfis].display();
+			}
+	}
+	
+	public static void adicionarPerfil(int x, int y, float radius, int ocorrencias) {
+		Perfil novoPerfil = new Perfil(MapaNeural.obterPontoDoNeuronioDadaALinhaEColuna(x,y), radius, ocorrencias);
+		perfis[perfis.length] = novoPerfil;
+	}
+}
 /*****************************
 EVENTOS
 ******************************/
@@ -228,6 +245,54 @@ class Ponto {
 	Ponto(float _x, float _y) {
 		this.x = _x;
 		this.y = _y;
+	}
+	
+}
+
+class Perfil {
+	
+	public float x;
+	public float y;
+	public float raio;
+	public int ocorrencias;
+	
+	Perfil(Ponto centroDoCirculo, float _raio, int _ocorrencias) {
+
+		this.x = centroDoCirculo.x;
+		this.y = centroDoCirculo.y;
+		this.raio = _raio;
+		this.ocorrencias = _ocorrencias;
+	}
+	
+	public void display() {
+		
+		r = sqrt( k_total / PI );
+		r = r*2.0*raio;
+		
+		noFill();
+	    
+		fill(10,10,10,30);
+
+	    strokeWeight(r/150);
+
+	    color local = color(0,0,0);
+	    stroke( local );
+
+		//desenha o circulo  
+	    ellipse(this.x,this.y,2*r-r/10,2*r-r/10); 
+		noFill();
+		noStroke();
+		fill(255);
+		strokeWeight(0);
+		
+		rect(this.x - 14 , this.y - 15, 30, 20);
+
+	    textFont(font, 12);
+	    textAlign(CENTER);
+	
+	    fill(220, 112, 23);
+
+	    text(this.ocorrencias, this.x, this.y);
 	}
 }
 
