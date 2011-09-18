@@ -1,10 +1,9 @@
 <div id="question">
 	<div class="h_text">
-		<!-- <img alt="" src="images/1-t1.jpg" />--><h1>Question</h1><br />
+		<!-- <img alt="" src="images/1-t1.jpg" />--><h1>Questão número <%= @questionNumber + 1 %></h1><br />
 	</div>
 	<div class="padding">
 		<div class="main_content">
-			<h2><%= @questionNumber.to_s %></h2>
 			<h2><%= @questions[@questionNumber].enunciation %></h2>
 			<br />
 		
@@ -34,3 +33,4 @@
 		</div>
 	</div>
 </div>
+

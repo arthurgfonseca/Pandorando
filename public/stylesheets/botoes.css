@@ -1,0 +1,39 @@
+/* Botoes - CSS
+/----------------------------------------------------------*/
+
+
+.botao_submit 
+{
+	background-color: #e6e9ea;
+	border: solid 1px #cccccc;
+	font-family: Century Gothic, Tahoma, Arial, Sans-Serif;
+	font-size: 12px;
+	color: #686868;
+	padding: 2px 8px;
+	margin-right: 10px;
+	-moz-border-radius: 2px;
+	cursor: pointer;
+}
+
+.botao_submit:hover
+{
+	background-color: #ffffff;
+
+}
+
+.red:hover {
+	background: #F80000  ;
+}
+.red{
+	background: #C80000 ;
+	color: white;
+}
+
+.green:hover {
+	background: #00CC33;
+}
+
+.green {
+	background: #009933;
+	color: white;
+}

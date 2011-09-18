@@ -1,0 +1,19 @@
+<div id="user">
+<h1>Informe seu nome e email (Criar cadastro)</h1>
+<br />
+<br />
+<%= form_tag({:controller => "home", :action => "createUser", :id => 1}, :remote => true) do %>
+	
+  <p class="form_field">
+    <label class="label">Nome</label>
+    <label class="text_field"><%= text_field_tag 'nome' %></label>
+  </p>
+  <p class="form_field">
+    <label class="label">Email</label>
+    <labe class="text_field"><%= text_field_tag 'email' %></label>
+  </p>
+	<div class="buttons">
+	    <a><%= submit_tag "OK" %></a>
+	</div>
+<% end %>
+</div>

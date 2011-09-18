@@ -1,0 +1,161 @@
+/* WHITEBOX - CSS
+/----------------------------------------------------------*/
+
+/* HTML
+/----------------------------------------------------------*/
+
+body
+{
+	border-top: none;
+	background: #f8f8f8;
+}
+
+
+/* 960 grid
+/---------------------------------------------------------*/
+
+#container
+{
+	background-color: #f8f8f8;
+}
+
+/* Wrapper
+/------------------------------------*/
+
+#wrapper
+{
+	color: #aaaaaa;
+	background-color: #f8f8f8;
+	min-height: 500px;
+}
+
+.box
+{
+	background-color: transparent;
+}
+
+/* Main
+/-----------------------------------*/
+
+#main
+{
+	min-height: 500px;
+	margin-top: 15px;
+	font-family: Century Gothic, Arial, Sans-Serif;
+	font-size: 11px;
+}
+
+.top
+{
+	background: transparent url('../../images/layout/top-content.png') scroll repeat-x 0 0;
+	height:40px;
+}
+
+.top_left
+{
+	background: transparent url('../../images/layout/top-left.png') scroll no-repeat 0 0;
+	padding-left:40px;
+}
+
+.top_right
+{
+	background: transparent url('../../images/layout/top-right.png') scroll no-repeat top right;
+	padding-right:40px;
+}
+
+.content
+{
+	background: white;
+	min-height: 500px;
+	overflow: auto;
+}
+
+
+.content_left
+{
+	background: transparent url('../../images/layout/content-left.png') scroll repeat-y 0 0;
+	padding-left:40px;
+}
+
+.content_right
+{
+	background: transparent url('../../images/layout/content-right.png') scroll repeat-y top right;
+	padding-right:40px;
+}
+
+.footer
+{
+	background: transparent url('../../images/layout/footer-content.png') scroll repeat-x 0 0;
+	height:40px;
+}
+
+.footer_left
+{
+	background: transparent url('../../images/layout/footer-left.png') scroll no-repeat 0 0;
+	padding-left:40px;
+}
+
+.footer_right
+{
+	background: transparent url('../../images/layout/footer-right.png') scroll no-repeat top right;
+	padding-right:40px;
+}
+
+
+
+
+/* Site Footer
+/-----------------------------------*/
+
+#site_info
+{
+	background-color: #f8f8f8;
+}
+
+#site_info h4
+{
+	float: right;
+	color: #888888;
+	font-weight: normal;
+	font: 13px/1.5 Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif;
+
+	font-size: 11px;
+}
+
+
+
+/* Flash Notice
+/-------------------------------------*/
+
+.content_login #flash_notice_error {
+
+	background-position: 15px 0px;
+	padding-left:40px;
+	
+}
+
+.content_login #flash_notice_success {
+
+	background-position: 15px 0px;
+	padding-left:40px;
+	
+}
+
+#flash_notice_error {
+
+	background: transparent url('../../images/icones/icone_erro.png') scroll no-repeat 0 0;
+	background-position: 0px 0px;
+	padding-left:30px;
+	color: red;
+	font-size: 14px;
+}
+
+#flash_notice_success {
+
+	background: url('../../images/icones/icone_sucesso.png') scroll no-repeat 0 0;
+	background-position: 0px 0px;
+	padding-left:30px;
+	color: #093;
+	font-size: 14px;
+}
+

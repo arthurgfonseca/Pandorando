@@ -2,10 +2,19 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="author" content="Arthur Fonseca" />
+  <meta name="reply-to" content="contato@i.ndigo.com.br" />
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
   <title>Pandorando</title>
   <%= stylesheet_link_tag "layout.css" %>
   <%= stylesheet_link_tag "style.css" %>
   <%= stylesheet_link_tag "heatmap.css" %>
+	<%= stylesheet_link_tag "layout_principal/container_branco.css" %>
+	<%= stylesheet_link_tag "layout_principal/grid.css" %>
+	<%= stylesheet_link_tag "layout_principal/text.css" %>
+	<%= stylesheet_link_tag "layout_principal/layout.css" %>
+	<%= stylesheet_link_tag "botoes.css" %>
   <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' %>
   <%= javascript_include_tag 'rails' %>
   <%= javascript_include_tag 'processing-1.2.1.js' %>
@@ -14,68 +23,59 @@
   <%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? -%>
 
 </head>
-<body id="index_1" onload="new ElementMaxHeight();">
-	<div id="header_tall">	
-		<div id="main">
-			<!--header -->
-			<div id="header">
-				<div class="h_logo">
-						<div class="left">
-						<!-- <img alt="" src="images/logo.jpg" />--><br />
-					</div>
-					<div class="right">
-						<a href="#"><%= link_to "Profile" %></a>				</div>
-					<div class="clear"></div>
-				</div>
-				<div id="menu">
-					<div class="rightbg">
-						<div class="leftbg">
-							<div class="padding">
-								<ul>
-									<% if(@index == "users") %>
-									<li><span>Usu&aacute;rios</span></li>
-									<% else %>
-									<li><%= link_to "Usuários", :controller => "users"%></li>
-									<% end %>
-									<% if(@index == "questions") %>
-									<li><span>Perguntas</span></li>
-									<% else %>
-									<li><%= link_to "Perguntas", :controller => "questions"%></li>
-									<% end %>
-									<% if(@index == "answers") %>
-									<li><span>Respostas</span></li>
-									<% else %>
-									<li><%= link_to "Respostas", :controller => "answers"%></li>
-									<% end %>
-									<% if(@index == "gifts") %>
-									<li><span>Presentes</span></li>
-									<% else %>
-									<li><%= link_to "Presentes", :controller => "gifts"%></li>
-									<% end %>
-									<li class="last"><a href="#">Mostrar Rede</a></li>
-								</ul>
-								<br class="clear" />
+<body>	    
+	<div id="container" class="container_16">
+			<%= render  "layouts/session_header" %>
+			<!-- end login area -->
+		</div>	
+		<div id="sec_header" class="grid_16">
+			<div class="grid_3">
+					<!-- TODO: alterar a imagem abaixo para o logotipo do servidor- - o posicionamento da imagem encontra-se no arquivo grid.css-->
+			        <img src="../../images/layout/logoIndigo.png"  id="logo" />
+			    </a>
+			</div>
+			<div class="grid_13" id="areas">
+							</div>  
+						</div><!-- end header -->
+
+						<div id="wrapper" class="grid_16">			    
+							<div id="menu_direito" class="grid_3">
+								<div class="box">	
+
+
+								<%= render  "layouts/menu" %>
+								</div>		
+							</div><!-- end menu_direito -->
+
+							<div class="grid_13 omega" id="main">
+								<div class="top_left">
+									<div class="top_right">
+										<div class="top">
+										</div>
+									</div>
+								</div>
+								<div class="content_left">
+									<div class="content_right">
+										<div id="alvo" class="content">
+											 <%= yield %>
+										</div>
+									</div>
+								</div>
+								<div class="footer_left">
+									<div class="footer_right">
+										<div class="footer">
+										</div>
+									</div>
+								</div>		
+							</div><!-- end main_border_reounded -->
+							<div class="clear"></div>
+							<div class="grid_16" id="site_info">
+								<div class="box">
+									<h4> Designed by Arthur Fonseca and Vinicius Oyama </h4>
+								</div>
 							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!--header end-->
-			<!-- middle -->
-			<div id="middle">
-				<%= yield %>
+						</div><!-- end main -->
 
-			</div>
-			<!-- middle end -->
-			<!-- footer -->
-			<div id="footer">
-				<div class="indent">
-					Pandorando <a href="#">Privacy Policy</a>				</div>
-			</div>
-			<!-- footer end -->
-		</div>
-
-	</div>
-
-</body>
+					</div><!-- end container -->
+				</body>
 </html>

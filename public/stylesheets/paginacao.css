@@ -1,0 +1,32 @@
+.paginacao
+{
+	margin: 15px 10px;
+}
+
+.paginacao li{
+	list-style-type:none;
+	margin-left: 0px;
+	margin-right: 5px;
+	border: 1px solid #CCCCCC;
+	color: #808185;
+   	padding: 3px 4px;
+	float: left; 
+}
+
+.paginacao li.current 
+{
+   	background-color: #808185;
+   	border: 1px solid #808185;
+	color: #FFFFFF;
+   	font-weight: bold;
+}
+
+.paginacao li.next ,.paginacao li.dots , .paginacao li.prev
+{
+	border: 0px solid #FFFFFF;
+}
+
+/*apagar depois que paginacao funcionar*/
+.paginacao li:hover{
+	cursor:pointer
+}

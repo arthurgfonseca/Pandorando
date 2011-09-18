@@ -1,0 +1,58 @@
+/*
+-----------------------------------------------
+Grey Box Method - Layout CSS
+----------------------------------------------- */
+
+body {
+
+	font: 13px/1.5 Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif;
+	background: #f8f8f8;
+	border-top: 5px solid #f8f8f8;
+	color: #f8f8f8;
+	font-size: 11px;
+	padding: 0 0 40px;
+	
+}
+
+
+/* forms
+----------------------------------------------- */
+
+fieldset {
+	border:1px solid #bbb;
+	padding:10px;
+	position:relative;
+	background:#f8f8f8;
+	margin-bottom:10px;
+}
+legend {
+	font-size:1.1em;
+	padding:.4em .8em;
+	background:#fff;
+	border:1px solid #bbb;
+}
+
+
+fieldset.login p label {
+	float:left;
+	line-height:2em;
+	margin-right:3%;
+	text-align:right;
+	width:32%;
+}
+
+
+/* AJAX sliding shelf
+----------------------------------------------- */
+
+#loading {  
+    position:relative;  
+    width:300px;  
+    top:-15%;  
+    left:50%;  
+    margin-left:-150px;  
+    text-align:center;  
+    padding:7px 0 0 0;  
+    font:bold 11px Arial, Helvetica, sans-serif;  
+}
+

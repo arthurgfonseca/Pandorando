@@ -1,0 +1,16 @@
+<div id="user">
+<h1>Informe seu nome e email</h1>
+<br />
+<br />
+<h2 id="error" style="display: none">Error</h2>
+<%= form_tag({:controller => "home", :action => "getUser", :id => 1}, :remote => true) do %>
+
+  <p class="form_field">
+    <label class="label">Email</label>
+    <labe class="text_field"><%= text_field_tag 'email' %></label>
+  </p>
+	<div class="buttons">
+	    <a><%= submit_tag "OK" %></a>
+	</div>
+<% end %>
+</div>

@@ -5,6 +5,7 @@ class GiftsController < ApplicationController
     @gifts = Gift.all
     @gift = Gift.new
     @index = "gifts"
+    @perfis = Perfil.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -42,7 +43,55 @@ class GiftsController < ApplicationController
   # POST /gifts
   # POST /gifts.xml
   def create
+    puts "ENTREI CREATE GFASFHLADKSFKJSADGLHJKDSLGHJKASDHJLGKHAJLSDGLHJASDHJAHJLGKSLHGJD"
     @gift = Gift.new(params[:gift])
+    
+    perfil1 = params[:Intelectual]
+    puts perfil1
+    
+    if(perfil1)
+      puts "entrei aki no perfil1"
+      perfil = Perfil.where(:title => "Intelectual").first
+      puts perfil
+      puts perfil.title
+      @gift.perfils.concat([perfil])
+    end
+    
+    perfil2 = params[:Esportista]
+    
+    if(perfil2)
+      perfil = Perfil.where(:title => "Esportista").first
+      @gift.perfils.concat([perfil])
+    end
+    
+    perfil3 = params[:Alternativo]
+    
+    if(perfil3)
+      perfil = Perfil.where(:title => "Alternativo").first
+      @gift.perfils.concat([perfil])
+    end
+    
+    
+    perfil4 = params[:Fun]
+    
+    if(perfil4)
+      perfil = Perfil.where(:title => "Fun").first
+      @gift.perfils.concat([perfil])
+    end
+    
+    perfil5 = params[:Comum]
+    
+    if(perfil5)
+      perfil = Perfil.where(:title => "Comum").first
+      @gift.perfils.concat([perfil])
+    end
+    
+    perfil6 = params[:Geral]
+    
+    if(perfil6)
+      perfil = Perfil.where(:title => "Geral").first
+      @gift.perfils.concat([perfil])
+    end
 
     respond_to do |format|
       if @gift.save

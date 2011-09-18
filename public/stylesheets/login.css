@@ -1,0 +1,39 @@
+/* LOGIN - CSS
+/----------------------------------------------------------*/
+
+
+/*-Pagina de login do servidor*/
+
+
+.box_login_content
+{
+    left:35%;
+    position:absolute;
+    top:20%;
+    width:400px;
+}
+
+.content_login
+{
+	background: white;
+	overflow: auto;
+	
+}
+
+
+input.email_senha {
+	width:80%;
+}
+
+
+#portal_login p
+{
+	margin-left: 20px;
+	margin-bottom: 20px;
+}
+
+
+
+
+
+

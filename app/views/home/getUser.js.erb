@@ -1,0 +1,7 @@
+if('<%= @findUser %>'  == 'true') {
+	$("#error").attr("style", "display:none");
+	$("#user").replaceWith("<%= escape_javascript(render(:partial => "generate_question/questions"))%>")
+}
+else {
+	$("#error").attr("style", "display:block");
+}

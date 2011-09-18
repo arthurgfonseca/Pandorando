@@ -7,4 +7,5 @@ class Network
   field :weight2, :type => Float
   field :weight3, :type => Float
   field :weight4, :type => Float
+  field :match_count, :type => Integer, :default => 0
 end

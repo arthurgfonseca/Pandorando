@@ -1,0 +1,31 @@
+
+<div class="h_text">
+	<!-- <img alt="" src="images/1-t1.jpg" />--><h1>Selecione os presentes!</h1><br />
+</div>
+<div class="padding">
+	<div class="main_content">
+		<div class="show">
+			<table id="gifts" class="grid">
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Adicionar</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @allGifts.each do |gift| %>
+						<tr id="<%= dom_id gift %>" class="show_grid">
+							<td><%= gift.name %></td>
+						    <td id="add_<%= gift.id %>"><a onclick="adicionarItem('<%= gift.id %>'); return false;" style="cursor:pointer;color:blue;">Adicionar</a></td>
+							<td id="remove_<%= gift.id %>" style="display:none"><a onclick="removerItem('<%= gift.id %>'); return false;" style="cursor:pointer;color:red;">Remover</a></td>
+						</tr>
+					<% end %>
+				</tbody>
+				<tfooter>
+
+				</tfooter>
+			</table>
+		</div>
+	</div>
+</div>
+

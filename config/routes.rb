@@ -1,24 +1,27 @@
 Pandorando::Application.routes.draw do
   
-  get "home/index"
 
-  resources :gifts
+   get "home/index"
 
-  match "generate_question/nextQuestion" => "generate_question#nextQuestion"
-  
-  resources :categories
+   resources :gifts
+ 
+   # match "questions/addAnswer" => "questions#addAnswer"
+   # match ':controller/:id/:action'
 
-  resources :answers
+   resources :categories
 
-  resources :questions
+   resources :answers
 
-  root :to => "home#index"
-  
-  resources :users
+   resources :questions
 
-  resources :resposta
-  
-  match ':controller(/:action(/:id))'
+   root :to => "home#index"
+ 
+   resources :users
+
+   resources :resposta
+ 
+   match ':controller(/:action(/:id))'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

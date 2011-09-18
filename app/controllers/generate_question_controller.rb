@@ -12,6 +12,7 @@ class GenerateQuestionController < ApplicationController
     
     #TODO
     opcao = params[:answer]
+    @acceptResult = true
     
     
     answers = @questions[@questionNumber.to_i].answers
@@ -41,13 +42,14 @@ class GenerateQuestionController < ApplicationController
       end
     
     session[:arrPesos] = arrPesos
-    
+    @allGifts = Array.new
+    @arrGifts = Array.new
+    @perfil = nil
     
     #Check if it is the last question
     if(@questions.size <= @questionNumber + 1)
       @lastQuestion = true
-      
-      puts Constants::TRAIN_MODE
+      @trainMode = Constants::TRAIN_MODE
       
       # Add new weights following the char quantity
       if(Constants::TRAIN_MODE == true)
@@ -57,10 +59,40 @@ class GenerateQuestionController < ApplicationController
         history.weight2 = arrPesos[2]
         history.weight3 = arrPesos[3]
         history.weight4 = arrPesos[4]
+        history.user_mail = session[:user].to_s
+        session[:user] = nil
         history.save
+        
+        @perfil = getResult(numberOfQuestions)
+        puts "SAI DO GER RESULT"
+        if(@perfil == nil)
+          puts "ENTREI AKI NO @PERFIL == NIL"
+          @acceptResult = false
+        end
+        
+        # Remover, usado apenas para teste
+        # @perfil = Perfil.last
+      else
+        
+        puts 'ENTREI AKIISISFASFJKLAKLJSFJKLASJKLFJKLAKJLSFAKLJJLFAKSLFKAJ'
+        
+        arrPerfis = getPerfisList(numberOfQuestions)
+        
+        cont = 0
+        
+        
+        while(cont < 3)
+          perfil = Perfil.where(:title => arrPerfis[cont]).first
+          gift = perfil.gifts[0]
+          @arrGifts << gift.name
+          cont = cont.next
+        end
+        
+        puts @arrGifts.size
+        
       end
       
-      @network = getResult(numberOfQuestions)
+      
     else
       @questionNumber = @questionNumber.next
     end
@@ -92,6 +124,19 @@ class GenerateQuestionController < ApplicationController
     puts 'passei aki'
     network = ResultController.generateResult(arrPesos)
     return network
+    
+  end
+  
+  def getPerfisList(numberOfQuestions)
+    
+    arrPesos = []
+    session[:arrPesos].each{|result|
+      arrPesos << Float(result.to_f/numberOfQuestions.to_f)
+    }
+    
+    puts 'passei aki no getPerfis'
+    return ResultController.generateResult(arrPesos)
+    
     
   end
   

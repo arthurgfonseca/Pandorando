@@ -1,0 +1,129 @@
+/* CSS formularios
+/----------------------------------------------------*/
+
+
+	
+/* Mensagens de Validação
+/--------------------------------*/
+
+span.validation
+{
+	color: 	red;
+	margin-left: 2%;
+}
+
+/* Campo Obrigatorio
+/--------------------------------*/
+.asterisco 
+{
+    color: #C11B17;
+    font-size: 12px;
+}
+
+
+/* Input File
+/----------------------------------*/
+
+input.file
+{
+	z-index: 2;
+}
+
+
+/* Text Area - layout
+/--------------------------------------------------------*/
+
+textarea {
+	font-family: monospace;
+}
+
+textarea {
+
+
+	cursor: auto;
+	padding: 2px;
+	white-space: pre-wrap;
+	
+}
+
+input, textarea, keygen, select, button, isindex {
+
+	font: -webkit-small-control;
+	color: initial;
+	letter-spacing: normal;
+	word-spacing: normal;
+	line-height: normal;
+	text-transform: none;
+	text-indent: 0px;
+	text-shadow: none;
+
+	text-align: -webkit-auto;
+}
+Pseudo ::-webkit-input-placeholder element
+input::-webkit-input-placeholder, isindex::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+	color: darkGray;
+}
+
+/* CheckBox - layout
+/-------------------------------------------------------------*/
+
+input[type="checkbox"] {
+	cursor: auto;
+	line-height: normal;
+
+}
+
+/* Select - layout
+/-------------------------------------------------------------*/
+select {
+
+
+	white-space: pre;
+	color: black;
+
+	cursor: default;
+}
+
+
+/* Inputs - customizar tamanhos
+/-------------------------------------------------------------------*/
+
+input[type="file"] {
+	width:60%;
+}
+
+input.texto_longo {
+	width:25%;
+}
+
+
+input.texto_curto {
+	width:5%;
+}
+
+select.texto_longo {
+	width:25%;
+}
+select.texto_curto {
+	width:9%;
+}
+
+textarea {
+	height:80px;
+}
+
+input[type="checkbox"] {
+	width:2%;
+}
+
+input[type="radio"] {
+	width:2%;
+}
+
+/* Imagens
+/-------------------------------------------*/
+
+img.botao_back{
+	float:left;
+	cursor: pointer;
+}

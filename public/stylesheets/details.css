@@ -1,0 +1,38 @@
+.details_image {
+	float: right;
+	border: 1px solid black;
+	margin-right: 18px;
+	max-height: 150px;
+}
+.text_details{
+	min-width:800px;
+}
+.text_details dl {
+	margin-bottom:1em;
+	margin-top:0pt;
+}
+
+.text_details dl dt {
+	float:left;
+	line-height:2em;
+	margin-right:3%;
+	text-align:right;
+	font-weight: bold;
+	width:25%;
+}
+.text_details dl dd {
+	width:60%;
+}
+
+.text_details ul
+{
+	margin: 0px;
+	font-weight: bold;
+}
+.text_details li
+{
+	font-weight: lighter; 
+	list-style-type: none;
+}
+
+

@@ -1,0 +1,61 @@
+/* Session eader - CSS
+/----------------------------------------------------------*/
+
+
+
+/* Menu Superior - Box de Login
+/----------------------------------------------------------*/
+
+
+#login
+{ 
+	height: 35px;
+	margin-left: -10px;
+
+	
+}
+
+#login ul
+{
+	font-family: Tahoma, Arial, Sans-Serif;
+	font-size: 11px;
+	float: right;
+	list-style: none;
+	display: block;
+	border: none;
+}
+
+#login ul li
+{
+	float: left;
+	margin: 8.5px 0;
+}
+
+#login ul li a
+{
+	font-weight: normal;
+	color: #333333;
+	cursor: default;
+	padding: 0 10px;
+}
+
+#login #logout a
+{
+	color: #d42f42;
+	cursor: pointer;
+	border-left: solid 1px white;
+}
+
+#login #logout a:hover
+{
+	color: #AAA;
+}
+
+#login_content
+{	height: 35px;
+	border-radius: 9px;
+	background-color: #EDEDED;
+	padding: 0px 0px 0px 10px;
+	border: solid 1px #FFFFFF;	
+}
+

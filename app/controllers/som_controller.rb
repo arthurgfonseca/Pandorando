@@ -1,13 +1,39 @@
 class SomController < ApplicationController
   
   
-  def self.execute(network, input, iterations, l_rate, neigh_size)
+  def self.execute(network, input, iterations, l_rate, neigh_size, bmu)
     
-    # SomController.summarize_vectors(network)
-    SomController.train_network(network, input, iterations, l_rate, neigh_size)
-    # puts changedNodes
-    # SomController.test_network(network, input)
-    # SomController.summarize_vectors(network)
+    return SomController.train_network(network, input, iterations, l_rate, neigh_size, bmu)
+    
+  end
+  
+  def self.best_unit(arrBmu, network, input)
+    
+    allBmu = Perfil.all
+    
+    
+    
+    bmu,bmuDist = SomController.get_best_matching_unit(network, input)
+    
+    
+    for selectedBmu in allBmu
+      
+      
+      hashBmu = Hash.new
+      
+      hashBmu[:name] = selectedBmu.title
+      
+      bmuCord = [selectedBmu.positionx, selectedBmu.positiony]
+      otherCord = [bmu.positionx, bmu.positiony]
+      
+      hashBmu[:dist] =  SomController.euclidean_distance(bmuCord, otherCord)
+      
+      arrBmu << hashBmu
+      
+    end
+    
+    
+    
   end
   
   private
@@ -74,10 +100,12 @@ class SomController < ApplicationController
       cont = cont.next
     end
     # Save changes
-    codebook.save
+    if(Constants::TRAIN_MODE == true)
+      codebook.save
+    end
   end
 
-  def self.train_network(network, input, iterations, l_rate, neighborhood_size)
+  def self.train_network(network, input, iterations, l_rate, neighborhood_size, bmu)
     iterations.times do |iter|
       # pattern = random_vector(shape)
       pattern = input
@@ -90,6 +118,7 @@ class SomController < ApplicationController
       end
       puts ">training: neighbors=#{neighbors.size}, bmu_dist=#{dist}, bmux=#{bmu.positionx}, bmuy=#{bmu.positiony}"
     end
+    return bmu
   end
 
 
