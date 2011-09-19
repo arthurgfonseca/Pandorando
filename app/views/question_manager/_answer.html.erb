@@ -2,9 +2,9 @@
 	<td>
 		<%= resposta.enunciation %>
 		 - 
-		<%= link_to 'Edit', edit_answer_path(resposta), :remote => true %>
+		<%= link_to 'Editar', edit_answer_path(resposta), :remote => true %>
 		 - 
-	    <%= link_to 'Destroy', resposta, :confirm => 'Deseja realmente excluir a resposta? Todos os pesos serao perdidos.', :method => :delete, :remote => true %>
+	    <%= link_to 'Remover', resposta, :confirm => 'Deseja realmente excluir a resposta? Todos os pesos serao perdidos.', :method => :delete, :remote => true %>
 	</td>
 	<%  
 		caracteristicas = Characteristic.get_characteristics

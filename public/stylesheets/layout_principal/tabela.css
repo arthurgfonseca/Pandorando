@@ -1,0 +1,38 @@
+/*Search*/
+.search_field {
+	float: right;
+}
+
+.index
+{
+	font-family: "Helvetica", "Lucida Sans Unicode", "Lucida Grande", "Sans-Serif";
+	font-size: 12px;
+	background: #fff;
+	width: 100%;
+	border-collapse: collapse;
+	text-align: left;
+}
+th
+{ 
+	font-size: 14px;
+	font-weight: normal;
+	color: #039;
+	padding: 10px 8px;
+	border-bottom: 2px solid #6678b1;
+}
+td
+{
+	vertical-align : middle;
+	border-bottom: 1px solid #ccc;
+	color: #669;
+	padding: 6px 8px;
+}
+tbody tr:hover td
+{
+	cursor: pointer;
+	color: #009;
+}
+
+.enunciado-questao {
+	font-size:16px;
+}

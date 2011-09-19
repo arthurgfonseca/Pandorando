@@ -93,9 +93,6 @@ function desenharRedeDePerfis() {
 //heatmap
 window.onload = function(){
 	pjs = Processing.getInstanceById("mapa");  
-	_width = document.getElementById("mapa").width;
-    _height = document.getElementById("mapa").height;
-	pjs.size(_width, _height);
 	raioHeatmap = Math.floor(document.getElementById("mapa").width / numeroDeLinhasDaRede);
 	document.getElementById("radius-heatmap").value = raioHeatmap;
 	heatMap = h337.create({"element":document.getElementById("heatmapArea"), "radius": raioHeatmap, "visible":false});
@@ -105,31 +102,28 @@ window.onload = function(){
 
 </script>
 
-<p>
-	<a onclick="criarRede(); return false;" style="cursor:pointer;color:red;">Criar rede<a>
-		&nbsp;&nbsp; - &nbsp;&nbsp;
-	<a onclick="adicionarAutomaticamente(); return false;" style = "cursor:pointer;">Gerar Vetores Randomicos(apos criar rede)</a>
+
+<p class="info grid_6">
+	Mapa da rede SOM
 </p>
 
 <p>
-	<label for="name">Radius heatmap</label>
-	<input type="text" name="radius" id="radius-heatmap" value="70"> </input>
-	<input type="submit" value="Ajustar" onclick="ajustarRadius(); return false;"/>
-	&nbsp;&nbsp; - &nbsp;&nbsp;
-	<span>Exibir Heatmap<span>
-	<input type="checkbox" onchange="heatMap.toggleDisplay();">
-	<span>Exibir Perfis<span>
-	<input type="checkbox" onchange="pjs.MapaDePerfis.deveDesenharOsPerfis = !(pjs.MapaDePerfis.deveDesenharOsPerfis);">
+	<label for="name">Heatmap Radius</label>
+	<input type="text" name="radius" id="radius-heatmap" value="70" size=5 onchange="ajustarRadius(); return false;"> </input>
+	<br/>
+	<span>Exibir: 
+		<br/>
+	Heatmap: 
+	<input type="checkbox" onchange="heatMap.toggleDisplay();"><span>
+	<span>
+		&nbsp;&nbsp;&nbsp;Perfis: 
+		<input type="checkbox" onchange="pjs.MapaDePerfis.deveDesenharOsPerfis = !(pjs.MapaDePerfis.deveDesenharOsPerfis);">
+	<span>
 </p>
 
-<p>
-	<label for="name">Id neurônio</label>
-	<input type="text" name="id" id="id-neuronio" />
 
-	<label for="email">Vetor a ser adicionado</label>
-	<input type="text" name="nome" id="vetor" />
-	
-	<input type="submit" value="Adicionar" onclick="adicionarNeuronio(); return false;"/>
+<p>
+
 </p>
 
 	<div id="heatmapArea">
