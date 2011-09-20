@@ -64,22 +64,25 @@ function ajustarRadius() {
 }
 
 function desenharRedeNeural() {
+
+	pjs.MapaNeural.quantidadeDeLinhas = numeroDeLinhasDaRede;
+	pjs.MapaNeural.quantidadeDeColunas = numeroDeColunasDaRede;
+	
 	<% 
 		idNeuronio = 0
 		@matrizDaRedeNeural.each do |neuronioDaRede| 
-	%>
-		pjs.MapaNeural.quantidadeDeLinhas = numeroDeLinhasDaRede;
-		pjs.MapaNeural.quantidadeDeColunas = numeroDeColunasDaRede;
-		
+	%>		
 		pjs.MapaNeural.criarNeuronio('<%= idNeuronio %>', '', <%= neuronioDaRede.positionx %>, <%= neuronioDaRede.positiony %>, <%= neuronioDaRede.match_count %>); 
 	<% 
 		idNeuronio = idNeuronio + 1
 		end 
 	%>
+    
 	return;
 }
 
 function desenharRedeDePerfis() {
+
 	<% 
 		idPerfil = 0
 		@listaDePerfis.each do |perfil| 
@@ -89,10 +92,11 @@ function desenharRedeDePerfis() {
 		idPerfil = idPerfil + 1
 		end 
 	%>
+	
 	return;
 }
 //heatmap
-window.onload = function(){
+function inicializarMapa(){
 	pjs = Processing.getInstanceById("mapa");  
 	raioHeatmap = Math.floor(document.getElementById("mapa").width / numeroDeLinhasDaRede);
 	document.getElementById("radius-heatmap").value = raioHeatmap;

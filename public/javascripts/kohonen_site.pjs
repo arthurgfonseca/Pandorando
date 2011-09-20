@@ -39,7 +39,7 @@ int timer_interno = 0;
 
 
 void setup() {
-
+  
   size(650,650);
   background(0, 0, 0, 0);
   smooth();
@@ -48,7 +48,7 @@ void setup() {
   font = loadFont("Century.vlw");
   
   layout();
-
+  inicializarMapa();
 }
 
 void layout() {
