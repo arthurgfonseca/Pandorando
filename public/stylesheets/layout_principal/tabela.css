@@ -18,21 +18,48 @@ th
 	font-weight: normal;
 	color: #039;
 	padding: 10px 8px;
-	border-bottom: 2px solid #6678b1;
+	border-bottom: 2px solid #3D6F92;
 }
+
 td
 {
 	vertical-align : middle;
 	border-bottom: 1px solid #ccc;
-	color: #669;
+	color: #555;
 	padding: 6px 8px;
 }
+
 tbody tr:hover td
 {
 	cursor: pointer;
-	color: #009;
+	color: #000;
 }
 
-.enunciado-questao {
+#questions {
+	font-size: 12px;
+}
+
+#questions .enunciado-questao {
+	margin:10px 0 0 0;
+	background: #EDEDED;
+	font-size: 12px;
+}
+
+#questions .enunciado-questao span{
+	padding-left: 5px;
+	color: #333;
 	font-size:16px;
 }
+
+#questions .enunciado-questao a {
+	color: #D42F42;
+}
+
+#questions td {
+	border:0;
+}
+
+#questions .addAnswer {
+	margin-top: 5px;
+}
+

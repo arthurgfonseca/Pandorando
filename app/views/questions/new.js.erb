@@ -1,0 +1,3 @@
+<% @question = Question.new # reset for new form %>
+$(".edit_question").replaceWith("<%= escape_javascript(render(:partial => 'question_manager/form'))%>");
+$("#formulario-questao")[0].reset();

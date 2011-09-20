@@ -83,9 +83,9 @@ class AnswersController < ApplicationController
   # PUT /answers/1.xml
   def update
     @answer = Answer.find(params[:id])
-
+    @answer.enunciation = params[:enunciado];
     respond_to do |format|
-      if @answer.update_attributes(params[:answer])
+      if @answer.save
         format.html { redirect_to(@answer, :notice => 'Answer was successfully updated.') }
         format.js
       else
