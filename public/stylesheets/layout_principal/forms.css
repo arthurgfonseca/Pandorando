@@ -114,7 +114,16 @@ select {
 	color: #3D6F92;
 }
 
+.form-field-submit {
+	text-align: right;
+}
+
+.form-field-submit .cancel{
+	margin-left: 5px;
+	color: #b00000;
+}
+
 #formulario-questao input[type=submit] {
-	margin: 5px 5px 0 5px;
+	margin: 5px 0px 0 5px;
 	margin-top: -15px;
 }

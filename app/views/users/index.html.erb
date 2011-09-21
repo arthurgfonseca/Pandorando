@@ -1,17 +1,20 @@
 <div class="h_text">
-	<!-- <img alt="" src="images/1-t1.jpg" />--><h1>Users</h1><br />
+	<!-- <img alt="" src="images/1-t1.jpg" />--><h1>Usu&aacute;rios</h1><br />
 </div>
 <div class="padding">
 	<div class="main_content">
+		<div class="form">
+			<p class='info'>Novo Usu&aacute;rio</p>
+			<div id="form"><%= render :partial => "form" %></div>
+		</div>
 		<div class="show">
 			<table id="users" class="grid">
 				<thead>
 					<tr>
-						<th>Name</th>
+						<th>Nome</th>
 						<th>Email</th>
-						<th>Show</th>
-						<th>Edit</th>
-						<th>Remove</th>
+						<th>Editar</th>
+						<th>Remover</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -23,10 +26,6 @@
 
 				</tfooter>
 			</table>
-		</div>
-		<div class="form">
-			<h2>New User</h2>
-			<div id="form"><%= render :partial => "form" %></div>
 		</div>
 	</div>
 </div>

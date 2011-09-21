@@ -2,4 +2,4 @@ window.location.href='#formulario-questao';
 $("#formulario-questao").html("<%= escape_javascript(render(:partial => 'question_manager/form'))%>");
 $("#formulario-questao .info").html("Editar pergunta");
 $("#question_submit").attr("value", "Editar");
-$("#question_submit").after("<%= escape_javascript(link_to 'Cancelar', {:controller => 'questions', :action => 'new'}, :remote => true) %>");
+$("#question_submit").after("<%= escape_javascript(link_to 'Cancelar', {:controller => 'questions', :action => 'new'}, :remote => true, :class => 'cancel') %>");

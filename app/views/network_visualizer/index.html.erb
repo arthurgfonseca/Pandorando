@@ -111,29 +111,30 @@ function inicializarMapa(){
 <h1>
 	Network
 </h1>
-
-<p>
-	<label for="name">Heatmap Radius</label>
-	<input type="text" name="radius" id="radius-heatmap" value="70" size=5 onchange="ajustarRadius(); return false;"> </input>
-	<br/>
-	<span>Exibir: 
+<div class="padding">
+	<p>
+		<label for="name">Heatmap Radius</label>
+		<input type="text" name="radius" id="radius-heatmap" value="70" size=5 onchange="ajustarRadius(); return false;"> 		   
+		</input>
 		<br/>
-	Heatmap: 
-	<input type="checkbox" onchange="heatMap.toggleDisplay();"><span>
-	<span>
-		&nbsp;&nbsp;&nbsp;Perfis: 
-		<input type="checkbox" onchange="pjs.MapaDePerfis.deveDesenharOsPerfis = !(pjs.MapaDePerfis.deveDesenharOsPerfis);">
-	<span>
-</p>
+		<span>Exibir
+			<br/>
+		Heatmap: 
+		<input type="checkbox" onchange="heatMap.toggleDisplay();"><span>
+		<span>
+			&nbsp;&nbsp;&nbsp;Perfis: 
+			<input type="checkbox" onchange="pjs.MapaDePerfis.deveDesenharOsPerfis = !(pjs.MapaDePerfis.deveDesenharOsPerfis);">
+		<span>
+	</p>
 
 
-<p>
+	<p>
 
-</p>
+	</p>
 
 	<div id="heatmapArea">
 		<canvas id="mapa" datasrc="/javascripts/kohonen_site.pjs"></canvas>
 	</div>
-
+</div>
 
 

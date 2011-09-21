@@ -4,10 +4,10 @@
 		    <label class="label">Enuciado</label>
 		    <label class="text_field"><%= text_field_tag 'enunciado' %></label>
 		  </p>
-		  <div class="buttons">
+		<p class="form-field-submit">
 		    <a><%= submit_tag "Adicionar" %></a>
 			<a class="cancel" onclick="$('.addAnswer').remove();">Cancelar</a>
-		  </div>
+		  </p>
 	<% end %>
 <% else %>
 	<% form_for(@answer, :remote => true) do %>
@@ -15,9 +15,9 @@
 		    <label class="label">Enuciado</label>
 		    <label class="text_field"><%= text_field_tag 'enunciado', @answer.enunciation %></label>
 		  </p>
-		  <div class="buttons">
+		  <p class="form-field-submit">
 		    <a><%= submit_tag "Editar" %></a>
 			<a class="cancel" onclick="$('.addAnswer').remove();">Cancelar</a>
-		 </div>
+		 </p>
 	<% end %>
 <% end %>

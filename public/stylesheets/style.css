@@ -101,6 +101,9 @@ a {color:#3d6f92; font-size:12px;}
 
 .buttons {margin-top:10px; margin-bottom:10px; height:30px;}
 /*.buttons input {float:right; background-image:url("../images/click_here.gif"); width:71px; text-align:center; color:#000000; height:22px; border:none; margin-right:20px;}*/
+.buttons input {
+	float:right;
+}
 
 .more {text-align:right;}
 /*.more a{background:url("../images/more_bg.gif") top right no-repeat; padding-right:13px; color:#000000; font-weight:bold;}*/
