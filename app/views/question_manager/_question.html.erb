@@ -1,6 +1,6 @@
 <div id="<%= dom_id question %>" class="show_grid">
-    <p>
-<%= question.enunciation %>
+    <p class='enunciado-questao'>
+	<span><%= question.enunciation %></span>
     - 
 	<%= link_to 'Adicionar resposta', {:controller => "questions", :action => "addAnswer", :id => question}, :remote => true %>
 	 - 

@@ -1,13 +1,18 @@
+#exibicaoRede {
+	width: 650px;
+	height: 650px;	
+}
+
 #heatmapArea {
 	position:relative;
-	width: 734px;
-	height: 734px;	
+	width: 650px;
+	height: 650px;	
 }	
 
 #heatmapArea canvas {
 	position: absolute;
 	top:0;
 	left:0;
-	width: 734px;
-	height: 734px;
+	width: 650px;
+	height: 650px;
 }

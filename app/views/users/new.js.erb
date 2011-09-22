@@ -1,0 +1,4 @@
+$(".form .info").html("Novo usu&aacute;rio");
+<% @user = User.new # reset for new form %>
+$(".edit_user").replaceWith("<%= escape_javascript(render(:partial => "form"))%>")
+$(".new_user")[0].reset();

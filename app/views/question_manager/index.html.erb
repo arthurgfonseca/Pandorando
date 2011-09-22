@@ -15,8 +15,7 @@ function atualizarValorDoPeso(idDaResposta, idDaCaracteristica, pesoAtribuidoACa
 <div class="padding">
 	<div class="main_content">
 		<div class="form">
-			<h2>Pergunta</h2>
-			<div id="formulario-questao"><%= render :partial => "form" %></div>
+			<div id="formulario-questao"> <%= render :partial => "form" %> </div>
 		</div>
 		<div class="show" id="questions">
 			<% @questions.each do |question| %>

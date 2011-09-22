@@ -12,10 +12,11 @@
   <% end %>
 
   <p class="form_field">
-    <label class="label"><%= f.label :enunciation %></label>
+    <label class="label"><%= f.label :enunciado %></label>
     <label class="text_field"><%= f.text_field :enunciation %></label>
   </p>
   <div class="buttons">
-    <a><%= f.submit "Save" %></a>
+    <a><%= f.submit "Salvar" %></a>
+	<a class="cancel" onclick="$('.addAnswer').remove();">Cancelar</a>
   </div>
 <% end %>

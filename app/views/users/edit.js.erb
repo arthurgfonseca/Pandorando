@@ -1,1 +1,3 @@
-$("#form > form").replaceWith("<%= escape_javascript(render(:partial => "form"))%>")
+$("#form > form").replaceWith("<%= escape_javascript(render(:partial => 'form'))%>")
+$(".form .info").html("Editar usu&aacute;rio");
+$("#user_submit").after("<%= escape_javascript(link_to 'Cancelar', {:controller => 'users', :action => 'new'}, :remote => true, :class => 'cancel') %>");

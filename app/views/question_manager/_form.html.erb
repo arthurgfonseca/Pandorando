@@ -1,22 +1,16 @@
 <%= form_for(@question, :remote => true) do |f| %>
-  <% if @question.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
 
-      <ul>
-      <% @question.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<p class="info grid_6">
+Adicionar pergunta
+</p>
 
-  <p class="form_field">
-    <label class="label"><%= f.label :enunciaciado %></label>
-    <label class="text_area"><%= f.text_area :enunciation %></label>
-  </p>
-  <div class="buttons">
-    <a><%= f.submit "Salvar" %></a>
-  </div>
+<p class="form_field">
+  <label class="label"><%= f.label :enunciado %></label>
+</p>
+<p class="form_field">
+	 <%= f.text_area :enunciation %>
+	<%= f.submit "Salvar" %>
+</p>
+
 <% end %>
 

@@ -93,7 +93,7 @@ a {color:#3d6f92; font-size:12px;}
 /*form*/
 .form {width:100%; margin-top:20px;}
 .form h2 {margin-bottom:10px; color:#000000;}
-.form_field {height:30px; width:100%;}
+.form_field {width:100%;}
 .label {width:30%; color:#3d6f92; font-size:12px; font-weight:bold; float:left; text-align:left;}
 .text_field {width:70%;}
 .text_area textarea {width:70%; height:45px; margin-bottom:30px;}
@@ -101,6 +101,9 @@ a {color:#3d6f92; font-size:12px;}
 
 .buttons {margin-top:10px; margin-bottom:10px; height:30px;}
 /*.buttons input {float:right; background-image:url("../images/click_here.gif"); width:71px; text-align:center; color:#000000; height:22px; border:none; margin-right:20px;}*/
+.buttons input {
+	float:right;
+}
 
 .more {text-align:right;}
 /*.more a{background:url("../images/more_bg.gif") top right no-repeat; padding-right:13px; color:#000000; font-weight:bold;}*/
@@ -230,7 +233,7 @@ form .row {height:25px;}
 form .row1 {height:34px;}
 
 .input {width:171px; height:18px; border:1px solid #a4a4a4; background:none; padding:0 0 0 5px; font-family:tahoma; line-height:13px; color:#a4a4a4;}
-textarea {width:516px; height:68px; border:1px solid #a4a4a4; background:none; padding:0 0 0 5px; overflow:auto; font-family:tahoma; line-height:13px; color:#a4a4a4;}
+textarea {width: 480px; height:68px; border:1px solid #a4a4a4; background:none; padding:0 0 0 5px; overflow:auto; font-family:tahoma; line-height:13px; color:#a4a4a4;}
 form .div {text-align:right; padding:6px 0 0 0;}
 
 /* index-6 */

@@ -4,18 +4,20 @@
 		    <label class="label">Enuciado</label>
 		    <label class="text_field"><%= text_field_tag 'enunciado' %></label>
 		  </p>
-		  <div class="buttons">
+		<p class="form-field-submit">
 		    <a><%= submit_tag "Adicionar" %></a>
-		  </div>
+			<a class="cancel" onclick="$('.addAnswer').remove();">Cancelar</a>
+		  </p>
 	<% end %>
 <% else %>
-	<% form_tag({:controller => "answer", :action => "edit", :id => @answer}, :remote => true) do %>
+	<% form_for(@answer, :remote => true) do %>
 		<p class="form_field">
 		    <label class="label">Enuciado</label>
 		    <label class="text_field"><%= text_field_tag 'enunciado', @answer.enunciation %></label>
 		  </p>
-		  <div class="buttons">
-		    <a><%= submit_tag "Adicionar" %></a>
-		 </div>
+		  <p class="form-field-submit">
+		    <a><%= submit_tag "Editar" %></a>
+			<a class="cancel" onclick="$('.addAnswer').remove();">Cancelar</a>
+		 </p>
 	<% end %>
 <% end %>

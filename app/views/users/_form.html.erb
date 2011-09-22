@@ -12,7 +12,7 @@
   <% end %>
 	
   <p class="form_field">
-    <label class="label"><%= f.label :name %></label>
+    <label class="label"><%= f.label :nome %></label>
     <label class="text_field"><%= f.text_field :name %></label>
   </p>
   <p class="form_field">
@@ -21,9 +21,9 @@
   </p>
   <p class="form_field">
     <label class="label"><%= f.label :senha %></label>
-    <labe class="text_field"><%= f.text_field :senha %></label>
+    <labe class="text_field"><%= f.password_field :senha %></label>
   </p>
-	<div class="buttons">
-	    <a href="#"><%= f.submit "Save" %></a>
-	</div>
+  <p class="form_field form-field-submit">
+	    <%= f.submit "Salvar" %>
+  </p>
 <% end %>

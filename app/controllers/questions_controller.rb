@@ -34,6 +34,17 @@ class QuestionsController < ApplicationController
        @answer = @question.answers.build 
        @answer.enunciation = params[:enunciado]
        @answer.save
+       
+       characteristics = Characteristic.get_characteristics
+
+       characteristics.each do |characteristic|
+          puts characteristic.name
+          characteristic_weight = @answer.AnswerCharacteristicWeight.build 
+          characteristic_weight.characteristic_id = characteristic.id
+          characteristic_weight.weight = 0.0
+          characteristic_weight.save
+        end
+        
      end
 
      respond_to do |format|

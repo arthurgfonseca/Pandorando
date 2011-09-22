@@ -44,8 +44,6 @@ class GenerateQuestionController < ApplicationController
     session[:arrPesos] = arrPesos
     @allGifts = Array.new
     @arrGifts = Array.new
-    puts "enLFKAJSFJALSFJKLAKLJSF ;G SD;GJKSGKL;JKLS;DG; ;;GS;DJKLGL ;SDKL;GJ KS;LKDG JLS;ADGJKL KJAS;DGJKA;DGS"
-    puts @arrGifts.size
     @perfil = nil
     
     #Check if it is the last question
@@ -66,12 +64,13 @@ class GenerateQuestionController < ApplicationController
         history.save
         
         @perfil = getResult(numberOfQuestions)
-        
+
         puts "SAI DO GER RESULT"
         if(@perfil == nil)
           puts "ENTREI AKI NO @PERFIL == NIL"
           @acceptResult = false
         end
+
         @allGifts = Gift.limit(50)
         
         puts @arrGifts.size
