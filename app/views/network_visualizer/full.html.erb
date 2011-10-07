@@ -4,9 +4,10 @@ var numeroDeColunasDaRede = <%= Math.sqrt(@matrizDaRedeNeural.length) %>;
 var heatMap = null;
 var raioHeatmap = 20;
 var pjs = null;
-var fullScreen = false;
+var fullScreen = true;
+
 function cliqueNoNeuronio(neuronio) {
-	alert('Neuronio de id: ' + neuronio.id);
+	
 	if (neuronio.vetores.length > 0)
 		alert('Vetores do neuronio: (' + neuronio.vetores.join(') - (') + ')');
 	else
@@ -105,93 +106,6 @@ function inicializarMapa(){
 	desenharRedeDePerfis();
 };
 
-//Popup full screen
-/***************************/
-//@Author: Adrian "yEnS" Mato Gondelle
-//@website: www.yensdesign.com
-//@email: yensamg@gmail.com
-//@license: Feel free to use it, but keep this credits please!					
-/***************************/
-
-//SETTING UP OUR POPUP
-//0 means disabled; 1 means enabled;
-var popupStatus = 0;
-
-//loading popup with jQuery magic!
-function loadPopup(){
-	//loads popup only if it is disabled
-	if(popupStatus==0){
-		$("#backgroundPopup").css({
-			"opacity": "0.7"
-		});
-		$("#backgroundPopup").fadeIn("slow");
-		$("#popupContact").fadeIn("slow");
-		popupStatus = 1;
-	}
-}
-
-//disabling popup with jQuery magic!
-function disablePopup(){
-	//disables popup only if it is enabled
-	if(popupStatus==1){
-		$("#backgroundPopup").fadeOut("slow");
-		$("#popupContact").fadeOut("slow");
-		popupStatus = 0;
-	}
-}
-
-//centering popup
-function centerPopup(){
-	//request data for centering
-	var windowWidth = document.documentElement.clientWidth;
-	var windowHeight = document.documentElement.clientHeight;
-	var popupHeight = $("#popupContact").height();
-	var popupWidth = $("#popupContact").width();
-	//centering
-	$("#popupContact").css({
-		"position": "absolute",
-		"top": windowHeight/2-popupHeight/2,
-		"left": windowWidth/2-popupWidth/2
-	});
-	//only need force for IE6
-	
-	$("#backgroundPopup").css({
-		"height": windowHeight
-	});
-	
-}
-
-
-//CONTROLLING EVENTS IN jQuery
-$(document).ready(function(){
-	
-	//LOADING POPUP
-	//Click the button event!
-	$("#button").click(function(){
-		//centering with css
-		centerPopup();
-		//load popup
-		loadPopup();
-	});
-				
-	//CLOSING POPUP
-	//Click the x event!
-	$("#popupContactClose").click(function(){
-		disablePopup();
-	});
-	//Click out event!
-	$("#backgroundPopup").click(function(){
-		disablePopup();
-	});
-	//Press Escape event!
-	$(document).keypress(function(e){
-		if(e.keyCode==27 && popupStatus==1){
-			disablePopup();
-		}
-	});
-
-});
-
 function obterLarguraDoCanvas() {
 	largura = $('#mapa').css('width').replace('px','');
 	return largura;
@@ -202,37 +116,31 @@ function obterAlturaDoCanvas() {
 	return largura;
 }
 
-	$(document).ready(function(){
+function setarTamanhoCanvasParaTamanhoDaJanela() {
+	alturaDaJanela = $(document).height() - 40;
+	$('#mapa').attr('style','height:' + alturaDaJanela + 'px; width: ' + alturaDaJanela + 'px;' );
+	$('#heatmapArea').attr('style','height:' +  alturaDaJanela + 'px; width: ' + alturaDaJanela + 'px;' );
+}
 
-		$("#botao-full-screen").colorbox({width:"90%", height:"100%", iframe:true});
-
-	});
 </script>
 
-
-<h1>
-	Network
-</h1>
-<div class="padding">
 	<p>
 		<label for="name">Heatmap Radius</label>
 		<input type="text" name="radius" id="radius-heatmap" value="70" size=5 onchange="ajustarRadius(); return false;"> 		   
 		</input>
-		<br/>
-		<span>Exibir
-			<br/>
+
+		<span>Exibir 
+
 		Heatmap: 
 		<input type="checkbox" onchange="heatMap.toggleDisplay();"><span>
 		<span>
 			&nbsp;&nbsp;&nbsp;Perfis: 
 			<input type="checkbox" onchange="pjs.MapaDePerfis.deveDesenharOsPerfis = !(pjs.MapaDePerfis.deveDesenharOsPerfis);">
 		<span>
-		<%= link_to 'Full Screen', {:controller => "network_visualizer", :action => "full"} , :id => "botao-full-screen", :style=> 'float:right; margin-right: 10px;' %>
 	</p>
 
-	<div id="heatmapArea" class='heatmap'>
+	<div id="heatmapArea" class="heatmap-full">
 		<canvas id="mapa" datasrc="/javascripts/kohonen_site.pjs"></canvas>
 	</div>
-</div>
 
 

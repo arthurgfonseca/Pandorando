@@ -3,16 +3,33 @@
 	height: 650px;	
 }
 
-#heatmapArea {
+.heatmap {
 	position:relative;
 	width: 650px;
 	height: 650px;	
 }	
 
-#heatmapArea canvas {
+.heatmap canvas {
 	position: absolute;
 	top:0;
 	left:0;
 	width: 650px;
 	height: 650px;
+}
+
+.heatmap-full {
+	position:relative;
+	margin: 0 auto;
+}
+
+.network-fullscreen {
+	background-color: #fff !important;
+	color: #fff !important;
+	border: 0 !important;
+	padding: 0;
+}
+
+.network-fullscreen p {
+	color: #333 !important;
+	margin-top: -20px;
 }

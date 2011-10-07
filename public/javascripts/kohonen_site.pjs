@@ -39,8 +39,12 @@ int timer_interno = 0;
 
 
 void setup() {
+  if(fullScreen == true) 
+	setarTamanhoCanvasParaTamanhoDaJanela();
   
-  size(650,650);
+  int largura = obterLarguraDoCanvas();
+  int altura = obterAlturaDoCanvas();
+  size(largura, altura);
   background(0, 0, 0, 0);
   smooth();
   loop();  
@@ -51,6 +55,12 @@ void setup() {
   inicializarMapa();
 }
 
+void resize() {
+  int largura = obterLarguraDoCanvas();
+  int altura = obterAlturaDoCanvas();
+  alert(largura);
+  size(largura, altura);
+}
 void layout() {
 
 	
