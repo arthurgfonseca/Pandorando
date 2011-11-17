@@ -12,8 +12,7 @@ function manageItem(idGift, idPerfil, actionName) {
 		element.attr("style", "display:block");
 
 		var element = $("#remove_" + id);
-		element.attr("style", "display:none");
-		
+		element.attr("style", "display:none");	
 	}
 	
 	$.get("/GenerateQuestion/manageGift/" + idGift, { action : encodeURIComponent(actionName), gift : encodeURIComponent(idGift), perfil : encodeURIComponent(idPerfil), authenticity_token : encodeURIComponent(AUTH_TOKEN) });
@@ -23,4 +22,9 @@ function manageItem(idGift, idPerfil, actionName) {
 function removerItem(id) {
 	
 	
+}
+
+function avisaUsuario() {
+	
+	alert("Sistema ainda em construção, em alguns dias estaremos online!");
 }
