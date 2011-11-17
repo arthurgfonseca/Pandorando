@@ -1,3 +1,5 @@
+<div id="addsuccess" style="display:block">Obrigado!!!</div>
+<div id="removesuccess" style="display:none">Removido com sucesso</div>
 
 <div class="h_text">
 	<!-- <img alt="" src="images/1-t1.jpg" />--><h1>Selecione os presentes!</h1><br />
@@ -16,8 +18,8 @@
 					<% @allGifts.each do |gift| %>
 						<tr id="<%= dom_id gift %>" class="show_grid">
 							<td><%= gift.name %></td>
-						    <td id="add_<%= gift.id %>"><a onclick="adicionarItem('<%= gift.id %>'); return false;" style="cursor:pointer;color:blue;">Adicionar</a></td>
-							<td id="remove_<%= gift.id %>" style="display:none"><a onclick="removerItem('<%= gift.id %>'); return false;" style="cursor:pointer;color:red;">Remover</a></td>
+							<%= @perfil %>
+						   
 						</tr>
 					<% end %>
 				</tbody>

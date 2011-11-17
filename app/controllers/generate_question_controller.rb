@@ -44,7 +44,7 @@ class GenerateQuestionController < ApplicationController
     session[:arrPesos] = arrPesos
     @allGifts = Array.new
     @arrGifts = Array.new
-    @perfil = nil
+    @perfil = Perfil.first
     
     #Check if it is the last question
     if(@questions.size <= @questionNumber + 1)
@@ -71,15 +71,14 @@ class GenerateQuestionController < ApplicationController
           @acceptResult = false
         end
 
-        @allGifts = Gift.limit(50)
+        @allGifts = Gift.all
         
-        puts @arrGifts.size
+        puts 'SIZE'
+        puts @allGifts.size
         
         # Remover, usado apenas para teste
         # @perfil = Perfil.last
       else
-        
-        puts 'ENTREI AKIISISFASFJKLAKLJSFJKLASJKLFJKLAKJLSFAKLJJLFAKSLFKAJ'
         
         arrPerfis = getPerfisList(numberOfQuestions)
         
@@ -114,7 +113,7 @@ class GenerateQuestionController < ApplicationController
   def self.getQuestions
     
     # return Question.find(:all, :include => :answers)
-    return Question.limit(5)
+    return Question.all
     
   end
   
@@ -142,8 +141,42 @@ class GenerateQuestionController < ApplicationController
     puts 'passei aki no getPerfis'
     return ResultController.generateResult(arrPesos)
     
-    
   end
+  
+  def manageGift
+    
+    puts '===== ENTREI NO MANAGEGIFT ======'
+    puts ''
+    puts ''
+
+     idGift = params[:gift]
+     idPerfil = params[:perfil]
+     @action = params[:action]
+     
+     if @action == "Adicionar"
+       
+       gift = Gift.find(idGift);
+       perfil = Perfil.find(idPerfil)
+       gift.perfils.concat([perfil])
+       gift.save
+       
+     else
+       
+      gift = Gift.find(idGift);
+      perfil = Perfil.find(idPerfil)
+      gift.perfils.where(:title => perfil.title).delete_all 
+       
+     end
+     
+
+     respond_to do |format|
+           format.js
+      end
+
+   end
+
+   def removeGiftFromPerfil(idGift)
+   end
   
   
   

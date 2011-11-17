@@ -13,18 +13,19 @@
 			<% cont = 1 %>
 			<% @questions[@questionNumber].answers.each do |i|  %> 
 			<%= radio_button_tag "answer", i.enunciation %>
-			<%= i.enunciation.humanize%>
+			<span class="radio_button_style"><%= i.enunciation.humanize%></span>
 			<% cont = cont.next %>
+			<br />
 			<br />
 			<% end %>
 		
 			<% if(@questions.size > (@questionNumber + 1))%>
 			<div class="buttons">
-			    <a href="#"><%= submit_tag "Next" %></a>
+			    <a href="#"><%= submit_tag "Próxima" %></a>
 			</div>
 			<% else %>
 			<div class="buttons">
-			    <a href="#"><%= submit_tag "Ok" %></a>
+			    <a href="#"><%= submit_tag "Enviar" %></a>
 			</div>
 			<% end %>
 		

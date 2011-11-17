@@ -162,6 +162,11 @@ class ResultController < ApplicationController
     mail = (History.last).user_mail
     # Verifica se é necessario criar um novo perfil
     if(createPerfil)
+      puts ''
+      puts ''
+      puts ' ------- NOVO PERFIL FOI CRIADO -------- '
+      puts ''
+      puts ''
       bmuRecord = Perfil.new
       bmuRecord.positionx = bmuResult.positionx
       bmuRecord.positiony = bmuResult.positiony
@@ -183,7 +188,7 @@ class ResultController < ApplicationController
     #       
     #     }
     
-    perfil = Perfil.where(:title => mail)
+    perfil = Perfil.where(:title => mail).first
     
     
     return perfil
@@ -263,8 +268,12 @@ class ResultController < ApplicationController
   
   def self.adjustPerfilRadius(perfil)
     if(perfil.match_count > 1 && perfil.match_count <= 10)
-      
-      newRadius = perfil.radius + perfil.radius*Math.exp(-1*((10.to_f - (perfil.match_count).to_f)/(10).to_f).to_f)
+      # Ajusta o tamanho do circulo no mapa da rede neural
+      newRadius =  (Constants::NEIGHBOURHOOD_RADIUS / 2)*(1 + Math.exp(-1*((10.to_f - (perfil.match_count).to_f)/(10).to_f).to_f))
+      perfil.radius = newRadius
+      perfil.save
+    else
+      newRadius = Constants::NEIGHBOURHOOD_RADIUS
       perfil.radius = newRadius
       perfil.save
     end
@@ -345,6 +354,7 @@ class ResultController < ApplicationController
     end
     return codebook_vectors
   end
+  
   
   
   

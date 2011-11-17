@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Pandorando</title>
+  	<%= stylesheet_link_tag "layout.css" %>
+  	<%= stylesheet_link_tag "style.css" %>
+  	<%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' %>
+  	<%= javascript_include_tag 'rails' %>
+	<%= javascript_include_tag 'maxheight' %>
+	<%= javascript_include_tag 'gifts' %>
+	<%= stylesheet_link_tag "layout_principal/container_branco.css" %>
+	<%= stylesheet_link_tag "homePage/homePage.css" %>
+	<%= stylesheet_link_tag "layout_principal/text.css" %>
+	<%= stylesheet_link_tag "layout_principal/layout.css" %>
+	<%= stylesheet_link_tag "botoes.css" %>
+</head>
+
+<body>	    
+	<div id="container" class="container_16">
+			<!-- end login area -->
+		</div>	
+		<div id="sec_header" class="grid_16">
+						</div><!-- end header -->
+							<div class="header_homePage">
+								<div class="image_homePage"><img style="margin: 15px 70px;" src="../../images/layout/logoPandorando.png"  id="logo" /></div>
+								<div class="footer_headerHomePage">
+								</div>
+							</div>
+							
+							</div><!-- end main_border_reounded -->
+							<div class="clear"></div>
+							<div class="grid_16" id="site_info">
+								<div class="box">
+									<h4> Designed by Arthur Fonseca and Vinicius Oyama </h4>
+								</div>
+							</div>
+							
+							<div id="body_text">
+								<%= yield %>
+							</div>
+							
+						</div><!-- end main -->
+
+					</div><!-- end container -->
+				</body>
+</html>

@@ -10,6 +10,12 @@
 	
 */
 
+.radio_button_style {
+	
+	font-size:14px;
+	margin-left:10px;
+}
+
 form  p {
 	display: block;
 	text-align:left;

@@ -4,7 +4,7 @@ class Constants
   NEURONS_HEIGHT = 20
   NEURONS_WIDTH = 20
   
-  NEIGHBOURHOOD_RADIUS = (NEURONS_HEIGHT / 6).to_f #Deve ser aproximadamente 3
+  NEIGHBOURHOOD_RADIUS = (NEURONS_HEIGHT / 5).to_f #Deve ser aproximadamente 3
   LEARNING_RATE = 0.5
   INTERATIONS = 30
   

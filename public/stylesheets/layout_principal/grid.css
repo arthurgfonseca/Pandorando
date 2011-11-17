@@ -23,6 +23,14 @@
 --------------------------------------------------------------------------------*/
 
 
+.grid_20
+{
+	display: block;
+	float: none;
+	margin-left: 30%;
+	margin-right: 30%;
+	margin-top:100px;
+}
 .grid_3,
 .grid_13,
 .grid_16

@@ -101,6 +101,7 @@ class SomController < ApplicationController
     end
     # Save changes
     if(Constants::TRAIN_MODE == true)
+      # COMENTAR O CÓDIGO DO SAVE QUANDO NAO QUISER ALTERAR A REDE E QUISER MANTER MODO DE TREINAMENTO.
       codebook.save
     end
   end
