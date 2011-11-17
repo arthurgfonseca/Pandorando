@@ -31,6 +31,8 @@
 	color: #3D6F92;
 	font-size:22px;
 	font-family: Comic Sans MS;
+	text-align:left;
+	display:block;
 	
 }
 
@@ -42,6 +44,7 @@
 	text-align:left;
 	margin-left:130px;
 	margin-top:5px;
+	width:100%;
 }
 
 #body_text h1
@@ -58,11 +61,20 @@
 	
 }
 
-#body_text .textoCheio {
+#body_text .textoCheio1 {
 	
 	width:100%;
 	display:block;
-	min-height:200px;
+	min-height:180px;
+}
+
+#body_text .textoCheio2 {
+	
+	width:100%;
+	display:block;
+	min-height:100px;
+	float:left;
+	clear:both;
 }
 
 #body_text .left_content {
