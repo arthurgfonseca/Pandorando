@@ -15,18 +15,28 @@
 	<%= stylesheet_link_tag "layout_principal/layout.css" %>
 	<%= stylesheet_link_tag "layout_principal/forms.css" %>
 	<%= stylesheet_link_tag "layout_principal/tabela.css" %>
+	<%= stylesheet_link_tag "layout_principal/session_header.css" %>
 	<%= stylesheet_link_tag "botoes.css" %>
 	<%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? -%>
 </head>
 
 <body>	    
 	<div id="container" class="container_16">
-			<!-- end login area -->
+		<div id="login">
+			<ul>
+				<div id="login_content">
+					<li><!--  <img src="../../images/icones/user_icon.png" /> --></li>
+						<!-- TODO: apos a implementacao de um sistema de login, substituir os proximos campos pelas respectivas actions-->
+						
+					<li id="logout"><%= link_to('Admin', '../users')%> 
+					</li>
+				</div>
+			</ul>
 		</div>	
 		<div id="sec_header" class="grid_16">
 			<div class="grid_3">
 					<!-- TODO: alterar a imagem abaixo para o logotipo do servidor- - o posicionamento da imagem encontra-se no arquivo grid.css-->
-			        <!-- <img src="../../images/layout/logoIndigo.png"  id="logo" /> -->
+			        <!--<img src="../../images/layout/logoPandorando.png"  id="logo" />-->
 			    </a>
 			</div>
 			<div class="grid_13" id="areas">
@@ -50,6 +60,9 @@
 									<div class="content_right">
 										<div id="alvo" class="content">
 											 <%= yield %>
+										</div>
+										<div class="logo_image_home_layout">
+											<img src="../../images/layout/logoPandorando.png"  id="logo" />
 										</div>
 									</div>
 								</div>

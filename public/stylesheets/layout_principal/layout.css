@@ -41,6 +41,12 @@ fieldset.login p label {
 	width:32%;
 }
 
+.logo_image_home_layout {
+	
+	display:block;
+	width:100%;
+	background-color:white;
+}
 
 /* AJAX sliding shelf
 ----------------------------------------------- */

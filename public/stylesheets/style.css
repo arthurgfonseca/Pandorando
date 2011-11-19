@@ -80,7 +80,41 @@ a {color:#3d6f92; font-size:12px;}
 
 
 /*.h_text {padding-bottom:2px; background:url("../images/h_text_bg.gif") bottom repeat-x;}*/
-.h_text h1{margin-left:10px; margin-top:10px;}
+
+.h_text {
+	
+	display:block;
+	width:100%;
+	clear:both;
+	height:60px;
+}
+
+.numero_questao {
+	
+	width:80%;
+	display:inline;
+	float:left;
+}
+
+.restart_button {
+	float:right;
+	width:19%;
+	display:inline;
+}
+
+.numero_questao h1
+{
+	margin-left:10px; 
+	margin-top:10px;
+	float:left;
+}
+
+.restart_button img {
+	float:right;
+	width:50px;
+	height:50px;
+	cursor:pointer;
+}
 
 .main_content {margin:10px;}
 /* Show grid */

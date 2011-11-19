@@ -22,6 +22,8 @@ h2
 h3
 {
 	font-size: 21px;
+	text-align:center;
+	width:100%;
 }
 
 h4
@@ -38,6 +40,7 @@ h6
 {
 	font-size: 15px;
 }
+
 
 h1, h2, h3, h5, h6 {margin: 0;line-height:1.2em; margin-bottom:.3em;}
 h2 {margin-top:1em;}
@@ -58,4 +61,60 @@ p {
 	
 }
 
+/* Imagens Go e Stop da home */
+
+#home .images_buttons {
+	
+	display:block;
+	height: 150px;
+	width:100%;
+	clear:both;
+	padding-top:50px;
+	
+}
+
+#home .left_image_button {
+	
+	display:inline;
+	width:50%;
+	float:left;
+	
+}
+
+#home .right_image_button {
+	
+	display:inline;
+	width:50%;
+	float:right;
+	
+}
+
+#home .text_block {
+	
+	display:block;
+	height:30px;
+	width:100%;
+	
+}
+
+#home a {
+	
+	font-size:30px;
+	width:50%;
+	color:#AAA;
+	float:left;
+	display:inline;
+	text-align:center;
+	padding-top:25px;
+}
+
+#home .image_left {
+	
+	margin-left:100px;
+}
+
+#home .image_right {
+	
+	margin-left:100px;
+}
 
