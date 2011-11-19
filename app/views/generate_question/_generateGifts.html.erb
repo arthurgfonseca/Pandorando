@@ -2,7 +2,12 @@
 <div id="removesuccess" style="display:none">Removido com sucesso</div>
 
 <div class="h_text">
-	<!-- <img alt="" src="images/1-t1.jpg" />--><h1>Selecione os presentes!</h1><br />
+	<div class="numero_questao">
+			<h1>Selecione os presentes que mais parece com você</h1>
+		</div>
+		<div class="restart_button">
+			<a href="../home/index"><img src="../../images/layout/restart_button.png" /></a>
+		</div>
 </div>
 <div class="padding">
 	<div class="main_content">
@@ -15,11 +20,12 @@
 					</tr>
 				</thead>
 				<tbody>
+					<br />
 					<% @allGifts.each do |gift| %>
 						<tr id="<%= dom_id gift %>" class="show_grid">
 							<td><%= gift.name %></td>
-							<%= @perfil %>
-						   
+						   	<td id="add_<%= gift.id %>"><%= link_to 'Adicionar', gift, :remote => true %></td>
+							<td id="remove_<%= gift.id %>" style="display:none"><%= link_to 'Remover', gift, :remote => true %></td>
 						</tr>
 					<% end %>
 				</tbody>

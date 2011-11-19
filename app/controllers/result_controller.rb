@@ -29,10 +29,11 @@ class ResultController < ApplicationController
         # Train Kohonen Network
         perfil = ResultController.start(network, resultVector)
         
-        puts "SAI DO START"
+        puts "RESULTADO CONSISTENTE"
         
         return perfil
       else
+        puts "RESULTADO INCONSISTENTE"
         return nil
       end
         
@@ -157,11 +158,12 @@ class ResultController < ApplicationController
     puts bmuResult
     puts 'BMU FIM'
     
-    createPerfil = ResultController.checkIfShoudCreatePerfil(bmuResult)
+    perfil = ResultController.checkIfShoudCreatePerfil(bmuResult)
+    
     
     mail = (History.last).user_mail
     # Verifica se é necessario criar um novo perfil
-    if(createPerfil)
+    if(perfil == nil)
       puts ''
       puts ''
       puts ' ------- NOVO PERFIL FOI CRIADO -------- '
@@ -175,23 +177,19 @@ class ResultController < ApplicationController
       # Perfil é associado ao email do usuario, ja que ele é único
       bmuRecord.title = mail
       bmuRecord.save
+      
+      perfilUsado = Perfil.where(:title => mail).first
+      
+    else
+      
+      perfilUsado = perfil
+      
     end
     
-    # network.each{|node|
-    #       puts 'NOOOOOOODEEEEEEEE FINAL nodex=' + (node.positionx).to_s + 'nodey=' + (node.positiony).to_s
-    #       puts node.weight0
-    #       puts node.weight1
-    #       puts node.weight2
-    #       puts node.weight3
-    #       puts node.weight4
-    #       puts node.match_count
-    #       
-    #     }
-    
-    perfil = Perfil.where(:title => mail).first
     
     
-    return perfil
+    
+    return perfilUsado
     
   end
   
@@ -263,7 +261,11 @@ class ResultController < ApplicationController
       end
     end
     
-    return createPerfil
+    if createPerfil
+      return nil
+    else
+      return bestBmu
+    end
   end
   
   def self.adjustPerfilRadius(perfil)
