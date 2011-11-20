@@ -42,8 +42,15 @@ class GenerateQuestionController < ApplicationController
       end
     
     session[:arrPesos] = arrPesos
+    
+    # Declaracao de variaveis globais usadas no _result
     @allGifts = Array.new
-    @arrGifts = Array.new
+    @arrGiftsPrincipais = Array.new
+    @countPrincipal = 0
+    @countSecundario = 0
+    @countTerceario = 0
+    @presenteSecundario = nil
+    @presenteTerceario = nil
     @perfil = Perfil.first
     
     #Check if it is the last question
@@ -84,15 +91,109 @@ class GenerateQuestionController < ApplicationController
         
         cont = 0
         
-        
-        while(cont < 3)
-          perfil = Perfil.where(:title => arrPerfis[cont]).first
-          gift = perfil.gifts[0]
-          @arrGifts << gift.name
-          cont = cont.next
+        # Adiciona até dois presentes contidos no perfil principal encontrado pelo sitema
+        while(cont < 2)
+          
+          adicionado = false
+          
+          perfil = Perfil.where(:title => arrPerfis[0]).first
+          puts perfil.title
+          gifts = perfil.gifts
+          
+          numeroRandomico = Random.new
+          
+          gift = gifts[numeroRandomico.rand(0...gifts.size)]
+          
+          @arrGiftsPrincipais.each{|item|
+            if(item == gift.name)
+              adicionado = true
+            end
+          }
+          
+          if !adicionado
+            @arrGiftsPrincipais << gift.name
+            cont = cont.next
+            contTentativas = 0
+          else
+            if @arrGiftsPrincipais.size == gifts.size
+              cont = cont.next
+            end
+          end
+          
         end
         
-        puts @arrGifts.size
+        @countPrincipal = @arrGiftsPrincipais.size
+        cont = 0
+        contVerificador = 0
+        
+        # Adiciona um presente do perfil secundario
+        while(cont < 1)
+          
+          adicionado = false
+          
+          perfil = Perfil.where(:title => arrPerfis[1]).first
+          puts perfil.title
+          gifts = perfil.gifts
+          
+          numeroRandomico = Random.new
+          
+          gift = gifts[numeroRandomico.rand(0...gifts.size)]
+          
+          @arrGiftsPrincipais.each{|item|
+            if(item == gift.name)
+              adicionado = true
+            end
+          }
+          
+          if !adicionado
+            @presenteSecundario = gift.name
+            cont = cont.next
+            @countSecundario = true
+          else
+            contVerificador = contVerificador.next
+            if contVerificador > 100
+              cont = cont.next
+              @countSecundario = false
+            end
+          end
+          
+        end
+        
+        cont = 0
+        contVerificador = 0
+        
+        #Adiciona presente do terceiro perfil mais próximo
+        while(cont < 1)
+          
+          adicionado = false
+          
+          perfil = Perfil.where(:title => arrPerfis[2]).first
+          puts perfil.title
+          gifts = perfil.gifts
+          
+          numeroRandomico = Random.new
+          
+          gift = gifts[numeroRandomico.rand(0...gifts.size)]
+          
+          @arrGiftsPrincipais.each{|item|
+            if(item == gift.name || item == @presenteSecundario)
+              adicionado = true
+            end
+          }
+          
+          if !adicionado
+            @presenteTerceario = gift.name
+            cont = cont.next
+            @countTerceario = true
+          else
+            contVerificador = contVerificador.next
+            if contVerificador > 100
+              cont = cont.next
+              @countTerceario = false
+            end
+          end
+          
+        end
         
       end
       
@@ -133,12 +234,14 @@ class GenerateQuestionController < ApplicationController
   
   def getPerfisList(numberOfQuestions)
     
+    puts 'passei aki no getPerfis'
     arrPesos = []
     session[:arrPesos].each{|result|
       arrPesos << Float(result.to_f/numberOfQuestions.to_f)
+      puts Float(result.to_f/numberOfQuestions.to_f)
     }
     
-    puts 'passei aki no getPerfis'
+    
     return ResultController.generateResult(arrPesos)
     
   end
@@ -151,9 +254,16 @@ class GenerateQuestionController < ApplicationController
 
      idGift = params[:gift]
      idPerfil = params[:perfil]
-     @action = params[:action]
+     @acao = params[:acao]
      
-     if @action == "Adicionar"
+     
+     puts idGift
+     puts idPerfil
+     puts @acao
+     
+     if @acao == "Adicionar"
+       
+       puts 'ENTREI ADICIONAR'
        
        gift = Gift.find(idGift);
        perfil = Perfil.find(idPerfil)
@@ -161,10 +271,12 @@ class GenerateQuestionController < ApplicationController
        gift.save
        
      else
-       
-      gift = Gift.find(idGift);
-      perfil = Perfil.find(idPerfil)
-      gift.perfils.where(:title => perfil.title).delete_all 
+     #   todo: fazer a forma de remover o a ligação rescem criada
+       # puts 'ENTREI REMOVER'
+       #      
+       #     gift = Gift.find(idGift);
+       #     perfil = Perfil.find(idPerfil)
+       #     gift.perfils.where(:title => perfil.title).delete_all 
        
      end
      

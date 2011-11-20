@@ -17,7 +17,7 @@
 			<%= hidden_field_tag 'questionNumber', @questionNumber%>
 			<% cont = 1 %>
 			<% @questions[@questionNumber].answers.each do |i|  %> 
-			<%= radio_button_tag "answer", i.enunciation %>
+			<%= radio_button_tag "answer", i.enunciation, true %>
 			<span class="radio_button_style"><%= i.enunciation.humanize%></span>
 			<% cont = cont.next %>
 			<br />

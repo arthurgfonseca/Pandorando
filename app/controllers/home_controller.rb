@@ -6,7 +6,7 @@ class HomeController < ApplicationController
   def index
     
     
-    
+    session[:autorizado] = false
     #Init array
     arrPesos = Array.new(5)
     arrPesos[0] = 0
@@ -110,6 +110,40 @@ class HomeController < ApplicationController
     
   end
   
+  def admin
+    puts "entrei aki no admin"
+    respond_to do |format|
+      format.html
+    end
+  end
+  
+  def authentication
+    
+    puts "ENTREI AUTENTICACAO"
+    senha = params[:senha]
+    puts "FIM senha"
+    
+    if senha == Constants::SENHA_PANDORANDO
+      
+      session[:autorizado] = true
+      
+      respond_to do |format|
+        format.html { redirect_to(:controller => "users", :action => "index") }
+      end
+      
+    else
+      
+      session[:autorizado] = false
+      
+      respond_to do |format|
+        format.html { redirect_to(:controller => "home", :action => "index") }
+      end
+      
+    end
+    
+    
+  end
+  
   
   private
   
@@ -120,6 +154,8 @@ class HomeController < ApplicationController
     return questions
     
   end
+  
+  
   
 
 end

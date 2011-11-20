@@ -2,14 +2,23 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
   def index
-    @users = User.all
-    @user = User.new
-    @index = "users"
+    
+    # if session[:autorizado] == true
+    
+      @users = User.all
+      @user = User.new
+      @index = "users"
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.js
-    end
+      respond_to do |format|
+        format.html # index.html.erb
+        format.js
+      end
+    # else
+    #       respond_to do |format|
+    #         format.html { redirect_to(:controller => "home", :action => "index") }
+    #       end
+    #     end
+    
   end
 
   # GET /users/1
@@ -80,4 +89,7 @@ class UsersController < ApplicationController
       format.js
     end
   end
+  
+  
+  
 end

@@ -1,6 +1,16 @@
-function manageItem(idGift, idPerfil, actionName) {
+function manageItem(parametros) {
 	
-	if(actionName == 'Adicionar') {
+	var arr = new Array;
+	
+	arr = parametros.split(" ");
+	
+	idGift = arr[0];
+	idPerfil = arr[1];
+	acao = arr[2];
+	
+	
+	
+	if(acao == 'Adicionar') {
 		var element = $("#add_" + idGift);
 		element.attr("style", "display:none");
 	
@@ -8,21 +18,17 @@ function manageItem(idGift, idPerfil, actionName) {
 		element.attr("style", "display:block");
 	
 	} else {
-		var element = $("#add_" + id);
+		var element = $("#add_" + idGift);
 		element.attr("style", "display:block");
 
-		var element = $("#remove_" + id);
+		var element = $("#remove_" + idGift);
 		element.attr("style", "display:none");	
 	}
 	
-	$.get("/GenerateQuestion/manageGift/" + idGift, { action : encodeURIComponent(actionName), gift : encodeURIComponent(idGift), perfil : encodeURIComponent(idPerfil), authenticity_token : encodeURIComponent(AUTH_TOKEN) });
+	$.get("/GenerateQuestion/manageGift/" + idGift, { action : encodeURIComponent(acao), gift : encodeURIComponent(idGift), acao : encodeURIComponent(acao), perfil : encodeURIComponent(idPerfil), authenticity_token : encodeURIComponent(AUTH_TOKEN) });
 		
 }
 
-function removerItem(id) {
-	
-	
-}
 
 function avisaUsuario() {
 	

@@ -3,7 +3,7 @@ if('<%= @lastQuestion %>' == 'false') {
 } else {
 	if('<%= @trainMode %>' == 'true') {
 		if('<%= @acceptResult %>' == 'true') {
-			alert("Resultado aceito <%= @perfil.title %>")
+			alert("Resultado aceito")
 			$("#question").replaceWith("<%= escape_javascript(render(:partial => "generateGifts"))%>")
 		} else {
 			alert("Resultado discardo")

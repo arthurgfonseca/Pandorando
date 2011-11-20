@@ -5,7 +5,7 @@ class HomePageController < ApplicationController
   
   def index
     
-    
+    session[:autorizado] = false
     respond_to do |format|
       format.html # new.html.erb
       format.js # Ajax CRUD
