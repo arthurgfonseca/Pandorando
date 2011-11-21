@@ -12,10 +12,12 @@ class Constants
   # Domain of the input and weights values
   DOMAIN = [[0.0, 1.0], [0.0, 1.0], [0.0, 1.0], [0.0, 1.0], [0.0, 1.0]]
   
-  TRAIN_MODE = false
+  TRAIN_MODE = true
   
   CHAR_NUMBER = 0
   
   SENHA_PANDORANDO = "oyama"
+  
+  PAGINA = 10
   
 end

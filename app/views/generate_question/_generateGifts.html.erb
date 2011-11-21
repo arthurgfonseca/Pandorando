@@ -1,6 +1,3 @@
-<div id="addsuccess" style="display:block">Obrigado!!!</div>
-<div id="removesuccess" style="display:none">Removido com sucesso</div>
-
 <div class="h_text">
 	<div class="numero_questao">
 			<h1>Selecione os presentes que mais parece com você</h1>
@@ -12,6 +9,7 @@
 <div class="padding">
 	<div class="main_content">
 		<div class="show">
+			<div id="paginacao">
 			<table id="gifts" class="grid">
 				<thead>
 					<tr>
@@ -25,14 +23,21 @@
 						<tr id="<%= dom_id gift %>" class="show_grid">
 							<td><%= gift.name %></td>
 						   	<td id="add_<%= gift.id %>"><a onclick="manageItem('<%= gift.id %> <%= @perfil.id %> Adicionar'); return false;" style="cursor:pointer;color:blue;">Adicionar</a></td>
-							<td id="remove_<%= gift.id %>" style="display:none"><a onclick="manageItem('<%= gift.id %> <%= @perfil.id %> Remover'); return false;" style="cursor:pointer;color:red;">Remover</a></td>
+							<!--<td id="remove_<%= gift.id %>" style="display:none"><a onclick="manageItem('<%= gift.id %> <%= @perfil.id %> Remover'); return false;" style="cursor:pointer;color:red;">Adicionado</a></td>-->
+							<td id="remove_<%= gift.id %>" style="display:none"><a style="color:red;">Adicionado</a></td>
 						</tr>
 					<% end %>
 				</tbody>
 				<tfooter>
-
+					<% if @pagina > 1 %>
+					<%= link_to 'Anterior', {:controller => "GenerateQuestion", :action => "paginacaoGift", :id => "anterior", :pagina => @pagina, :perfil => @perfil.id}, :remote => true %>
+					<% end %>
+					<% if @ultimaPagina == false %>
+					<%= link_to 'Proxima', {:controller => "GenerateQuestion", :action => "paginacaoGift", :id => "proxima", :pagina => @pagina, :perfil => @perfil.id}, :remote => true %>
+					<% end %>
 				</tfooter>
 			</table>
+			</div>
 		</div>
 	</div>
 </div>

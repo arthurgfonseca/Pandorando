@@ -50,6 +50,9 @@ class GenerateQuestionController < ApplicationController
     @countSecundario = 0
     @countTerceario = 0
     @presenteSecundario = nil
+    @ultimaPagina = false
+    @pagina = 1
+    
     @presenteTerceario = nil
     @perfil = Perfil.first
     
@@ -77,11 +80,22 @@ class GenerateQuestionController < ApplicationController
           puts "ENTREI AKI NO @PERFIL == NIL"
           @acceptResult = false
         end
-
-        @allGifts = Gift.all
         
-        puts 'SIZE'
-        puts @allGifts.size
+        # 
+        # Obtem todos os presentes e faz a paginação
+        # 
+
+        @allGifts = Gift.limit((Constants::PAGINA).to_i)
+        @pagina = 1
+        @ultimaPagina = false
+        # Limpa a session e depois inicia
+        session[:giftsAdicionados] = nil
+        session[:giftsAdicionados] = Array.new
+        
+        
+        # 
+        # FIM PAGINAÇÃO
+        # 
         
         # Remover, usado apenas para teste
         # @perfil = Perfil.last
@@ -99,6 +113,10 @@ class GenerateQuestionController < ApplicationController
           perfil = Perfil.where(:title => arrPerfis[0]).first
           puts perfil.title
           gifts = perfil.gifts
+          if(gifts.size == 0)
+            puts "ENTREI NO CASO SEM PRESENTES"
+            gifts = Gift.all
+          end
           
           numeroRandomico = Random.new
           
@@ -134,6 +152,10 @@ class GenerateQuestionController < ApplicationController
           perfil = Perfil.where(:title => arrPerfis[1]).first
           puts perfil.title
           gifts = perfil.gifts
+          if(gifts.size == 0)
+            puts "ENTREI NO CASO SEM PRESENTES"
+            gifts = Gift.all
+          end
           
           numeroRandomico = Random.new
           
@@ -170,13 +192,17 @@ class GenerateQuestionController < ApplicationController
           perfil = Perfil.where(:title => arrPerfis[2]).first
           puts perfil.title
           gifts = perfil.gifts
+          if(gifts.size == 0)
+            puts "ENTREI NO CASO SEM PRESENTES"
+            gifts = Gift.all
+          end
           
           numeroRandomico = Random.new
           
           gift = gifts[numeroRandomico.rand(0...gifts.size)]
           
           @arrGiftsPrincipais.each{|item|
-            if(item == gift.name || item == @presenteSecundario)
+            if(item == gift.name || gift.name == @presenteSecundario)
               adicionado = true
             end
           }
@@ -257,15 +283,20 @@ class GenerateQuestionController < ApplicationController
      @acao = params[:acao]
      
      
+     
+     
      puts idGift
      puts idPerfil
      puts @acao
      
      if @acao == "Adicionar"
        
+       
+       
        puts 'ENTREI ADICIONAR'
        
        gift = Gift.find(idGift);
+       session[:giftsAdicionados] << gift.name
        perfil = Perfil.find(idPerfil)
        gift.perfils.concat([perfil])
        gift.save
@@ -286,8 +317,60 @@ class GenerateQuestionController < ApplicationController
       end
 
    end
-
-   def removeGiftFromPerfil(idGift)
+   
+   def paginacaoGift
+     
+     gifts = Gift.all
+     @pagina = params[:pagina].to_i
+     @tipo = params[:id]
+     idPerfil = params[:perfil]
+     @perfil = Perfil.find(idPerfil)
+     @giftsAdicionados = session[:giftsAdicionados]
+     
+     puts "INICIO PUTS paginacaoGift"
+     puts @giftsAdicionados.size
+     puts @pagina
+     puts @tipo
+     puts idPerfil
+     puts "FIM PAGINACAO"
+     
+     if @tipo == "proxima"
+       if((@pagina + 1)*((Constants::PAGINA).to_i) >= gifts.size)
+         @ultimaPagina = true
+         @allGifts = Gift.all
+         giftsVistos = Gift.limit(((Constants::PAGINA).to_i)*@pagina)
+         @allGifts = @allGifts - giftsVistos
+       else
+         @ultimaPagina = false
+         @allGifts = Gift.limit(((Constants::PAGINA).to_i)*(@pagina + 1))
+         giftsVistos = Gift.limit(((Constants::PAGINA).to_i)*@pagina)
+         @allGifts = @allGifts - giftsVistos
+         
+       end
+       
+       @pagina = @pagina.next
+       
+     else
+       
+       if(@pagina == 2)
+          @allGifts = Gift.limit(((Constants::PAGINA).to_i))
+        else
+          
+          @allGifts = Gift.limit(((Constants::PAGINA).to_i)*(@pagina - 1))
+          giftsVistos = Gift.limit(((Constants::PAGINA).to_i)*(@pagina - 2))
+          @allGifts = @allGifts - giftsVistos
+        end
+       
+       @ultimaPagina = false
+       @pagina = @pagina.pred
+       
+     end
+     
+     
+     respond_to do |format|
+            format.js
+       end
+     
    end
   
   
