@@ -37,7 +37,7 @@ function avisaUsuario() {
 
 function loadingGifts() {
 	
-	alert("entrei aki");
-	var element = $("#question")
-	element.addClass("loading_view")
+	$("#question").hide()
+	$("#loading_view").attr("style", "display:block");
+	
 }

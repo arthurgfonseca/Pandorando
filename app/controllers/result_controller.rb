@@ -133,8 +133,7 @@ class ResultController < ApplicationController
     puts ''
     puts ''
     
-    # TODO: USE INPUT FROM resultVector
-    # input = [0.35, 0.56]
+    
     puts '################################################################'
     puts '################################################################'
     puts '################################################################'
@@ -329,6 +328,10 @@ class ResultController < ApplicationController
       node.weight2 = networkItem[:vector][2].to_f
       node.weight3 = networkItem[:vector][3].to_f
       node.weight4 = networkItem[:vector][4].to_f
+      node.weight5 = networkItem[:vector][5].to_f
+      node.weight6 = networkItem[:vector][6].to_f
+      node.weight7 = networkItem[:vector][7].to_f
+      node.weight8 = networkItem[:vector][8].to_f
       node.save
       
     }

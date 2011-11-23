@@ -48,7 +48,7 @@ class SomController < ApplicationController
   def self.get_best_matching_unit(codebook_vectors, pattern)
     best, b_dist = nil, nil
     codebook_vectors.each do |codebook|
-      vector = [codebook.weight0, codebook.weight1, codebook.weight2, codebook.weight3, codebook.weight4]
+      vector = [codebook.weight0, codebook.weight1, codebook.weight2, codebook.weight3, codebook.weight4, codebook.weight5, codebook.weight6, codebook.weight7, codebook.weight8]
       dist = SomController.euclidean_distance(vector, pattern)
       best,b_dist = codebook,dist if b_dist.nil? or dist<b_dist
     end
@@ -78,7 +78,7 @@ class SomController < ApplicationController
     learningRateModifier = Math.exp((-1*timestamp).to_f/(timestampTotal).to_f)
     # puts codebook
     cont = 0
-    while(cont < 5)
+    while(cont < 9)
       
       error = pattern[cont] - eval("codebook.weight" + cont.to_s)
       value = eval("codebook.weight" + cont.to_s)
@@ -93,6 +93,14 @@ class SomController < ApplicationController
         codebook.weight3 = value + (distanceRateModifier * learningRateModifier * lrate * error)
       elsif(cont == 4)
         codebook.weight4 = value + (distanceRateModifier * learningRateModifier * lrate * error)
+      elsif(cont == 5)
+        codebook.weight5 = value + (distanceRateModifier * learningRateModifier * lrate * error)
+      elsif(cont == 6)
+        codebook.weight6 = value + (distanceRateModifier * learningRateModifier * lrate * error)
+      elsif(cont == 7)
+        codebook.weight7 = value + (distanceRateModifier * learningRateModifier * lrate * error)
+      elsif(cont == 8)
+        codebook.weight8 = value + (distanceRateModifier * learningRateModifier * lrate * error)
       else
         raise 'error'
       end
