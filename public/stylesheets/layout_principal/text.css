@@ -98,7 +98,6 @@ p {
 }
 
 #home a {
-	
 	font-size:30px;
 	width:50%;
 	color:#AAA;
@@ -106,6 +105,10 @@ p {
 	display:inline;
 	text-align:center;
 	padding-top:25px;
+}
+
+#home a:hover {
+	color:#666;
 }
 
 #home .image_left {
@@ -155,3 +158,12 @@ p {
 	font-family: Comic Sans MS;
 }
 
+a#botao_nao {
+	background: transparent url('../../images/layout/stop_button.png') top center no-repeat !important;
+	padding-top: 139px;
+}
+
+a#botao_sim {
+	background: transparent url('../../images/layout/go_button.png') top center no-repeat !important;
+	padding-top: 139px;
+}
