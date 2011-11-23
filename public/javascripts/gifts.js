@@ -34,3 +34,10 @@ function avisaUsuario() {
 	
 	alert("Sistema ainda em construção, em alguns dias estaremos online!");
 }
+
+function loadingGifts() {
+	
+	alert("entrei aki");
+	var element = $("#question")
+	element.addClass("loading_view")
+}

@@ -1,10 +1,10 @@
 class Constants
   
   # Constants to calculate the soa algorithm
-  NEURONS_HEIGHT = 20
-  NEURONS_WIDTH = 20
+  NEURONS_HEIGHT = 30
+  NEURONS_WIDTH = 30
   
-  NEIGHBOURHOOD_RADIUS = (NEURONS_HEIGHT / 5).to_f #Deve ser aproximadamente 3
+  NEIGHBOURHOOD_RADIUS = (NEURONS_HEIGHT / 7).to_f #Deve ser aproximadamente 3
   LEARNING_RATE = 0.5
   INTERATIONS = 30
   

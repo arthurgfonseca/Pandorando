@@ -37,6 +37,10 @@ class GenerateQuestionController < ApplicationController
           arrPesos[2] = arrPesos[2].to_f + (char[2].weight).to_f
           arrPesos[3] = arrPesos[3].to_f + (char[3].weight).to_f
           arrPesos[4] = arrPesos[4].to_f + (char[4].weight).to_f
+          arrPesos[5] = arrPesos[5].to_f + (char[5].weight).to_f
+          arrPesos[6] = arrPesos[6].to_f + (char[6].weight).to_f
+          arrPesos[7] = arrPesos[7].to_f + (char[7].weight).to_f
+          arrPesos[8] = arrPesos[8].to_f + (char[8].weight).to_f
       
         end
       end
@@ -52,9 +56,8 @@ class GenerateQuestionController < ApplicationController
     @presenteSecundario = nil
     @ultimaPagina = false
     @pagina = 1
-    
     @presenteTerceario = nil
-    @perfil = Perfil.first
+    #Fim da declaração
     
     #Check if it is the last question
     if(@questions.size <= @questionNumber + 1)
@@ -69,6 +72,10 @@ class GenerateQuestionController < ApplicationController
         history.weight2 = arrPesos[2]
         history.weight3 = arrPesos[3]
         history.weight4 = arrPesos[4]
+        history.weight1 = arrPesos[5]
+        history.weight2 = arrPesos[6]
+        history.weight3 = arrPesos[7]
+        history.weight4 = arrPesos[8]
         history.user_mail = session[:user].to_s
         session[:user] = nil
         history.save
@@ -101,7 +108,7 @@ class GenerateQuestionController < ApplicationController
         # @perfil = Perfil.last
       else
         
-        arrPerfis = getPerfisList(numberOfQuestions)
+        arrPerfis = getPerfisList()
         
         cont = 0
         
@@ -246,9 +253,24 @@ class GenerateQuestionController < ApplicationController
   
   def getResult(numberOfQuestions)
     
+    puts "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
+    puts "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
+    puts "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
+    puts "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
     arrPesos = []
+    cont = 0
     session[:arrPesos].each{|result|
-      arrPesos << Float(result.to_f/numberOfQuestions.to_f)
+      
+      characteristics = Characteristic.get_characteristic_by_id(cont)
+      puts "nome da caracteristica"
+      puts characteristics.name
+      puts characteristics.referencias
+      puts Float(result.to_f/(characteristics.referencias).to_f)
+      
+      arrPesos << Float(result.to_f/(characteristics.referencias).to_f)
+      
+      
+      cont = cont.next
     }
     
     
@@ -258,13 +280,19 @@ class GenerateQuestionController < ApplicationController
     
   end
   
-  def getPerfisList(numberOfQuestions)
+  def getPerfisList()
     
     puts 'passei aki no getPerfis'
     arrPesos = []
+    cont = 0
     session[:arrPesos].each{|result|
-      arrPesos << Float(result.to_f/numberOfQuestions.to_f)
-      puts Float(result.to_f/numberOfQuestions.to_f)
+      
+      characteristics = Characteristic.get_characteristic_by_id(cont)
+      
+      arrPesos << Float(result.to_f/(characteristics.referencias).to_f)
+      puts Float(result.to_f/(characteristics.referencias).to_f)
+      
+      cont = cont.next
     }
     
     

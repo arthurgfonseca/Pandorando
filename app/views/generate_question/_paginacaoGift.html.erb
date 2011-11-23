@@ -30,11 +30,13 @@
 		<% end %>
 	</tbody>
 	<tfooter>
-		<% if @pagina > 1 %>
-		<%= link_to 'Anterior', {:controller => "GenerateQuestion", :action => "paginacaoGift", :id => "anterior", :pagina => @pagina, :perfil => @perfil.id}, :remote => true %>
-		<% end %>
-		<% if @ultimaPagina == false %>
-		<%= link_to 'Proxima', {:controller => "GenerateQuestion", :action => "paginacaoGift", :id => "proxima", :pagina => @pagina, :perfil => @perfil.id}, :remote => true %>
+		<% if @perfil != nil%>
+			<% if @pagina > 1 %>
+			<%= link_to 'Anterior', {:controller => "GenerateQuestion", :action => "paginacaoGift", :id => "anterior", :pagina => @pagina, :perfil => @perfil.id}, :remote => true %>
+			<% end %>
+			<% if @ultimaPagina == false %>
+			<%= link_to 'Proxima', {:controller => "GenerateQuestion", :action => "paginacaoGift", :id => "proxima", :pagina => @pagina, :perfil => @perfil.id}, :remote => true %>
+			<% end %>
 		<% end %>
 	</tfooter>
 </table>

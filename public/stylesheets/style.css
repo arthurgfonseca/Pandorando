@@ -282,3 +282,11 @@ form .div {text-align:right; padding:6px 0 0 0;}
 
 #index_6 #middle .indent {padding:33px 15px 17px 17px;}
 #index_6 #middle .p1 {padding:6px 0 0 0;}
+
+/*Loading*/
+
+.loading_view {
+	
+	background-color:black;
+	opacity:0.3;
+}
