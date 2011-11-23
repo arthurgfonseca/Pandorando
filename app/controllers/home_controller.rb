@@ -1,3 +1,4 @@
+# encoding: utf-8
 include ActionView::Helpers::SanitizeHelper 
 
 class HomeController < ApplicationController
@@ -89,25 +90,50 @@ class HomeController < ApplicationController
   
   def createUser
     
-    puts "CREATE USER"
     
+    @valido = true
+    @erro = ""
     name = params[:nome]
     email = params[:email]
     
+    if(name.to_s == "" || email.to_s == "")
+       @erro = "Todos os campos devem ser preenchidos"
+      @valido = false
+    end
+    
+    if(@valido)
+        if !email.match(/\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/)
+          @erro = "Email inválido"
+          @valido = false
+        end
+    end
+    
+    if(@valido)
+      emailCadastrado = User.where(:email => email).first
+      if !(emailCadastrado == nil)
+        @valido = false
+        @erro = "Email já cadastrado"
+      end
+    end
+    
+  
     user = User.new
     user.name = name
     user.email = email
     
-    if(user.save)    
+    @questionNumber = 0
+    @questions = generateQuestion()
+  
+  if(@valido)
+    if(user.save)
       session[:user] = (user.email).to_s
-      @questions = generateQuestion()
-      @questionNumber = 0
-      
-      respond_to do |format|
-        format.html # new.html.erb
-        format.js # Ajax CRUD
-      end
     end
+  end
+  
+  respond_to do |format|
+    format.html # new.html.erb
+    format.js # Ajax CRUD
+  end
     
   end
   
