@@ -17,9 +17,11 @@
 			<%= hidden_field_tag 'questionNumber', @questionNumber%>
 			<% cont = 1 %>
 			<% @questions[@questionNumber].answers.each do |i|  %> 
+			<div class="selecao_de_resposta">
 			<%= radio_button_tag "answer", i.enunciation, true %>
 			<span class="radio_button_style"><%= i.enunciation.humanize%></span>
-			<% cont = cont.next %>
+			<span><% cont = cont.next %><span>
+			</div>
 			<br />
 			<br />
 			<% end %>
@@ -40,3 +42,8 @@
 	</div>
 </div>
 
+<script type="text/javascript"> 
+$('.selecao_de_resposta').click(function() {
+	$(this).children('input').attr('checked','checked');
+});
+</script>

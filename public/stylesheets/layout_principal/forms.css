@@ -9,6 +9,16 @@
 	Specific forms
 	
 */
+.selecao_de_resposta {
+	width: 100%;
+	display:block;
+	min-height: 25px;
+}
+
+.selecao_de_resposta:hover {
+	cursor:pointer;
+	background-color: #dedede;
+}
 
 .radio_button_style {
 	
