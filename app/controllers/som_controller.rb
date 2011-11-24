@@ -23,8 +23,10 @@ class SomController < ApplicationController
       
       hashBmu[:name] = selectedBmu.title
       
-      bmuCord = [selectedBmu.positionx, selectedBmu.positiony]
-      otherCord = [bmu.positionx, bmu.positiony]
+      matchFromNetwork = Network.where(:positionx => selectedBmu.positionx, :positiony => selectedBmu.positiony)
+      
+      bmuCord = [matchFromNetwork.weight0, matchFromNetwork.weight1, matchFromNetwork.weight2, matchFromNetwork.weight3, matchFromNetwork.weight4, matchFromNetwork.weight5, matchFromNetwork.weight6, matchFromNetwork.weight7, matchFromNetwork.weight8]
+      otherCord = [bmu.weight0, bmu.weight1, bmu.weight2, bmu.weight3, bmu.weight4, bmu.weight5, bmu.weight6, bmu.weight7, bmu.weight8]
       
       hashBmu[:dist] =  SomController.euclidean_distance(bmuCord, otherCord)
       

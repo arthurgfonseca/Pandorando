@@ -92,7 +92,7 @@ class ResultController < ApplicationController
     
       index = nil
       cont = 0
-      dist = 1000 # Max value
+      dist = 10000 # Max value
     
       arrBmu.each{|hashBmu|
         if(dist > hashBmu[:dist])
