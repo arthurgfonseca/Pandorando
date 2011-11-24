@@ -1,5 +1,14 @@
+<div id="error" style="display:none; color:red;">
+</div>
 <div id="user">
-<h1>Informe seu nome e email (Criar cadastro)</h1>
+	<div class="h_text">
+		<div class="numero_questao">
+				<h1>Informe seu nome e email</h1>
+			</div>
+			<div class="restart_button">
+				<a href="../home/index"><img src="../../images/layout/restart_button.png" /></a>
+			</div>
+	</div>
 <br />
 <br />
 <%= form_tag({:controller => "home", :action => "createUser", :id => 1}, :remote => true) do %>
@@ -13,7 +22,10 @@
     <labe class="text_field"><%= text_field_tag 'email' %></label>
   </p>
 	<div class="buttons">
-	    <a><%= submit_tag "OK" %></a>
+	    <a><%= submit_tag "Enviar" %></a>
 	</div>
 <% end %>
+<h1>Atenção</h1>
+<h4>Como o sistema está em modo de treinamento, as questões deve ser respondida sobre a sua personalidade, e depois você deve indicar os presentes que você gostária de ganhar.</h4>
+<h1>Agradecemos a ajuda</h1>
 </div>

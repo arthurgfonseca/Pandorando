@@ -1,3 +1,4 @@
+# encoding: utf-8
 include ActionView::Helpers::SanitizeHelper 
 
 class HomeController < ApplicationController
@@ -6,7 +7,7 @@ class HomeController < ApplicationController
   def index
     
     
-    
+    session[:autorizado] = false
     #Init array
     arrPesos = Array.new(5)
     arrPesos[0] = 0
@@ -22,6 +23,7 @@ class HomeController < ApplicationController
        
     
   end
+  
   
   def getGifts
     
@@ -88,25 +90,84 @@ class HomeController < ApplicationController
   
   def createUser
     
-    puts "CREATE USER"
     
+    @valido = true
+    @erro = ""
     name = params[:nome]
     email = params[:email]
     
+    if(name.to_s == "" || email.to_s == "")
+       @erro = "Todos os campos devem ser preenchidos"
+      @valido = false
+    end
+    
+    if(@valido)
+        if !email.match(/\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/)
+          @erro = "Email inválido"
+          @valido = false
+        end
+    end
+    
+    if(@valido)
+      emailCadastrado = User.where(:email => email).first
+      if !(emailCadastrado == nil)
+        @valido = false
+        @erro = "Email já cadastrado"
+      end
+    end
+    
+  
     user = User.new
     user.name = name
     user.email = email
     
-    if(user.save)    
+    @questionNumber = 0
+    @questions = generateQuestion()
+  
+  if(@valido)
+    if(user.save)
       session[:user] = (user.email).to_s
-      @questions = generateQuestion()
-      @questionNumber = 0
+    end
+  end
+  
+  respond_to do |format|
+    format.html # new.html.erb
+    format.js # Ajax CRUD
+  end
+    
+  end
+  
+  def admin
+    puts "entrei aki no admin"
+    respond_to do |format|
+      format.html
+    end
+  end
+  
+  def authentication
+    
+    puts "ENTREI AUTENTICACAO"
+    senha = params[:senha]
+    puts "FIM senha"
+    
+    if senha == Constants::SENHA_PANDORANDO
+      
+      session[:autorizado] = true
       
       respond_to do |format|
-        format.html # new.html.erb
-        format.js # Ajax CRUD
+        format.html { redirect_to(:controller => "users", :action => "index") }
       end
+      
+    else
+      
+      session[:autorizado] = false
+      
+      respond_to do |format|
+        format.html { redirect_to(:controller => "home", :action => "index") }
+      end
+      
     end
+    
     
   end
   
@@ -120,6 +181,8 @@ class HomeController < ApplicationController
     return questions
     
   end
+  
+  
   
 
 end

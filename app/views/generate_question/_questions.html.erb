@@ -1,30 +1,36 @@
 <div id="question">
 	<div class="h_text">
-		<!-- <img alt="" src="images/1-t1.jpg" />--><h1>Questão número <%= @questionNumber + 1 %></h1><br />
+		<div class="numero_questao">
+				<h1>Questão número <%= @questionNumber + 1 %></h1>
+			</div>
+			<div class="restart_button">
+				<a href="../home/index"><img src="../../images/layout/restart_button.png" /></a>
+			</div>
 	</div>
 	<div class="padding">
 		<div class="main_content">
 			<h2><%= @questions[@questionNumber].enunciation %></h2>
 			<br />
-		
 			<%=  form_tag({:controller => "generate_question", :action => "nextQuestion"}, :remote => true)  do -%>
 		
 			<%= hidden_field_tag 'questionNumber', @questionNumber%>
 			<% cont = 1 %>
+
 			<% @questions[@questionNumber].answers.each do |i|  %> 
-			<%= radio_button_tag "answer", i.enunciation %>
-			<%= i.enunciation.humanize%>
+			<%= radio_button_tag "answer", i.enunciation, true %>
+			<span class="radio_button_style"><%= i.enunciation.humanize%></span>
 			<% cont = cont.next %>
+			<br />
 			<br />
 			<% end %>
 		
 			<% if(@questions.size > (@questionNumber + 1))%>
 			<div class="buttons">
-			    <a href="#"><%= submit_tag "Next" %></a>
+			    <a href="#"><%= submit_tag "Próxima" %></a>
 			</div>
 			<% else %>
 			<div class="buttons">
-			    <a href="#"><%= submit_tag "Ok" %></a>
+			    <a href="#" onclick="loadingGifts();"><%= submit_tag "Enviar" %></a>
 			</div>
 			<% end %>
 		
@@ -32,5 +38,20 @@
 		
 		</div>
 	</div>
+</div>
+<div id="loading_view" style="display:none">
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<img src="../../images/layout/ajax-loader.gif" />
+	<h3>Aguarde...</h3>
+	<h2>Estamos Criando o seu perfil e em segundos você será direcionado para a escolha de presentes.
 </div>
 

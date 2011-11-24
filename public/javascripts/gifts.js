@@ -1,18 +1,43 @@
-function adicionarItem(id) {
+function manageItem(parametros) {
 	
-	var element = $("#add_" + id);
-	element.attr("style", "display:none");
+	var arr = new Array;
 	
-	var element = $("#remove_" + id);
-	element.attr("style", "display:block");
+	arr = parametros.split(" ");
 	
+	idGift = arr[0];
+	idPerfil = arr[1];
+	acao = arr[2];
+	
+	
+	
+	if(acao == 'Adicionar') {
+		var element = $("#add_" + idGift);
+		element.attr("style", "display:none");
+	
+		var element = $("#remove_" + idGift);
+		element.attr("style", "display:block");
+	
+	} else {
+		var element = $("#add_" + idGift);
+		element.attr("style", "display:block");
+
+		var element = $("#remove_" + idGift);
+		element.attr("style", "display:none");	
+	}
+	
+	$.get("/GenerateQuestion/manageGift/" + idGift, { action : encodeURIComponent(acao), gift : encodeURIComponent(idGift), acao : encodeURIComponent(acao), perfil : encodeURIComponent(idPerfil), authenticity_token : encodeURIComponent(AUTH_TOKEN) });
+		
 }
 
-function removerItem(id) {
+
+function avisaUsuario() {
 	
-	var element = $("#add_" + id);
-	element.attr("style", "display:block");
+	alert("Sistema ainda em construção, em alguns dias estaremos online!");
+}
+
+function loadingGifts() {
 	
-	var element = $("#remove_" + id);
-	element.attr("style", "display:none");
+	$("#question").hide()
+	$("#loading_view").attr("style", "display:block");
+	
 }

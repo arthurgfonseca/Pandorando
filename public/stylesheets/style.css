@@ -80,11 +80,60 @@ a {color:#3d6f92; font-size:12px;}
 
 
 /*.h_text {padding-bottom:2px; background:url("../images/h_text_bg.gif") bottom repeat-x;}*/
-.h_text h1{margin-left:10px; margin-top:10px;}
+
+.h_text {
+	
+	display:block;
+	width:100%;
+	clear:both;
+	height:60px;
+}
+
+.finalizar_button {
+	float:right;
+	color:red;
+	font-size:14px;
+	margin-top:10px;
+}
+
+.numero_questao {
+	
+	width:80%;
+	display:inline;
+	float:left;
+}
+
+.restart_button {
+	float:right;
+	width:19%;
+	display:inline;
+}
+
+.numero_questao h1
+{
+	margin-left:10px; 
+	margin-top:10px;
+	float:left;
+}
+
+.restart_button img {
+	float:right;
+	width:50px;
+	height:50px;
+	cursor:pointer;
+}
 
 .main_content {margin:10px;}
 /* Show grid */
 .show {width:100%;}
+
+.show_gifts {
+	
+	width:100%;
+	max-height: 300px;
+	
+}
+
 .show table {width:100%;}
 .show table thead {text-align:left; height:20px; font-size:14px;}
 .show table thead th {color:#000000;}
@@ -240,3 +289,38 @@ form .div {text-align:right; padding:6px 0 0 0;}
 
 #index_6 #middle .indent {padding:33px 15px 17px 17px;}
 #index_6 #middle .p1 {padding:6px 0 0 0;}
+
+/*Loading*/
+
+#loading_view {
+	
+	height:70px;
+	display:block;
+	width:100%;
+	clear:both;
+}
+
+#loading_view img {
+	
+	margin-left:175px;
+	display:block;
+	width:300px;
+	clear:both;
+}
+
+#loading_view h2 {
+	
+	font-size: 15px;
+	color: #BBB;
+	width:100%;
+	text-align:center;
+}
+
+#loading_view h3 {
+	
+	font-size: 20px;
+	color: #BBB;
+	width:100%;
+	text-align:center;
+	
+}

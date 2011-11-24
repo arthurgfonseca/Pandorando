@@ -29,10 +29,11 @@ class ResultController < ApplicationController
         # Train Kohonen Network
         perfil = ResultController.start(network, resultVector)
         
-        puts "SAI DO START"
+        puts "RESULTADO CONSISTENTE"
         
         return perfil
       else
+        puts "RESULTADO INCONSISTENTE"
         return nil
       end
         
@@ -91,7 +92,7 @@ class ResultController < ApplicationController
     
       index = nil
       cont = 0
-      dist = 1000 # Max value
+      dist = 10000 # Max value
     
       arrBmu.each{|hashBmu|
         if(dist > hashBmu[:dist])
@@ -132,8 +133,7 @@ class ResultController < ApplicationController
     puts ''
     puts ''
     
-    # TODO: USE INPUT FROM resultVector
-    # input = [0.35, 0.56]
+    
     puts '################################################################'
     puts '################################################################'
     puts '################################################################'
@@ -157,11 +157,17 @@ class ResultController < ApplicationController
     puts bmuResult
     puts 'BMU FIM'
     
-    createPerfil = ResultController.checkIfShoudCreatePerfil(bmuResult)
+    perfil = ResultController.checkIfShoudCreatePerfil(bmuResult)
+    
     
     mail = (History.last).user_mail
     # Verifica se é necessario criar um novo perfil
-    if(createPerfil)
+    if(perfil == nil)
+      puts ''
+      puts ''
+      puts ' ------- NOVO PERFIL FOI CRIADO -------- '
+      puts ''
+      puts ''
       bmuRecord = Perfil.new
       bmuRecord.positionx = bmuResult.positionx
       bmuRecord.positiony = bmuResult.positiony
@@ -170,23 +176,19 @@ class ResultController < ApplicationController
       # Perfil é associado ao email do usuario, ja que ele é único
       bmuRecord.title = mail
       bmuRecord.save
+      
+      perfilUsado = Perfil.where(:title => mail).first
+      
+    else
+      
+      perfilUsado = perfil
+      
     end
     
-    # network.each{|node|
-    #       puts 'NOOOOOOODEEEEEEEE FINAL nodex=' + (node.positionx).to_s + 'nodey=' + (node.positiony).to_s
-    #       puts node.weight0
-    #       puts node.weight1
-    #       puts node.weight2
-    #       puts node.weight3
-    #       puts node.weight4
-    #       puts node.match_count
-    #       
-    #     }
-    
-    perfil = Perfil.where(:title => mail)
     
     
-    return perfil
+    
+    return perfilUsado
     
   end
   
@@ -258,13 +260,21 @@ class ResultController < ApplicationController
       end
     end
     
-    return createPerfil
+    if createPerfil
+      return nil
+    else
+      return bestBmu
+    end
   end
   
   def self.adjustPerfilRadius(perfil)
     if(perfil.match_count > 1 && perfil.match_count <= 10)
-      
-      newRadius = perfil.radius + perfil.radius*Math.exp(-1*((10.to_f - (perfil.match_count).to_f)/(10).to_f).to_f)
+      # Ajusta o tamanho do circulo no mapa da rede neural
+      newRadius =  (Constants::NEIGHBOURHOOD_RADIUS / 2)*(1 + Math.exp(-1*((10.to_f - (perfil.match_count).to_f)/(10).to_f).to_f))
+      perfil.radius = newRadius
+      perfil.save
+    else
+      newRadius = Constants::NEIGHBOURHOOD_RADIUS
       perfil.radius = newRadius
       perfil.save
     end
@@ -318,6 +328,10 @@ class ResultController < ApplicationController
       node.weight2 = networkItem[:vector][2].to_f
       node.weight3 = networkItem[:vector][3].to_f
       node.weight4 = networkItem[:vector][4].to_f
+      node.weight5 = networkItem[:vector][5].to_f
+      node.weight6 = networkItem[:vector][6].to_f
+      node.weight7 = networkItem[:vector][7].to_f
+      node.weight8 = networkItem[:vector][8].to_f
       node.save
       
     }
@@ -345,6 +359,7 @@ class ResultController < ApplicationController
     end
     return codebook_vectors
   end
+  
   
   
   

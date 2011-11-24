@@ -1,0 +1,43 @@
+<div id="paginacao">
+<table id="gifts" class="grid">
+	<thead>
+		<tr>
+			<th>Nome</th>
+			<th>Adicionar</th>
+		</tr>
+	</thead>
+	<tbody>
+		<br />
+		<% @allGifts.each do |gift| %>
+		<% adicionado = false %>
+			<tr id="<%= dom_id gift %>" class="show_grid">
+				<td><%= gift.name %></td>
+				<% @giftsAdicionados.each do |nameGift| %>
+					<% if(nameGift == gift.name) %>
+						<% adicionado = true %>
+					<% end %>
+				<% end %>
+				
+				<% if(adicionado == false) %>
+			   		<td id="add_<%= gift.id %>"><a onclick="manageItem('<%= gift.id %> <%= @perfil.id %> Adicionar'); return false;" style="cursor:pointer;color:blue;">Adicionar</a></td>
+				<% else%>
+					<!--<td id="remove_<%= gift.id %>" style="display:none"><a onclick="manageItem('<%= gift.id %> <%= @perfil.id %> Remover'); return false;" style="cursor:pointer;color:red;">Adicionado</a></td>-->
+					<td id="remove_<%= gift.id %>" style="display:block"><a style="color:red;">Adicionado</a></td>
+				<% end %>
+				<!--<td id="remove_<%= gift.id %>" style="display:none"><a onclick="manageItem('<%= gift.id %> <%= @perfil.id %> Remover'); return false;" style="cursor:pointer;color:red;">Adicionado</a></td>-->
+				<td id="remove_<%= gift.id %>" style="display:none"><a style="color:red;">Adicionado</a></td>
+			</tr>
+		<% end %>
+	</tbody>
+	<tfooter>
+		<% if @perfil != nil%>
+			<% if @pagina > 1 %>
+			<%= link_to 'Anterior', {:controller => "GenerateQuestion", :action => "paginacaoGift", :id => "anterior", :pagina => @pagina, :perfil => @perfil.id}, :remote => true %>
+			<% end %>
+			<% if @ultimaPagina == false %>
+			<%= link_to 'Proxima', {:controller => "GenerateQuestion", :action => "paginacaoGift", :id => "proxima", :pagina => @pagina, :perfil => @perfil.id}, :remote => true %>
+			<% end %>
+		<% end %>
+	</tfooter>
+</table>
+</div>

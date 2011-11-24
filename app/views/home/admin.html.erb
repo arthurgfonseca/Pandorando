@@ -1,0 +1,22 @@
+<div id="admin">
+	<div class="h_text">
+		<div class="numero_questao">
+				<h1>Você realmente tem acesso a essa área?</h1>
+			</div>
+			<div class="restart_button">
+				<a href="../index"><img src="../../images/layout/restart_button.png" /></a>
+			</div>
+	</div>
+	<br />
+	<br />
+	<br />
+	<%= form_tag({:controller => "home", :action => "authentication"})  do -%>
+		<p class="form_field">
+			<label class="label">Password</label>
+	    	<label class="text_field"><%= password_field_tag "senha" %></label>
+		</p>
+		<div class="buttons">
+		    <a><%= submit_tag "Entrar" %></a>
+		</div>
+	<% end %>
+</div>

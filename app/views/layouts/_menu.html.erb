@@ -21,10 +21,10 @@
 			<% else %>
 			<li><%= link_to "Perguntas", :controller => "Question_Manager"%></li>
 			<% end %>
-			<% if(@index == "gifts") %>
+			<% if(@index == "presentes") %>
 			<li><span>Presentes</span></li>
 			<% else %>
-			<li><%= link_to "Presentes", :controller => "gifts"%></li>
+			<li><%= link_to "Presentes", :controller => "Gifts"%></li>
 			<% end %>
 			<% if(@index == "network") %>
 			<li><span>Network</span></li>

@@ -21,17 +21,19 @@ h2
 
 h3
 {
-	font-size: 15px;
+	font-size: 21px;
+	text-align:center;
+	width:100%;
 }
 
 h4
 {
-	font-size: 14px;
+	font-size: 19px;
 }
 
 h5
 {
-	font-size: 12px;
+	font-size: 17px;
 }
 
 h6
@@ -39,7 +41,8 @@ h6
 	font-size: 15px;
 }
 
-h1, h2, h3, h5, h6 {margin: 0;line-height:1.2em; margin-bottom:.3em; color: #14405f}
+
+h1, h2, h3, h5, h6 {margin: 0;line-height:1.2em; margin-bottom:.3em;}
 h2 {margin-top:1em;}
 
 
@@ -58,4 +61,97 @@ p {
 	
 }
 
+/* Imagens Go e Stop da home */
+
+#home .images_buttons {
+	
+	display:block;
+	height: 150px;
+	width:100%;
+	clear:both;
+	padding-top:50px;
+	
+}
+
+#home .left_image_button {
+	
+	display:inline;
+	width:50%;
+	float:left;
+	
+}
+
+#home .right_image_button {
+	
+	display:inline;
+	width:50%;
+	float:right;
+	
+}
+
+#home .text_block {
+	
+	display:block;
+	height:30px;
+	width:100%;
+	
+}
+
+#home a {
+	
+	font-size:30px;
+	width:50%;
+	color:#AAA;
+	float:left;
+	display:inline;
+	text-align:center;
+	padding-top:25px;
+}
+
+#home .image_left {
+	
+	margin-left:100px;
+}
+
+#home .image_right {
+	
+	margin-left:100px;
+}
+
+#resultado h1 {
+	font-size:24px;
+}
+
+#resultado h2 {
+	
+	width:100%;
+	text-align:center;
+	font-size:30px;
+	color:#99c339;
+	margin: 15px 0px;
+	font-family: Comic Sans MS;
+	
+}
+
+#resultado h3 {
+	
+	width:100%;
+	text-align:center;
+	font-size:24px;
+/*	color:#3D6F92;*/
+	color:#69c;
+	margin: 15px 0px;
+	font-family: Comic Sans MS;
+	
+}
+
+#resultado h4 {
+	
+	width:100%;
+	text-align:center;
+	font-size:20px;
+	color:#AAA;
+	margin: 15px 0px;
+	font-family: Comic Sans MS;
+}
 

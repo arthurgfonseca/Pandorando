@@ -1,1 +1,10 @@
-$("#user").replaceWith("<%= escape_javascript(render(:partial => "generate_question/questions"))%>")
+if('<%= @valido %>' == 'true') {
+	$("#error").empty()
+	$("#error").hide()
+	$("#user").replaceWith("<%= escape_javascript(render(:partial => "generate_question/questions"))%>")
+} else {
+	alert("entrei no false")
+	$("#error").empty()
+	$("#error").append("<h2><%= @erro %></h2>")
+	$("#error").show()
+}

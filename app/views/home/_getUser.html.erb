@@ -1,5 +1,12 @@
 <div id="user">
-<h1>Informe seu nome e email</h1>
+	<div class="h_text">
+		<div class="numero_questao">
+				<h1>Informe seu email</h1>
+			</div>
+			<div class="restart_button">
+				<a href="../home/index"><img src="../../images/layout/restart_button.png" /></a>
+			</div>
+	</div>
 <br />
 <br />
 <h2 id="error" style="display: none">Error</h2>
@@ -10,7 +17,9 @@
     <labe class="text_field"><%= text_field_tag 'email' %></label>
   </p>
 	<div class="buttons">
-	    <a><%= submit_tag "OK" %></a>
+	    <a><%= submit_tag "Enviar" %></a>
 	</div>
 <% end %>
+<h1>Atenção</h1>
+<h4>Se você deseja responder novamente o sistema, é importante saber que as respostas devem ser conscistentes com as respondidas anteriormente.</h4>
 </div>

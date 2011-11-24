@@ -2,11 +2,16 @@
 <%= render :partial => "generate_question/questions"%>
 <% else %>
 <div id="home">
+	<br />
 	<h3>Essa é a sua primeira vez por aqui?</h3>
 	<br />
 	<br />
-	<h2><%= link_to 'Sim', {:controller => "home", :action => "getUserAnswer", :id => "sim"}, :remote => true %></h2>
-	<br />
-	<h2><%= link_to 'Não', {:controller => "home", :action => "getUserAnswer", :id => "nao"}, :remote => true %></h2>
+	<div class="images_buttons">
+		<div class="left_image_button"><img class="image_left" src="../../images/layout/stop_button.png"/></div>
+		<div class="right_image_button"><img class="image_right" src="../../images/layout/go_button.png"/></div>
+			<%= link_to 'Não', {:controller => "home", :action => "getUserAnswer", :id => "nao"}, :remote => true %>
+			<%= link_to 'Sim', {:controller => "home", :action => "getUserAnswer", :id => "sim"}, :remote => true %>
+		
+	</div>
 </div>
 <% end %>
