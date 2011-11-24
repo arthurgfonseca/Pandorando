@@ -57,20 +57,19 @@
 #body_text p 
 {
 	font-size:14px;
-	color: #AAA;
+	color: #555;
 	
 }
 
 #body_text .textoCheio1 {
-	
-	width:100%;
+	width:95%;
 	display:block;
 	min-height:180px;
 }
 
 #body_text .textoCheio2 {
 	
-	width:100%;
+	width:95%;
 	display:block;
 	min-height:100px;
 	float:left;

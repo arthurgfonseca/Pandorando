@@ -5,7 +5,6 @@
 	Licensed under GPL and MIT.
 */
 
-
 /* =Headings
 --------------------------------------------------------------------------------*/
 
@@ -166,4 +165,16 @@ a#botao_nao {
 a#botao_sim {
 	background: transparent url('../../images/layout/go_button.png') top center no-repeat !important;
 	padding-top: 139px;
+}
+
+a#botao_reiniciar {
+	background: transparent url('../../images/botoes/reset.png') top center no-repeat !important;
+	padding-top: 20px;
+	float:right;
+	color:#aaa;
+}
+
+
+a#botao_reiniciar:hover {
+	color: #555;
 }
