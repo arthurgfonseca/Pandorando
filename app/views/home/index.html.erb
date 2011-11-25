@@ -7,10 +7,8 @@
 	<br />
 	<br />
 	<div class="images_buttons">
-		<div class="left_image_button"><img class="image_left" src="../../images/layout/stop_button.png"/></div>
-		<div class="right_image_button"><img class="image_right" src="../../images/layout/go_button.png"/></div>
-			<%= link_to 'Não', {:controller => "home", :action => "getUserAnswer", :id => "nao"}, :remote => true %>
-			<%= link_to 'Sim', {:controller => "home", :action => "getUserAnswer", :id => "sim"}, :remote => true %>
+		<%= link_to 'Não', {:controller => "home", :action => "getUserAnswer", :id => "nao"}, :id=> "botao_nao", :remote => true %>
+		<%= link_to 'Sim', {:controller => "home", :action => "getUserAnswer", :id => "sim"}, :id => "botao_sim", :remote => true %>
 		
 	</div>
 </div>

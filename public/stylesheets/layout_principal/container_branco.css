@@ -24,7 +24,7 @@ body
 
 #wrapper
 {
-	color: #aaaaaa;
+	color: #555;
 	background-color: #f8f8f8;
 	min-height: 500px;
 }
@@ -110,6 +110,7 @@ body
 #site_info
 {
 	background-color: #f8f8f8;
+	width: 94%;
 }
 
 #site_info h4
