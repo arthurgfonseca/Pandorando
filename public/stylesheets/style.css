@@ -88,6 +88,13 @@ a {color:#3d6f92; font-size:12px;}
 	clear:both;
 }
 
+.finalizar_button {
+	float:right;
+	color:red;
+	font-size:14px;
+	margin-top:10px;
+}
+
 .numero_questao {
 	
 	width:100%;
@@ -283,8 +290,35 @@ form .div {text-align:right; padding:6px 0 0 0;}
 
 /*Loading*/
 
-.loading_view {
+#loading_view {
 	
-	background-color:black;
-	opacity:0.3;
+	height:70px;
+	display:block;
+	width:100%;
+	clear:both;
+}
+
+#loading_view img {
+	
+	margin-left:175px;
+	display:block;
+	width:300px;
+	clear:both;
+}
+
+#loading_view h2 {
+	
+	font-size: 15px;
+	color: #BBB;
+	width:100%;
+	text-align:center;
+}
+
+#loading_view h3 {
+	
+	font-size: 20px;
+	color: #BBB;
+	width:100%;
+	text-align:center;
+	
 }

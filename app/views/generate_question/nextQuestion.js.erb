@@ -3,8 +3,12 @@ if('<%= @lastQuestion %>' == 'false') {
 } else {
 	if('<%= @trainMode %>' == 'true') {
 		if('<%= @acceptResult %>' == 'true') {
+			alert("entrei no aceitei resultado")
+			$("#loading_view").remove()
 			$("#question").replaceWith("<%= escape_javascript(render(:partial => "generateGifts"))%>")
 		} else {
+			alert("entrei no discardResult")
+			$("#loading_view").remove()
 			$("#question").replaceWith("<%= escape_javascript(render(:partial => "discardResult"))%>")
 		}
 		

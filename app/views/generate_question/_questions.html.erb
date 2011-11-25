@@ -10,11 +10,11 @@
 		<div class="main_content">
 			<h2><%= @questions[@questionNumber].enunciation %></h2>
 			<br />
-		
 			<%=  form_tag({:controller => "generate_question", :action => "nextQuestion"}, :remote => true)  do -%>
 		
 			<%= hidden_field_tag 'questionNumber', @questionNumber%>
 			<% cont = 1 %>
+
 			<% @questions[@questionNumber].answers.each do |i|  %> 
 			<div class="selecao_de_resposta">
 			<%= radio_button_tag "answer", i.enunciation, true %>
@@ -39,6 +39,21 @@
 		
 		</div>
 	</div>
+</div>
+<div id="loading_view" style="display:none">
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<img src="../../images/layout/ajax-loader.gif" />
+	<h3>Aguarde...</h3>
+	<h2>Estamos Criando o seu perfil e em segundos você será direcionado para a escolha de presentes.
 </div>
 
 <script type="text/javascript"> 
