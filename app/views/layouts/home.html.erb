@@ -22,64 +22,36 @@
 
 <body>	    
 	<div id="container" class="container_16">
-		<div id="login">
-			<ul>
-				<div id="login_content">
-					<li><!--  <img src="../../images/icones/user_icon.png" /> --></li>
-						<!-- TODO: apos a implementacao de um sistema de login, substituir os proximos campos pelas respectivas actions-->
-						
-					<li id="logout"><%= link_to('Admin', '../home/admin/1')%> 
-					</li>
-				</div>
-			</ul>
+		<div class="grid_16 alpha omega">
+			<img src="../../images/layout/logoPandorando.png" id="logo" style="margin: 10px 0 0 30px;" />
 		</div>	
-		<div id="sec_header" class="grid_16">
-			<div class="grid_3">
-					<!-- TODO: alterar a imagem abaixo para o logotipo do servidor- - o posicionamento da imagem encontra-se no arquivo grid.css-->
-			        <!--<img src="../../images/layout/logoPandorando.png"  id="logo" />-->
-			    </a>
+ 
+		<div class="grid_16 omega" style="margin-top: 15px;">
+			<div class="top_left">
+				<div class="top_right">
+					<div class="top">
+					</div>
+				</div>
 			</div>
-			<div class="grid_13" id="areas">
-							</div>  
-						</div><!-- end header -->
+			<div class="content_left">
+				<div class="content_right">
+					<div id="alvo" class="content">
+						 <%= yield %>
+					</div>
+				</div>
+			</div>
+			<div class="footer_left">
+				<div class="footer_right">
+					<div class="footer">
+					</div>
+				</div>
+			</div>		
+		</div><!-- end main_border_reounded -->
+		<div class="clear"></div>
 
-						<div id="wrapper" class="grid_20">			    
-							<div id="menu_direito" class="grid_3">
-								<div class="box">	
-								</div>		
-							</div><!-- end menu_direito -->
-
-							<div class="grid_13 omega" id="main">
-								<div class="top_left">
-									<div class="top_right">
-										<div class="top">
-										</div>
-									</div>
-								</div>
-								<div class="content_left">
-									<div class="content_right">
-										<div id="alvo" class="content">
-											 <%= yield %>
-										</div>
-										<div class="logo_image_home_layout">
-											<img src="../../images/layout/logoPandorando.png"  id="logo" />
-										</div>
-									</div>
-								</div>
-								<div class="footer_left">
-									<div class="footer_right">
-										<div class="footer">
-										</div>
-									</div>
-								</div>		
-							</div><!-- end main_border_reounded -->
-							<div class="clear"></div>
-							<div class="grid_16" id="site_info">
-								<div class="box">
-									<h4> Designed by Arthur Fonseca and Vinicius Oyama </h4>
-								</div>
-							</div>
-						</div><!-- end main -->
+		<div class="grid_16" id="site_info">
+			<h4 style="float:right"> Designed by Arthur Fonseca and Vinicius Oyama </h4>
+		</div>				
 
 					</div><!-- end container -->
 				</body>

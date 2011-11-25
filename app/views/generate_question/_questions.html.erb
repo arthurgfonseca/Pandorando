@@ -2,10 +2,9 @@
 	<div class="h_text">
 		<div class="numero_questao">
 				<h1>Questão número <%= @questionNumber + 1 %></h1>
+				<a href="../home/index" id="botao_reiniciar">Reiniciar Questionário</a>
 			</div>
-			<div class="restart_button">
-				<a href="../home/index"><img src="../../images/layout/restart_button.png" /></a>
-			</div>
+			
 	</div>
 	<div class="padding">
 		<div class="main_content">
@@ -17,9 +16,11 @@
 			<% cont = 1 %>
 
 			<% @questions[@questionNumber].answers.each do |i|  %> 
+			<div class="selecao_de_resposta">
 			<%= radio_button_tag "answer", i.enunciation, true %>
 			<span class="radio_button_style"><%= i.enunciation.humanize%></span>
-			<% cont = cont.next %>
+			<span><% cont = cont.next %><span>
+			</div>
 			<br />
 			<br />
 			<% end %>
@@ -55,3 +56,8 @@
 	<h2>Estamos Criando o seu perfil e em segundos você será direcionado para a escolha de presentes.
 </div>
 
+<script type="text/javascript"> 
+$('.selecao_de_resposta').click(function() {
+	$(this).children('input').attr('checked','checked');
+});
+</script>

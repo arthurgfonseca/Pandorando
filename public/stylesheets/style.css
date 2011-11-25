@@ -86,7 +86,20 @@ a {color:#3d6f92; font-size:12px;}
 	display:block;
 	width:100%;
 	clear:both;
-	height:60px;
+}
+
+.finalizar_button {
+	float:right;
+	color:red;
+	font-size:14px;
+	margin-top:10px;
+}
+
+.finalizar_button {
+	float:right;
+	color:red;
+	font-size:14px;
+	margin-top:10px;
 }
 
 .finalizar_button {
@@ -98,7 +111,7 @@ a {color:#3d6f92; font-size:12px;}
 
 .numero_questao {
 	
-	width:80%;
+	width:100%;
 	display:inline;
 	float:left;
 }
@@ -111,7 +124,6 @@ a {color:#3d6f92; font-size:12px;}
 
 .numero_questao h1
 {
-	margin-left:10px; 
 	margin-top:10px;
 	float:left;
 }
@@ -292,8 +304,9 @@ form .div {text-align:right; padding:6px 0 0 0;}
 
 /*Loading*/
 
-#loading_view {
-	
+
+#loading_view {	
+
 	height:70px;
 	display:block;
 	width:100%;
@@ -302,7 +315,7 @@ form .div {text-align:right; padding:6px 0 0 0;}
 
 #loading_view img {
 	
-	margin-left:175px;
+	margin: 0 auto;
 	display:block;
 	width:300px;
 	clear:both;
@@ -316,11 +329,13 @@ form .div {text-align:right; padding:6px 0 0 0;}
 	text-align:center;
 }
 
+
 #loading_view h3 {
 	
 	font-size: 20px;
 	color: #BBB;
 	width:100%;
 	text-align:center;
-	
+
+
 }
