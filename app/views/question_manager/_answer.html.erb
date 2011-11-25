@@ -17,6 +17,6 @@
 				end		
 			end 		
 	%>
-		<td><input value='<%= peso_da_caracteristica %>' size='<%=caracteristicas.length%>>' onchange="atualizarValorDoPeso('<%= resposta.id %>', '<%= caracteristica_da_coluna.id %>', this.value);"/></td>
+		<td><input value='<%= peso_da_caracteristica %>' size='5' onchange="atualizarValorDoPeso('<%= resposta.id %>', '<%= caracteristica_da_coluna.id %>', this.value);"/></td>
 	<% end %>
 </tr>
