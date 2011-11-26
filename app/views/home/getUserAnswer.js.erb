@@ -1,5 +1,6 @@
 if('<%= @userAnswer %>' == 'sim') {
 	$("#home").replaceWith("<%= escape_javascript(render(:partial => "createUser"))%>")
+	alert("Antes de prosseguir, leia as instruções com ATENÇÃO!")
 } else {
 	$("#home").replaceWith("<%= escape_javascript(render(:partial => "getUser"))%>")
 }
