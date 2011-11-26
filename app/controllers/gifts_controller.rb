@@ -3,15 +3,24 @@ class GiftsController < ApplicationController
   # GET /gifts.xml
   def index
     
-    @gifts = Gift.all
-    @gift = Gift.new
-    @index = "presentes"
-    @perfis = Perfil.all
+    if session[:autorizado] == true
+      @gifts = Gift.all
+      @gift = Gift.new
+      @index = "presentes"
+      @perfis = Perfil.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.js
+      respond_to do |format|
+        format.html # index.html.erb
+        format.js
+      end
+    else
+      
+      respond_to do |format|
+        format.html { redirect_to(:controller => "home", :action => "admin") }
+      end
+      
     end
+    
   end
 
   # GET /gifts/1

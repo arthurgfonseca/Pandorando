@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   # GET /users.xml
   def index
     
-    # if session[:autorizado] == true
+    if session[:autorizado] == true
     
       @users = User.all
       @user = User.new
@@ -13,11 +13,11 @@ class UsersController < ApplicationController
         format.html # index.html.erb
         format.js
       end
-    # else
-    #       respond_to do |format|
-    #         format.html { redirect_to(:controller => "home", :action => "index") }
-    #       end
-    #     end
+    else
+          respond_to do |format|
+            format.html { redirect_to(:controller => "home", :action => "admin") }
+          end
+        end
     
   end
 
