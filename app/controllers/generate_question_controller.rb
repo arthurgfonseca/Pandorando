@@ -92,7 +92,7 @@ class GenerateQuestionController < ApplicationController
         # Obtem todos os presentes e faz a paginação
         # 
 
-        @allGifts = Gift.limit((Constants::PAGINA).to_i)
+        @allGifts = (Gift.limit((Constants::PAGINA).to_i)).asc(:name)
         @pagina = 1
         @ultimaPagina = false
         # Limpa a session e depois inicia
@@ -348,7 +348,7 @@ class GenerateQuestionController < ApplicationController
    
    def paginacaoGift
      
-     gifts = Gift.all
+     gifts = (Gift.all).asc(:name)
      @pagina = params[:pagina].to_i
      @tipo = params[:id]
      idPerfil = params[:perfil]
@@ -365,13 +365,13 @@ class GenerateQuestionController < ApplicationController
      if @tipo == "proxima"
        if((@pagina + 1)*((Constants::PAGINA).to_i) >= gifts.size)
          @ultimaPagina = true
-         @allGifts = Gift.all
-         giftsVistos = Gift.limit(((Constants::PAGINA).to_i)*@pagina)
+         @allGifts = (Gift.all).asc(:name)
+         giftsVistos = (Gift.limit(((Constants::PAGINA).to_i)*@pagina)).asc(:name)
          @allGifts = @allGifts - giftsVistos
        else
          @ultimaPagina = false
-         @allGifts = Gift.limit(((Constants::PAGINA).to_i)*(@pagina + 1))
-         giftsVistos = Gift.limit(((Constants::PAGINA).to_i)*@pagina)
+         @allGifts = (Gift.limit(((Constants::PAGINA).to_i)*(@pagina + 1))).asc(:name)
+         giftsVistos = (Gift.limit(((Constants::PAGINA).to_i)*@pagina)).asc(:name)
          @allGifts = @allGifts - giftsVistos
          
        end
@@ -379,13 +379,13 @@ class GenerateQuestionController < ApplicationController
        @pagina = @pagina.next
        
      else
-       
+      
        if(@pagina == 2)
-          @allGifts = Gift.limit(((Constants::PAGINA).to_i))
+          @allGifts = (Gift.limit(((Constants::PAGINA).to_i))).asc(:name)
         else
           
-          @allGifts = Gift.limit(((Constants::PAGINA).to_i)*(@pagina - 1))
-          giftsVistos = Gift.limit(((Constants::PAGINA).to_i)*(@pagina - 2))
+          @allGifts = (Gift.limit(((Constants::PAGINA).to_i)*(@pagina - 1))).asc(:name)
+          giftsVistos = (Gift.limit(((Constants::PAGINA).to_i)*(@pagina - 2))).asc(:name)
           @allGifts = @allGifts - giftsVistos
         end
        

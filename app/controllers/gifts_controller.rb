@@ -4,7 +4,8 @@ class GiftsController < ApplicationController
   def index
     
     if session[:autorizado] == true
-      @gifts = Gift.all
+      # @gifts = (Gift.limit((Constants::PAGINA).to_i)).asc(:name)
+      @gifts = Gift.asc(:name)
       @gift = Gift.new
       @index = "presentes"
       @perfis = Perfil.all

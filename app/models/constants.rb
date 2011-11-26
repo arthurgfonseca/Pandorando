@@ -18,6 +18,6 @@ class Constants
   
   SENHA_PANDORANDO = "oyama"
   
-  PAGINA = 10
+  PAGINA = 15
   
 end
