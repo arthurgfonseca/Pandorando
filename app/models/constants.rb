@@ -12,7 +12,7 @@ class Constants
   # Domain of the input and weights values
   DOMAIN = [[0.0, 1.0], [0.0, 1.0], [0.0, 1.0], [0.0, 1.0], [0.0, 1.0], [0.0, 1.0], [0.0, 1.0], [0.0, 1.0], [0.0, 1.0]]
   
-  TRAIN_MODE = true
+  TRAIN_MODE = false
   
   CHAR_NUMBER = 0
   
