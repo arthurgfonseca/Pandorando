@@ -30,6 +30,8 @@
 		<% end %>
 	</tbody>
 	<tfooter>
+		<tr>
+			<td colspan="3">
 		<% if @perfil != nil%>
 			<% if @pagina > 1 %>
 			<%= link_to 'Anterior', {:controller => "GenerateQuestion", :action => "paginacaoGift", :id => "anterior", :pagina => @pagina, :perfil => @perfil.id}, :remote => true %>
@@ -38,6 +40,8 @@
 			<%= link_to 'Proxima', {:controller => "GenerateQuestion", :action => "paginacaoGift", :id => "proxima", :pagina => @pagina, :perfil => @perfil.id}, :remote => true %>
 			<% end %>
 		<% end %>
+			</td>
+		</tr>
 	</tfooter>
 </table>
 </div>
