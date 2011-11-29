@@ -5,7 +5,7 @@ if('<%= @lastQuestion %>' == 'false') {
 		if('<%= @acceptResult %>' == 'true') {
 			$("#loading_view").remove();
 			$("#question").replaceWith("<%= escape_javascript(render(:partial => "generateGifts"))%>");
-			alert("Não esqueca de escolher os presentes.");
+			alert("Não esqueca de escolher de 2 a 5 presentes.");
 		} else {
 //			alert("entrei no discardResult");
 			$("#loading_view").remove();
