@@ -9,6 +9,7 @@ class AnswersController < ApplicationController
     @answer = Answer.new
     @index = "answers"
     
+    
     puts'ANSWER'
     puts @answers[0].question
 
